@@ -60,17 +60,14 @@ class Ui_info_collect_Form(object):
         self.verticalLayout_4.addLayout(self.horizontalLayout)
         self.verticalLayout_2.addWidget(self.groupBox)
         self.groupBox_2 = QtWidgets.QGroupBox(self.info_main)
-        self.groupBox_2.setStyleSheet("QGroupBox#groupBox_2 {\n"
-"    background-color: rgb(255, 255, 255);\n"
-"    \n"
-"}")
+        self.groupBox_2.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.groupBox_2.setObjectName("groupBox_2")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.groupBox_2)
         self.verticalLayout_3.setContentsMargins(-1, 20, -1, -1)
         self.verticalLayout_3.setSpacing(6)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.tableView = QtWidgets.QTableView(self.groupBox_2)
-        self.tableView.setStyleSheet("background-color: rgb(85, 170, 127);")
+        self.tableView.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.tableView.setGridStyle(QtCore.Qt.DotLine)
         self.tableView.setObjectName("tableView")
         self.verticalLayout_3.addWidget(self.tableView)

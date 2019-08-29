@@ -114,10 +114,7 @@ border-radius:5px;</string>
       <item>
        <widget class="QGroupBox" name="groupBox_2">
         <property name="styleSheet">
-         <string notr="true">QGroupBox#groupBox_2 {
-    background-color: rgb(255, 255, 255);
-    
-}</string>
+         <string notr="true">background-color: rgb(255, 255, 255);</string>
         </property>
         <property name="title">
          <string>人员信息列表</string>
@@ -132,7 +129,7 @@ border-radius:5px;</string>
          <item>
           <widget class="QTableView" name="tableView">
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(85, 170, 127);</string>
+            <string notr="true">background-color: rgb(255, 255, 255);</string>
            </property>
            <property name="gridStyle">
             <enum>Qt::DotLine</enum>
