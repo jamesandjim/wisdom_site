@@ -2,22 +2,24 @@
 <ui version="4.0">
  <class>info_collect_Form</class>
  <widget class="QWidget" name="info_collect_Form">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>825</width>
-    <height>679</height>
+    <width>1146</width>
+    <height>731</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">border-color: rgb(255, 255, 255);
-</string>
+   <string notr="true"/>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -30,7 +32,7 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
+   <item row="0" column="0">
     <widget class="QWidget" name="info_main" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -39,8 +41,7 @@
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-color: rgb(255, 255, 255);
-border-radius:5px;</string>
+      <string notr="true"/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
@@ -50,7 +51,7 @@ border-radius:5px;</string>
        <number>5</number>
       </property>
       <property name="topMargin">
-       <number>20</number>
+       <number>5</number>
       </property>
       <property name="rightMargin">
        <number>5</number>
@@ -59,84 +60,272 @@ border-radius:5px;</string>
        <number>5</number>
       </property>
       <item>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="minimumSize">
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="tabShape">
+         <enum>QTabWidget::Triangular</enum>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <property name="iconSize">
          <size>
-          <width>0</width>
-          <height>200</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
-        <property name="styleSheet">
-         <string notr="true">QGroupBox#groupBox {
-	
-	background-color: rgb(255, 255, 255);
-	gridline-color: rgb(13, 144, 11);
-	
-}</string>
+        <property name="elideMode">
+         <enum>Qt::ElideMiddle</enum>
         </property>
-        <property name="title">
-         <string>查询与操作</string>
-        </property>
-        <property name="flat">
-         <bool>false</bool>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
-         <property name="topMargin">
-          <number>20</number>
-         </property>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QLabel" name="label">
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>人员信息采集</string>
+         </attribute>
+         <widget class="QWidget" name="layoutWidget">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>30</y>
+            <width>651</width>
+            <height>641</height>
+           </rect>
+          </property>
+          <layout class="QFormLayout" name="formLayout">
+           <property name="verticalSpacing">
+            <number>10</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>文本内容请输入：</string>
+              <string>TextLabel</string>
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QLineEdit" name="lineEdit"/>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="le_name"/>
            </item>
-           <item>
-            <widget class="QPushButton" name="pushButton">
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_3">
              <property name="text">
-              <string>PushButton</string>
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="le_sex"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="le_nation"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="le_birthdate"/>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="le_address"/>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLineEdit" name="le_idNum"/>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLineEdit" name="le_issue"/>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QLineEdit" name="le_effectedDate"/>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QLineEdit" name="le_expiredDate"/>
+           </item>
+           <item row="9" column="0">
+            <widget class="QLabel" name="lb_photo">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QLabel" name="lb_photo2">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QLabel" name="lb_photo3">
+          <property name="geometry">
+           <rect>
+            <x>840</x>
+            <y>360</y>
+            <width>171</width>
+            <height>221</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+         <widget class="QWidget" name="">
+          <property name="geometry">
+           <rect>
+            <x>830</x>
+            <y>80</y>
+            <width>231</width>
+            <height>231</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QPushButton" name="pb_cj">
+             <property name="text">
+              <string>采   集</string>
              </property>
              <property name="flat">
               <bool>false</bool>
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="pb_uploadPhoto">
+             <property name="text">
+              <string>上传人员照片</string>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_save_upload">
+             <property name="text">
+              <string>保存数据到本地</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_cj_photo">
+             <property name="text">
+              <string>从考勤设备拍摄照片</string>
+             </property>
+            </widget>
+           </item>
           </layout>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="title">
-         <string>人员信息列表</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <property name="spacing">
-          <number>6</number>
-         </property>
-         <property name="topMargin">
-          <number>20</number>
-         </property>
-         <item>
-          <widget class="QTableView" name="tableView">
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);</string>
-           </property>
-           <property name="gridStyle">
-            <enum>Qt::DotLine</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>人员信息列表</string>
+         </attribute>
+         <widget class="QTableView" name="tableView">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>10</y>
+            <width>811</width>
+            <height>381</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::DotLine</enum>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pb_readall">
+          <property name="geometry">
+           <rect>
+            <x>880</x>
+            <y>80</y>
+            <width>91</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>获取人员列表</string>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </item>
      </layout>

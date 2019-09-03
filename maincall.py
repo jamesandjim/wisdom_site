@@ -11,11 +11,12 @@ class MyMainWindow(QWidget, mainwindows.Ui_Form):
     def __init__(self, parent=None):
         super(MyMainWindow, self).__init__(parent)
         self.setupUi(self)
-        self.tree_menu.itemClicked['QTreeWidgetItem*', 'int'].connect(self.tree_menu_itemClicked)
+        # self.tree_menu.itemClicked['QTreeWidgetItem*', 'int'].connect(self.tree_menu_itemClicked)
 
-
-    def tree_menu_itemClicked(self):
+    @pyqtSlot('QTreeWidgetItem*', 'int')
+    def on_tree_menu_itemClicked(self):
         print(self.tree_menu.currentItem().text(0))
+
         for i in range(self.verticalLayout_3.count()):
             self.verticalLayout_3.itemAt(i).widget().deleteLater()
         if self.tree_menu.currentItem().text(0) == '人员信息采集':
