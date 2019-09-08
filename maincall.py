@@ -11,6 +11,7 @@ class MyMainWindow(QWidget, mainwindows.Ui_Form):
     def __init__(self, parent=None):
         super(MyMainWindow, self).__init__(parent)
         self.setupUi(self)
+
         # self.tree_menu.itemClicked['QTreeWidgetItem*', 'int'].connect(self.tree_menu_itemClicked)
 
     @pyqtSlot('QTreeWidgetItem*', 'int')

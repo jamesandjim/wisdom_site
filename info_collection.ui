@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1146</width>
-    <height>731</height>
+    <width>1092</width>
+    <height>698</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -89,7 +89,7 @@
             <x>20</x>
             <y>30</y>
             <width>651</width>
-            <height>641</height>
+            <height>713</height>
            </rect>
           </property>
           <layout class="QFormLayout" name="formLayout">
@@ -196,18 +196,21 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>200</width>
-               <height>200</height>
+               <width>300</width>
+               <height>300</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>200</width>
-               <height>200</height>
+               <width>300</width>
+               <height>300</height>
               </size>
              </property>
              <property name="text">
               <string>TextLabel</string>
+             </property>
+             <property name="scaledContents">
+              <bool>false</bool>
              </property>
             </widget>
            </item>
@@ -235,21 +238,36 @@
          <widget class="QLabel" name="lb_photo3">
           <property name="geometry">
            <rect>
-            <x>840</x>
-            <y>360</y>
-            <width>171</width>
-            <height>221</height>
+            <x>760</x>
+            <y>270</y>
+            <width>240</width>
+            <height>320</height>
            </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>240</width>
+            <height>320</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>240</width>
+            <height>320</height>
+           </size>
           </property>
           <property name="text">
            <string>TextLabel</string>
           </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
          </widget>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
-            <x>830</x>
-            <y>80</y>
+            <x>760</x>
+            <y>30</y>
             <width>231</width>
             <height>231</height>
            </rect>
@@ -283,9 +301,23 @@
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="pb_camera">
+             <property name="text">
+              <string>从摄像头拍照</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="pb_cj_photo">
              <property name="text">
               <string>从考勤设备拍摄照片</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_refresh_photo">
+             <property name="text">
+              <string>刷新考勤设备照片</string>
              </property>
             </widget>
            </item>

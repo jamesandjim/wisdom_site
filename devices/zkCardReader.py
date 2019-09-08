@@ -3,7 +3,7 @@ import base64
 
 class CardReader:
     def __init__(self):
-        self.dev = WinDLL('./dll/termb.dll')
+        self.dev = WinDLL('./dll/zk/termb.dll')
         self.cbDataSize = 128
         self.GphotoSize = 256 * 1024
         self.info = {}

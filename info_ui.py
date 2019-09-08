@@ -8,6 +8,7 @@ import info_collection
 from devices import zkCardReader
 from models.dbtools import Dboperator
 from devices.face01 import Face_device
+from devices.camera import CameraDev
 
 
 class Info_Ui(QWidget, info_collection.Ui_info_collect_Form):
@@ -18,12 +19,38 @@ class Info_Ui(QWidget, info_collection.Ui_info_collect_Form):
         self.db = Dboperator()
 
     @pyqtSlot()
+    def on_pb_refresh_photo_clicked(self):
+        img = QPixmap('./face_photos/{}.jpg'.format(self.le_idNum.text()))
+        self.lb_photo3.setPixmap(img)
+
+    @pyqtSlot()
+    def on_pb_camera_clicked(self):
+        try:
+            cam_Dev = CameraDev()
+            cam_Dev.filename = self.le_idNum.text()
+            cam_Dev.take_photo()
+            img = QPixmap('./photos/{}.jpg'.format(cam_Dev.filename))
+            self.lb_photo3.setPixmap(img)
+        except Exception as e:
+            QMessageBox.information(self, '提示', '未检测到摄像头！', QMessageBox.Yes)
+
+
+    @pyqtSlot()
     def on_pb_cj_photo_clicked(self):
         face = Face_device('192.168.0.105')
-        if face.setPassWord():
-            face.getDeviceKey()
+        person = {"id": str(self.le_idNum.text()), "name": str(self.le_name.text())}
+
+        if face.createPerson(person):
+
+            if face.takeImg(person["id"]):
+
+                map = QPixmap("./face_photos/{}".format(self.le_idNum.text()))
+
+                self.lb_photo3.setPixmap(map)
+            else:
+                QMessageBox.information(self, '提示', '不能拍照', QMessageBox.Yes)
         else:
-            print('无法联接设备')
+            QMessageBox.information(self, '提示', '不能创建人员', QMessageBox.Yes)
 
     @pyqtSlot()
     def on_pb_readall_clicked(self):
@@ -98,7 +125,6 @@ class Info_Ui(QWidget, info_collection.Ui_info_collect_Form):
 
     @pyqtSlot()
     def on_pb_cj_clicked(self):
-
 
         if self.cr.openDevice() > 0:
 
