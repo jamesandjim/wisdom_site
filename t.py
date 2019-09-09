@@ -4,7 +4,7 @@ from PyQt5 import QtSql, QtGui
 from PyQt5.QtCore import pyqtSlot, Qt
 from PyQt5.Qt import QImage, QPixmap
 import requests
-import requests_ftp
+
 
 import sys
 

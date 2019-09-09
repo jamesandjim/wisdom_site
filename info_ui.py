@@ -15,7 +15,7 @@ class Info_Ui(QWidget, info_collection.Ui_info_collect_Form):
     def __init__(self, parent=None):
         super(Info_Ui, self).__init__(parent)
         self.setupUi(self)
-        self.cr = zkCardReader.CardReader()
+        # self.cr = zkCardReader.CardReader()
         self.db = Dboperator()
 
     @pyqtSlot()
