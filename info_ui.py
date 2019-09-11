@@ -1,4 +1,5 @@
 import base64
+
 from PyQt5.QtWidgets import QWidget, QMessageBox, QFileDialog
 from PyQt5 import QtSql, QtGui
 from PyQt5.QtCore import pyqtSlot, Qt
@@ -6,6 +7,7 @@ from PyQt5.Qt import QImage, QPixmap
 
 import info_collection
 from devices import zkCardReader
+from devices import klCardReader
 from models.dbtools import Dboperator
 from devices.face01 import Face_device
 from devices.camera import CameraDev
@@ -79,7 +81,7 @@ class Info_Ui(QWidget, info_collection.Ui_info_collect_Form):
     @pyqtSlot()
     def on_pb_save_upload_clicked(self):
 
-        idperiod = str('{}-{}'.format(str(self.cr.info['effectedDate']), str(self.cr.info['expiredDate'])))
+        idperiod = str('{}-{}'.format(self.le_effectedDate.text(), self.le_expiredDate.text()))
         idNo = str(self.le_idNum.text())
         name = str(self.le_name.text())
         gender = 1 if self.le_sex.text() == '男' else 0
@@ -124,27 +126,66 @@ class Info_Ui(QWidget, info_collection.Ui_info_collect_Form):
         print('xxx')
 
     @pyqtSlot()
+    def on_pb_cj1_clicked(self):
+        try:
+            cr = klCardReader.CardReader()
+        except Exception as e:
+            return e
+        r = cr.openDevice()
+
+        if r == 0:
+            try:
+                r = cr.readCard()
+                if r == 0:
+                    self.le_name.setText(cr.info['name'])
+                    self.le_address.setText(cr.info['address'])
+                    self.le_sex.setText(cr.info['sexDesc'])
+                    self.le_nation.setText(cr.info['nationDesc'])
+                    self.le_birthdate.setText(cr.info['born'])
+                    self.le_idNum.setText(cr.info['cardNo'])
+                    self.le_issue.setText(cr.info['issuedAt'])
+                    self.le_effectedDate.setText(cr.info['effectedDate'])
+                    self.le_expiredDate.setText(cr.info['expiredDate'])
+
+                    image = QPixmap("./kl_photos/{}.jpg".format(cr.info['cardNo']))
+
+                    self.lb_photo.setPixmap(image)
+                else:
+                    QMessageBox.information(self, '提示', '请确认身份证是否放到阅读器上！', QMessageBox.Yes)
+            except Exception as e:
+                QMessageBox.information(self, '提示', '读卡失败，{}'.format(e), QMessageBox.Yes)
+            finally:
+                cr.closeDevice()
+        else:
+            QMessageBox.information(self, '提示', '身份证阅读器打开失败！', QMessageBox.Yes)
+
+    @pyqtSlot()
     def on_pb_cj_clicked(self):
+        try:
+            cr = zkCardReader.CardReader()
+        except Exception as e:
+            return e
 
-        if self.cr.openDevice() > 0:
+        if cr.openDevice() > 0:
 
-            re = self.cr.readCard()
+            re = cr.readCard()
             if re == 1:
-                self.le_name.setText(self.cr.info['name'])
-                self.le_address.setText(self.cr.info['address'])
-                self.le_sex.setText(self.cr.info['sex'])
-                self.le_nation.setText(self.cr.info['nation'])
-                self.le_birthdate.setText(self.cr.info['birthdate'])
-                self.le_idNum.setText(self.cr.info['idNum'])
-                self.le_issue.setText(self.cr.info['issue'])
-                self.le_effectedDate.setText(str(self.cr.info['effectedDate']))
-                self.le_expiredDate.setText(str(self.cr.info['expiredDate']))
+                self.le_name.setText(cr.info['name'])
+                self.le_address.setText(cr.info['address'])
+                self.le_sex.setText(cr.info['sex'])
+                self.le_nation.setText(cr.info['nation'])
+                self.le_birthdate.setText(cr.info['birthdate'])
+                self.le_idNum.setText(cr.info['idNum'])
+                self.le_issue.setText(cr.info['issue'])
+                self.le_effectedDate.setText(str(cr.info['effectedDate']))
+                self.le_expiredDate.setText(str(cr.info['expiredDate']))
 
-                photo = base64.b64decode(self.cr.info['b_Photo'])
+                photo = base64.b64decode(cr.info['b_Photo'])
 
                 q_photo = QImage.fromData(photo)
                 image = QPixmap.fromImage(q_photo)
                 self.lb_photo.setPixmap(image)
+                cr.closeDevice()
 
 
 

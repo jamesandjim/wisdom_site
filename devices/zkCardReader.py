@@ -1,26 +1,37 @@
 from ctypes import *
-import base64
+import os
+
 
 class CardReader:
     def __init__(self):
-        self.dev = WinDLL('./dll/zk/termb.dll')
+        self.BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.dllDir = os.path.join(self.BASE_DIR, r'dll\zk\termb.dll')
+        self.dll = WinDLL(self.dllDir)
+        # self.dev = WinDLL('./dll/zk/termb.dll')
         self.cbDataSize = 128
         self.GphotoSize = 256 * 1024
         self.info = {}
 
     def openDevice(self):
         """大于0表示成功，返回值为端口号"""
-        return self.dev.InitCommExt()
-
+        try:
+            r = self.dev.InitCommExt()
+            return r
+        except Exception as e:
+            return e
 
     def closeDevice(self):
         """返回值为1表示成功，为0表示失败"""
-        return self.dev.CloseComm()
+        try:
+            r = self.dev.CloseComm()
+            return r
+        except Exception as e:
+            return e
 
     def readCard(self):
         try:
             auth = self.dev.Authenticate()
-            if  auth == 1:
+            if auth == 1:
                 if self.dev.Read_Content(1) >= 1:
 
                     b_name = create_string_buffer(self.cbDataSize)

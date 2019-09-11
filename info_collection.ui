@@ -65,7 +65,7 @@
          <string notr="true"/>
         </property>
         <property name="tabShape">
-         <enum>QTabWidget::Triangular</enum>
+         <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
          <number>0</number>
@@ -280,6 +280,13 @@
              </property>
              <property name="flat">
               <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_cj1">
+             <property name="text">
+              <string>读身份证信息</string>
              </property>
             </widget>
            </item>

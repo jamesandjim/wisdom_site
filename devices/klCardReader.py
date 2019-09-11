@@ -1,65 +1,86 @@
 from ctypes import *
 import json
-import PIL
-from PIL import Image
-from PyQt5.Qt import QImage, QPixmap
-
-import base64
+import os
+import logging
+from pathlib import Path, PurePath
 
 class CardReader:
+
     def __init__(self):
-        self.dev = WinDLL("../dll/kl/cardreaderkt5.dll")
+        # 用于pyinstaller打包的文件路径
+        # self.BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        # self.dllDir = os.path.join(self.BASE_DIR, 'dll\kl\cardreaderkt5.dll')
+        # self.dll = WinDLL(self.dllDir)
+
+        # 用于直接在pycharm中测试运行的文件路径
+        self.dll = WinDLL('./dll/kl/cardreaderkt5.dll')
+
+        # self.homeDir = Path.home()
+        # self.dllDir = PurePath(self.homeDir, 'dll/kl', 'cardreaderkt5.dll')
+
+        # continueRead 为1表示可连续读卡，为0则读下张卡时必须拿开再放
         self.url = "{\"continueRead\":1, \"uri\":\"wss://idcard.kaercloud.top//socket\"}"
-        self.p = c_int32()
+        # C语言的INT类型，配合byref,pointer使用。表示先开设定数据类型内存区，然后，在方法执行后，传值。
+        self.dev = c_int32()
+        self.info = {}
         # self.p = pointer(c_size_t())
         # self.p = c_size_t()
+        # logger = logging.getLogger()
+        fh = logging.FileHandler('deb.log')
+        # fh = logging.StreamHandler()
+
+        fh.setLevel(logging.DEBUG)
 
     def openDevice(self):
-
-        r = self.dev.KT_Dev_Open(5, reader.url, pointer(self.p))
-        return r
+        try:
+            r = self.dll.KT_Dev_Open(5, self.url, pointer(self.dev))
+            return r
+        except Exception as e:
+            return e
 
     def readCard(self):
+        # 身份证基本信息
         wzData = create_string_buffer(1024)
+        # 身份证照片
         zpData = create_string_buffer(1024)
+        try:
+            r = self.dll.KT_Dev_ReadIDCard(self.dev, wzData, zpData)
+            print(r)
+            if r == 0:
+                outStr = create_string_buffer(500)
+                outStr_len = c_int32(500)
 
-        r = self.dev.KT_Dev_ReadIDCard(self.p, wzData, zpData)
+                r1 = self.dll.KT_ParseIDCardInfo(wzData, outStr, pointer(outStr_len))
+                if r1 == 8:
+                    outStr = create_string_buffer(outStr_len)
+                    r2 = self.dll.KT_ParseIDCardInfo(wzData, outStr, pointer(outStr_len))
 
-        outStr = create_string_buffer(500)
-        i = c_int32(500)
+                self.info = json.loads(outStr.value.decode('gbk'))
+                #print(self.info)
 
-        r1 = self.dev.KT_ParseIDCardInfo(wzData, outStr, pointer(i))
+                img_len = c_int32(5000)
+                img = create_string_buffer(img_len.value)
 
-        if r1 == 8:
-            outStr = create_string_buffer(i)
-            r2 = self.dev.KT_ParseIDCardInfo(wzData, outStr, pointer(i))
-
-        print(json.loads(outStr.value.decode('gbk')))
-
-        img_len = c_int32(5000)
-        img = create_string_buffer(img_len.value)
-        print(img_len.value)
-
-        photo_size = (358, 441)
-
-        r2 = self.dev.KT_WltUnpack(zpData, b'JPG', -1, img, pointer(img_len))
-        with open('1.jpg', 'wb') as f:
-            f.write(img)
-
+                r2 = self.dll.KT_WltUnpack(zpData, b'JPG', -1, img, pointer(img_len))
+                cardNo = self.info['cardNo']
+                with open('./kl_photos/{}.jpg'.format(cardNo), 'wb') as f:
+                    f.write(img)
+                return 0
+            else:
+                return 1
+        except Exception as e:
+            return e
 
     def closeDevice(self):
-        if self.dev.KT_Dev_Close() == 0:
-            return True
-        else:
-            return False
+        try:
+            r = self.dll.KT_Dev_Close(self.dev)
+            return r
+        except Exception as e:
+            return e
+        return
 
 
 
-
-if __name__ == "__main__":
-    reader = CardReader()
-    reader.openDevice()
-    reader.readCard()
 
 
 
