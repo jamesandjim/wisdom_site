@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>info_collect_Form</class>
- <widget class="QWidget" name="info_collect_Form">
+ <class>infoCollectionForm</class>
+ <widget class="QWidget" name="infoCollectionForm">
   <property name="windowModality">
    <enum>Qt::WindowModal</enum>
   </property>

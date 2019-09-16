@@ -1,6 +1,6 @@
 from PyQt5 import QtCore
 import time
-import web_server
+
 
 class EmationThread(QtCore.QThread):  # 继承QThread
     resSignal = QtCore.pyqtSignal(dict)  # 注册一个信号

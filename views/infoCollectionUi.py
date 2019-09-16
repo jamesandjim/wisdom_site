@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'info_collection.ui'
+# Form implementation generated from reading ui file 'infoCollectionUi.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
@@ -10,16 +10,16 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_info_collect_Form(object):
-    def setupUi(self, info_collect_Form):
-        info_collect_Form.setObjectName("info_collect_Form")
-        info_collect_Form.setWindowModality(QtCore.Qt.WindowModal)
-        info_collect_Form.resize(1092, 698)
-        info_collect_Form.setStyleSheet("")
-        self.gridLayout = QtWidgets.QGridLayout(info_collect_Form)
+class Ui_infoCollectionForm(object):
+    def setupUi(self, infoCollectionForm):
+        infoCollectionForm.setObjectName("infoCollectionForm")
+        infoCollectionForm.setWindowModality(QtCore.Qt.WindowModal)
+        infoCollectionForm.resize(1092, 698)
+        infoCollectionForm.setStyleSheet("")
+        self.gridLayout = QtWidgets.QGridLayout(infoCollectionForm)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
-        self.info_main = QtWidgets.QWidget(info_collect_Form)
+        self.info_main = QtWidgets.QWidget(infoCollectionForm)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -166,32 +166,32 @@ class Ui_info_collect_Form(object):
         self.verticalLayout_2.addWidget(self.tabWidget)
         self.gridLayout.addWidget(self.info_main, 0, 0, 1, 1)
 
-        self.retranslateUi(info_collect_Form)
+        self.retranslateUi(infoCollectionForm)
         self.tabWidget.setCurrentIndex(0)
-        QtCore.QMetaObject.connectSlotsByName(info_collect_Form)
+        QtCore.QMetaObject.connectSlotsByName(infoCollectionForm)
 
-    def retranslateUi(self, info_collect_Form):
+    def retranslateUi(self, infoCollectionForm):
         _translate = QtCore.QCoreApplication.translate
-        info_collect_Form.setWindowTitle(_translate("info_collect_Form", "Form"))
-        self.label_2.setText(_translate("info_collect_Form", "TextLabel"))
-        self.label_3.setText(_translate("info_collect_Form", "TextLabel"))
-        self.label_4.setText(_translate("info_collect_Form", "TextLabel"))
-        self.label_5.setText(_translate("info_collect_Form", "TextLabel"))
-        self.label_8.setText(_translate("info_collect_Form", "TextLabel"))
-        self.label_6.setText(_translate("info_collect_Form", "TextLabel"))
-        self.label_9.setText(_translate("info_collect_Form", "TextLabel"))
-        self.label_7.setText(_translate("info_collect_Form", "TextLabel"))
-        self.label_10.setText(_translate("info_collect_Form", "TextLabel"))
-        self.lb_photo.setText(_translate("info_collect_Form", "TextLabel"))
-        self.lb_photo2.setText(_translate("info_collect_Form", "TextLabel"))
-        self.lb_photo3.setText(_translate("info_collect_Form", "TextLabel"))
-        self.pb_cj.setText(_translate("info_collect_Form", "采   集"))
-        self.pb_cj1.setText(_translate("info_collect_Form", "读身份证信息"))
-        self.pb_uploadPhoto.setText(_translate("info_collect_Form", "上传人员照片"))
-        self.pb_save_upload.setText(_translate("info_collect_Form", "保存数据到本地"))
-        self.pb_camera.setText(_translate("info_collect_Form", "从摄像头拍照"))
-        self.pb_cj_photo.setText(_translate("info_collect_Form", "从考勤设备拍摄照片"))
-        self.pb_refresh_photo.setText(_translate("info_collect_Form", "刷新考勤设备照片"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("info_collect_Form", "人员信息采集"))
-        self.pb_readall.setText(_translate("info_collect_Form", "获取人员列表"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("info_collect_Form", "人员信息列表"))
+        infoCollectionForm.setWindowTitle(_translate("infoCollectionForm", "Form"))
+        self.label_2.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.label_3.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.label_4.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.label_5.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.label_8.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.label_6.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.label_9.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.label_7.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.label_10.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.lb_photo.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.lb_photo2.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.lb_photo3.setText(_translate("infoCollectionForm", "TextLabel"))
+        self.pb_cj.setText(_translate("infoCollectionForm", "采   集"))
+        self.pb_cj1.setText(_translate("infoCollectionForm", "读身份证信息"))
+        self.pb_uploadPhoto.setText(_translate("infoCollectionForm", "上传人员照片"))
+        self.pb_save_upload.setText(_translate("infoCollectionForm", "保存数据到本地"))
+        self.pb_camera.setText(_translate("infoCollectionForm", "从摄像头拍照"))
+        self.pb_cj_photo.setText(_translate("infoCollectionForm", "从考勤设备拍摄照片"))
+        self.pb_refresh_photo.setText(_translate("infoCollectionForm", "刷新考勤设备照片"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("infoCollectionForm", "人员信息采集"))
+        self.pb_readall.setText(_translate("infoCollectionForm", "获取人员列表"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("infoCollectionForm", "人员信息列表"))

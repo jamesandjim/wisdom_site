@@ -1,7 +1,5 @@
 from flask import Flask, request
-from PyQt5.Qt import QImage, QPixmap
-import requests
-from ftp import myFtp
+from ftp.ftp import myFtp
 
 
 app = Flask(__name__)

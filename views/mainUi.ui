@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>infoCollection</class>
+ <widget class="QWidget" name="infoCollection">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1102</width>
-    <height>662</height>
+    <width>1179</width>
+    <height>706</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -17,7 +20,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>智慧工地系统</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -28,6 +31,9 @@
   <layout class="QHBoxLayout" name="horizontalLayout_3">
    <property name="spacing">
     <number>0</number>
+   </property>
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMinAndMaxSize</enum>
    </property>
    <property name="leftMargin">
     <number>0</number>
@@ -144,7 +150,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="resource.qrc">
+              <iconset>
                <normaloff>:/ico/resource/ico/1.jpg</normaloff>:/ico/resource/ico/1.jpg</iconset>
              </property>
              <property name="iconSize">
@@ -179,7 +185,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="resource.qrc">
+              <iconset>
                <normaloff>:/ico/resource/ico/2.jpg</normaloff>:/ico/resource/ico/2.jpg</iconset>
              </property>
              <property name="iconSize">
@@ -214,7 +220,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="resource.qrc">
+              <iconset>
                <normaloff>:/ico/resource/ico/3.jpg</normaloff>:/ico/resource/ico/3.jpg</iconset>
              </property>
              <property name="iconSize">
@@ -265,7 +271,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="resource.qrc">
+              <iconset>
                <normaloff>:/ico/resource/ico/exit.png</normaloff>:/ico/resource/ico/exit.png</iconset>
              </property>
              <property name="iconSize">
@@ -342,6 +348,9 @@ border-radius:5px;</string>
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
+            <property name="itemsExpandable">
+             <bool>true</bool>
+            </property>
             <property name="animated">
              <bool>true</bool>
             </property>
@@ -361,7 +370,7 @@ border-radius:5px;</string>
               </font>
              </property>
              <property name="icon">
-              <iconset resource="resource.qrc">
+              <iconset>
                <normaloff>:/ico/resource/ico/main.jpg</normaloff>:/ico/resource/ico/main.jpg</iconset>
              </property>
             </column>
@@ -369,6 +378,16 @@ border-radius:5px;</string>
              <property name="text">
               <string>系统设置</string>
              </property>
+             <item>
+              <property name="text">
+               <string>系统参数设置</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>住建平台信息设置</string>
+              </property>
+             </item>
             </item>
             <item>
              <property name="text">
@@ -381,7 +400,7 @@ border-radius:5px;</string>
               </font>
              </property>
              <property name="icon">
-              <iconset resource="resource.qrc">
+              <iconset>
                <normaloff>:/ico/resource/ico/2.jpg</normaloff>
                <normalon>:/ico/resource/ico/1.jpg</normalon>:/ico/resource/ico/2.jpg</iconset>
              </property>
@@ -423,11 +442,36 @@ border-radius:5px;</string>
                <string>显示屏设备</string>
               </property>
              </item>
+             <item>
+              <property name="text">
+               <string>显示屏内容设置</string>
+              </property>
+             </item>
+            </item>
+            <item>
+             <property name="text">
+              <string>LCD显示</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>数据备份</string>
+             </property>
             </item>
             <item>
              <property name="text">
               <string>操作员管理</string>
              </property>
+             <item>
+              <property name="text">
+               <string>系统人员管理</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>班组信息管理</string>
+              </property>
+             </item>
             </item>
            </widget>
           </item>
@@ -501,8 +545,6 @@ border-radius:5px;</string>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="resource.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

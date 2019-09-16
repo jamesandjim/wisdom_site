@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 from random import randint
 
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QWidget, QListWidget, QStackedWidget, QHBoxLayout,\
+from PyQt5.QtWidgets import QListWidget, QStackedWidget, QHBoxLayout,\
     QListWidgetItem, QLabel
 
-from info_ui import *
+from controllers.infoCollectionController import *
 
 class LeftTabWidget(QWidget):
 
@@ -56,7 +56,7 @@ class LeftTabWidget(QWidget):
 
         item = QListWidgetItem(
             QIcon('Data/0%d.ico' % randint(1, 8)), str('测试'), self.listWidget)
-        te = Info_Ui()
+        te = InfoCollectionCls()
         self.stackedWidget.addWidget(te)
 
 

@@ -1,11 +1,11 @@
 import base64
 
 from PyQt5.QtWidgets import QWidget, QMessageBox, QFileDialog
-from PyQt5 import QtSql, QtGui
+from PyQt5 import QtSql
 from PyQt5.QtCore import pyqtSlot, Qt
 from PyQt5.Qt import QImage, QPixmap
 
-import info_collection
+from views import infoCollectionUi
 from devices import zkCardReader
 from devices import klCardReader
 from models.dbtools import Dboperator
@@ -13,9 +13,9 @@ from devices.face01 import Face_device
 from devices.camera import CameraDev
 
 
-class Info_Ui(QWidget, info_collection.Ui_info_collect_Form):
+class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
     def __init__(self, parent=None):
-        super(Info_Ui, self).__init__(parent)
+        super(InfoCollectionCls, self).__init__(parent)
         self.setupUi(self)
         # self.cr = zkCardReader.CardReader()
         self.db = Dboperator()
@@ -35,7 +35,6 @@ class Info_Ui(QWidget, info_collection.Ui_info_collect_Form):
             self.lb_photo3.setPixmap(img)
         except Exception as e:
             QMessageBox.information(self, '提示', '未检测到摄像头！', QMessageBox.Yes)
-
 
     @pyqtSlot()
     def on_pb_cj_photo_clicked(self):
@@ -77,10 +76,8 @@ class Info_Ui(QWidget, info_collection.Ui_info_collect_Form):
         queryModel.setHeaderData(16, Qt.Horizontal, '所属班组或部门')
         queryModel.setHeaderData(17, Qt.Horizontal, '数据状态')
 
-
     @pyqtSlot()
     def on_pb_save_upload_clicked(self):
-
         idperiod = str('{}-{}'.format(self.le_effectedDate.text(), self.le_expiredDate.text()))
         idNo = str(self.le_idNum.text())
         name = str(self.le_name.text())
@@ -110,7 +107,6 @@ class Info_Ui(QWidget, info_collection.Ui_info_collect_Form):
             print(sql)
 
             self.db.excuteSQl(sql)
-
 
     @pyqtSlot()
     def on_pb_uploadPhoto_clicked(self):
