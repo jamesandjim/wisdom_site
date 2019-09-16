@@ -8,7 +8,7 @@ from controllers import infoCollectionController
 from controllers import sysSetController
 
 
-class MyMainWindow(QWidget, mainUi.Ui_infoCollection):
+class MyMainWindow(QWidget, mainUi.Ui_mainForm):
     def __init__(self, parent=None):
         super(MyMainWindow, self).__init__(parent)
         self.setupUi(self)
@@ -30,7 +30,7 @@ class MyMainWindow(QWidget, mainUi.Ui_infoCollection):
             self.verticalLayout_3.addWidget(widget)
 
         elif selected == '系统参数设置':
-            widget = sysSetController.SysSetCls()
+            widget = sysSetController.SysSetWindow()
             self.removeC()
             self.verticalLayout_3.addWidget(widget)
 

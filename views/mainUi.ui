@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>infoCollection</class>
- <widget class="QWidget" name="infoCollection">
+ <class>mainForm</class>
+ <widget class="QWidget" name="mainForm">
   <property name="windowModality">
    <enum>Qt::WindowModal</enum>
   </property>
@@ -21,6 +21,10 @@
   </property>
   <property name="windowTitle">
    <string>智慧工地系统</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resource.qrc">
+    <normaloff>:/ico/resource/ico/main.jpg</normaloff>:/ico/resource/ico/main.jpg</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -150,7 +154,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="../resource.qrc">
                <normaloff>:/ico/resource/ico/1.jpg</normaloff>:/ico/resource/ico/1.jpg</iconset>
              </property>
              <property name="iconSize">
@@ -185,7 +189,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="../resource.qrc">
                <normaloff>:/ico/resource/ico/2.jpg</normaloff>:/ico/resource/ico/2.jpg</iconset>
              </property>
              <property name="iconSize">
@@ -220,7 +224,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="../resource.qrc">
                <normaloff>:/ico/resource/ico/3.jpg</normaloff>:/ico/resource/ico/3.jpg</iconset>
              </property>
              <property name="iconSize">
@@ -236,19 +240,6 @@
               <bool>true</bool>
              </property>
             </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-            </spacer>
            </item>
            <item>
             <widget class="QPushButton" name="pushButton_8">
@@ -271,7 +262,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="../resource.qrc">
                <normaloff>:/ico/resource/ico/exit.png</normaloff>:/ico/resource/ico/exit.png</iconset>
              </property>
              <property name="iconSize">
@@ -370,7 +361,7 @@ border-radius:5px;</string>
               </font>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="../resource.qrc">
                <normaloff>:/ico/resource/ico/main.jpg</normaloff>:/ico/resource/ico/main.jpg</iconset>
              </property>
             </column>
@@ -400,7 +391,7 @@ border-radius:5px;</string>
               </font>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="../resource.qrc">
                <normaloff>:/ico/resource/ico/2.jpg</normaloff>
                <normalon>:/ico/resource/ico/1.jpg</normalon>:/ico/resource/ico/2.jpg</iconset>
              </property>
@@ -545,6 +536,8 @@ border-radius:5px;</string>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

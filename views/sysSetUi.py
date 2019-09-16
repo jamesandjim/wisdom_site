@@ -14,6 +14,8 @@ class Ui_sysSetForm(object):
     def setupUi(self, sysSetForm):
         sysSetForm.setObjectName("sysSetForm")
         sysSetForm.resize(835, 559)
+        sysSetForm.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius:5px;")
 
         self.retranslateUi(sysSetForm)
         QtCore.QMetaObject.connectSlotsByName(sysSetForm)
