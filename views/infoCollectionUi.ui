@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1092</width>
-    <height>698</height>
+    <width>889</width>
+    <height>551</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,7 +41,10 @@
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">QWidget #info_main{
+    background-color: rgb(255, 255, 255);
+    border-radius:5px;
+}</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
@@ -62,7 +65,10 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">QTabWidget #tabWidget{
+    background-color: rgb(255, 255, 255);
+    border-radius:5px;
+}</string>
         </property>
         <property name="tabShape">
          <enum>QTabWidget::Rounded</enum>
@@ -80,6 +86,12 @@
          <enum>Qt::ElideMiddle</enum>
         </property>
         <widget class="QWidget" name="tab">
+         <property name="styleSheet">
+          <string notr="true">QWidget #tab{
+    background-color: rgb(255, 255, 255);
+    border-radius:5px;
+}</string>
+         </property>
          <attribute name="title">
           <string>人员信息采集</string>
          </attribute>
@@ -88,7 +100,7 @@
            <rect>
             <x>20</x>
             <y>30</y>
-            <width>651</width>
+            <width>591</width>
             <height>713</height>
            </rect>
           </property>
@@ -196,14 +208,14 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>300</width>
-               <height>300</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>300</width>
-               <height>300</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="text">
@@ -266,7 +278,7 @@
          <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
-            <x>760</x>
+            <x>630</x>
             <y>30</y>
             <width>231</width>
             <height>231</height>
@@ -332,6 +344,12 @@
          </widget>
         </widget>
         <widget class="QWidget" name="tab_2">
+         <property name="styleSheet">
+          <string notr="true">QWidget #tab_2{
+    background-color: rgb(255, 255, 255);
+    border-radius:5px;
+}</string>
+         </property>
          <attribute name="title">
           <string>人员信息列表</string>
          </attribute>

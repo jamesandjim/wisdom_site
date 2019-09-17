@@ -6186,3 +6186,61 @@
 2019-09-16 14:45:35.458 DEBUG [4972]  BulkHidDevice::close end
 2019-09-16 14:45:35.458 DEBUG [4972] BulkHidDevice::~BulkHidDevice end
 2019-09-16 14:45:35.458 DEBUG [4972] IDCardReaderHID::~IDCardReaderHID end
+2019-09-16 20:34:27.664 DEBUG [4812]  cardreadekt dll version  5.1.6.0
+2019-09-16 20:34:27.680 DEBUG [4812] KT_Dev_Open start portType  5  param  {
+2019-09-16 20:34:27.680 WARN  [4812] parse  "{"  error  "unterminated object"
+2019-09-16 20:34:27.711 DEBUG [4812] CardReaderHID::SetParam  
+2019-09-16 20:34:27.711 DEBUG [4812] CardReaderHID::OpenPort start 
+2019-09-16 20:34:27.711 DEBUG [4812] BulkHidDevice::open start  {"VP":["VID_0483&PID_5750","VID_0483&PID_5751","VID_5000&PID_0500","VID_2015&PID_0008"],"addr":0,"bus":0,"pid":0,"vid":0}
+2019-09-16 20:34:27.839 DEBUG [4812] BulkHidDevice::open by VP  device count 6 
+2019-09-16 20:34:27.839 DEBUG [4812] CardReaderHID::OpenPort open device  -1
+2019-09-16 20:34:27.839 DEBUG [4812] IDCardReaderHID::~IDCardReaderHID start 
+2019-09-16 20:34:27.839 DEBUG [4812] BulkHidDevice::close start
+2019-09-16 20:34:27.839 DEBUG [4812]  BulkHidDevice::close end
+2019-09-16 20:34:27.839 DEBUG [4812] BulkHidDevice::~BulkHidDevice start
+2019-09-16 20:34:27.839 DEBUG [4812] BulkHidDevice::close start
+2019-09-16 20:34:27.839 DEBUG [4812]  BulkHidDevice::close end
+2019-09-16 20:34:27.839 DEBUG [4812] BulkHidDevice::~BulkHidDevice end
+2019-09-16 20:34:27.839 DEBUG [4812] IDCardReaderHID::~IDCardReaderHID end
+2019-09-16 20:34:27.839 DEBUG [4812] CardReaderUSB::CardReaderUSB start
+2019-09-16 20:34:27.839 DEBUG [4812] resolveSdtapiFromLibrary D:/PycharmProjects/wisdom_site/dll/kl/sdtapi.dll
+2019-09-16 20:34:27.855 DEBUG [4812] resolveSdtapiFromLibrary LoadLibrary sdtapi success
+2019-09-16 20:34:27.855 DEBUG [4812] CardReaderUSB::CardReaderUSB end
+2019-09-16 20:34:27.855 DEBUG [4812] CardReaderUSB::SetParam 
+2019-09-16 20:34:27.855 DEBUG [4812] CardReaderUSB::OpenPort 1001
+2019-09-16 20:34:27.855 DEBUG [4812] CardReaderUSB::OpenPort port  1001
+2019-09-16 20:34:27.855 WARN  [4812] CardReaderUSB::OpenPort sdtOpenPort error  1
+2019-09-16 20:34:27.855 DEBUG [4812] CardReaderUSB::~CardReaderUSB start
+2019-09-16 20:34:27.855 DEBUG [4812] CardReaderUSB::ClosePort -1
+2019-09-16 20:34:27.855 DEBUG [4812] CardReaderUSB::ClosePort sdtClosePort 0
+2019-09-16 20:34:27.855 DEBUG [4812] CardReaderUSB::~CardReaderUSB end
+2019-09-16 20:34:27.855 DEBUG [4812] KT_Dev_Open end  1
+2019-09-17 20:46:29.286 DEBUG [740]  cardreadekt dll version  5.1.6.0
+2019-09-17 20:46:29.286 DEBUG [740] KT_Dev_Open start portType  5  param  {
+2019-09-17 20:46:29.286 WARN  [740] parse  "{"  error  "unterminated object"
+2019-09-17 20:46:29.333 DEBUG [740] CardReaderHID::SetParam  
+2019-09-17 20:46:29.333 DEBUG [740] CardReaderHID::OpenPort start 
+2019-09-17 20:46:29.333 DEBUG [740] BulkHidDevice::open start  {"VP":["VID_0483&PID_5750","VID_0483&PID_5751","VID_5000&PID_0500","VID_2015&PID_0008"],"addr":0,"bus":0,"pid":0,"vid":0}
+2019-09-17 20:46:29.451 DEBUG [740] BulkHidDevice::open by VP  device count 6 
+2019-09-17 20:46:29.451 DEBUG [740] CardReaderHID::OpenPort open device  -1
+2019-09-17 20:46:29.451 DEBUG [740] IDCardReaderHID::~IDCardReaderHID start 
+2019-09-17 20:46:29.451 DEBUG [740] BulkHidDevice::close start
+2019-09-17 20:46:29.451 DEBUG [740]  BulkHidDevice::close end
+2019-09-17 20:46:29.451 DEBUG [740] BulkHidDevice::~BulkHidDevice start
+2019-09-17 20:46:29.451 DEBUG [740] BulkHidDevice::close start
+2019-09-17 20:46:29.451 DEBUG [740]  BulkHidDevice::close end
+2019-09-17 20:46:29.467 DEBUG [740] BulkHidDevice::~BulkHidDevice end
+2019-09-17 20:46:29.467 DEBUG [740] IDCardReaderHID::~IDCardReaderHID end
+2019-09-17 20:46:29.467 DEBUG [740] CardReaderUSB::CardReaderUSB start
+2019-09-17 20:46:29.467 DEBUG [740] resolveSdtapiFromLibrary D:/PycharmProjects/wisdom_site/dll/kl/sdtapi.dll
+2019-09-17 20:46:29.467 DEBUG [740] resolveSdtapiFromLibrary LoadLibrary sdtapi success
+2019-09-17 20:46:29.467 DEBUG [740] CardReaderUSB::CardReaderUSB end
+2019-09-17 20:46:29.467 DEBUG [740] CardReaderUSB::SetParam 
+2019-09-17 20:46:29.467 DEBUG [740] CardReaderUSB::OpenPort 1001
+2019-09-17 20:46:29.467 DEBUG [740] CardReaderUSB::OpenPort port  1001
+2019-09-17 20:46:29.467 WARN  [740] CardReaderUSB::OpenPort sdtOpenPort error  1
+2019-09-17 20:46:29.467 DEBUG [740] CardReaderUSB::~CardReaderUSB start
+2019-09-17 20:46:29.467 DEBUG [740] CardReaderUSB::ClosePort -1
+2019-09-17 20:46:29.467 DEBUG [740] CardReaderUSB::ClosePort sdtClosePort 0
+2019-09-17 20:46:29.467 DEBUG [740] CardReaderUSB::~CardReaderUSB end
+2019-09-17 20:46:29.467 DEBUG [740] KT_Dev_Open end  1

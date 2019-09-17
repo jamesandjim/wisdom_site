@@ -14,7 +14,7 @@ class Ui_infoCollectionForm(object):
     def setupUi(self, infoCollectionForm):
         infoCollectionForm.setObjectName("infoCollectionForm")
         infoCollectionForm.setWindowModality(QtCore.Qt.WindowModal)
-        infoCollectionForm.resize(1092, 698)
+        infoCollectionForm.resize(889, 551)
         infoCollectionForm.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(infoCollectionForm)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -25,22 +25,32 @@ class Ui_infoCollectionForm(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.info_main.sizePolicy().hasHeightForWidth())
         self.info_main.setSizePolicy(sizePolicy)
-        self.info_main.setStyleSheet("")
+        self.info_main.setStyleSheet("QWidget #info_main{\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border-radius:5px;\n"
+"}")
         self.info_main.setObjectName("info_main")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.info_main)
         self.verticalLayout_2.setContentsMargins(5, 5, 5, 5)
         self.verticalLayout_2.setSpacing(10)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.tabWidget = QtWidgets.QTabWidget(self.info_main)
-        self.tabWidget.setStyleSheet("")
+        self.tabWidget.setStyleSheet("QTabWidget #tabWidget{\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border-radius:5px;\n"
+"}")
         self.tabWidget.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.tabWidget.setIconSize(QtCore.QSize(20, 20))
         self.tabWidget.setElideMode(QtCore.Qt.ElideMiddle)
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
+        self.tab.setStyleSheet("QWidget #tab{\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border-radius:5px;\n"
+"}")
         self.tab.setObjectName("tab")
         self.layoutWidget = QtWidgets.QWidget(self.tab)
-        self.layoutWidget.setGeometry(QtCore.QRect(20, 30, 651, 713))
+        self.layoutWidget.setGeometry(QtCore.QRect(20, 30, 591, 713))
         self.layoutWidget.setObjectName("layoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.layoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -106,8 +116,8 @@ class Ui_infoCollectionForm(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lb_photo.sizePolicy().hasHeightForWidth())
         self.lb_photo.setSizePolicy(sizePolicy)
-        self.lb_photo.setMinimumSize(QtCore.QSize(300, 300))
-        self.lb_photo.setMaximumSize(QtCore.QSize(300, 300))
+        self.lb_photo.setMinimumSize(QtCore.QSize(200, 200))
+        self.lb_photo.setMaximumSize(QtCore.QSize(200, 200))
         self.lb_photo.setScaledContents(False)
         self.lb_photo.setObjectName("lb_photo")
         self.formLayout.setWidget(9, QtWidgets.QFormLayout.LabelRole, self.lb_photo)
@@ -123,7 +133,7 @@ class Ui_infoCollectionForm(object):
         self.lb_photo3.setScaledContents(True)
         self.lb_photo3.setObjectName("lb_photo3")
         self.layoutWidget1 = QtWidgets.QWidget(self.tab)
-        self.layoutWidget1.setGeometry(QtCore.QRect(760, 30, 231, 231))
+        self.layoutWidget1.setGeometry(QtCore.QRect(630, 30, 231, 231))
         self.layoutWidget1.setObjectName("layoutWidget1")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -153,6 +163,10 @@ class Ui_infoCollectionForm(object):
         self.verticalLayout.addWidget(self.pb_refresh_photo)
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QtWidgets.QWidget()
+        self.tab_2.setStyleSheet("QWidget #tab_2{\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border-radius:5px;\n"
+"}")
         self.tab_2.setObjectName("tab_2")
         self.tableView = QtWidgets.QTableView(self.tab_2)
         self.tableView.setGeometry(QtCore.QRect(0, 10, 811, 381))
