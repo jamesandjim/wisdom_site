@@ -17,6 +17,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
     def __init__(self, parent=None):
         super(InfoCollectionCls, self).__init__(parent)
         self.setupUi(self)
+        self.pb_cj.setVisible(False)
         # self.cr = zkCardReader.CardReader()
         self.db = Dboperator()
 
@@ -104,7 +105,6 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         else:
 
             sql = "INSERT INTO wis_person VALUES('%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s',%d,'%s',%d,'%s','%s',%d,%d)" % (idNo, name, gender, nation, birthday, address, idissue, idperiod, idphoto, photo, inf_photo, userType, dev_mac, RegType, user_id, work_sn, department, status)
-            print(sql)
 
             self.db.excuteSQl(sql)
 
@@ -131,6 +131,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
 
         if r == 0:
             try:
+                self.pb_cj1.setText('信息读取中....')
                 r = cr.readCard()
                 if r == 0:
                     self.le_name.setText(cr.info['name'])
@@ -146,6 +147,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
                     image = QPixmap("./kl_photos/{}.jpg".format(cr.info['cardNo']))
 
                     self.lb_photo.setPixmap(image)
+                    self.pb_cj1.setText('读身份证信息')
                 else:
                     QMessageBox.information(self, '提示', '请确认身份证是否放到阅读器上！', QMessageBox.Yes)
             except Exception as e:

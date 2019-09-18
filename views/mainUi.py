@@ -26,7 +26,7 @@ class Ui_mainForm(object):
         mainForm.setAutoFillBackground(False)
         mainForm.setStyleSheet("background-color: rgb(229, 225, 222);")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(mainForm)
-        self.horizontalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
+        self.horizontalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetMaximumSize)
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")

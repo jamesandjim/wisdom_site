@@ -6,6 +6,7 @@ from PyQt5.QtCore import pyqtSlot
 from views import mainUi
 from controllers import infoCollectionController
 from controllers import sysSetController
+from controllers import departmentController
 
 
 class MyMainWindow(QWidget, mainUi.Ui_mainForm):
@@ -68,7 +69,9 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
             pass
 
         elif selected == '班组信息管理':
-            pass
+            widget = departmentController.DepartmentWindow()
+            self.removeC()
+            self.verticalLayout_3.addWidget(widget)
 
         else:
             pass
