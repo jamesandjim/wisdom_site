@@ -26,7 +26,7 @@ class CardReader:
         # self.p = pointer(c_size_t())
         # self.p = c_size_t()
         # logger = logging.getLogger()
-        fh = logging.FileHandler('deb.log')
+        fh = logging.FileHandler('klreader.log')
         # fh = logging.StreamHandler()
 
         fh.setLevel(logging.DEBUG)
@@ -45,7 +45,7 @@ class CardReader:
         zpData = create_string_buffer(1024)
         try:
             r = self.dll.KT_Dev_ReadIDCard(self.dev, wzData, zpData)
-            print(r)
+
             if r == 0:
                 outStr = create_string_buffer(500)
                 outStr_len = c_int32(500)
@@ -63,7 +63,7 @@ class CardReader:
 
                 r2 = self.dll.KT_WltUnpack(zpData, b'JPG', -1, img, pointer(img_len))
                 cardNo = self.info['cardNo']
-                with open('./kl_photos/{}.jpg'.format(cardNo), 'wb') as f:
+                with open('./photos_kl/{}.jpg'.format(cardNo), 'wb') as f:
                     f.write(img)
                 return 0
             else:

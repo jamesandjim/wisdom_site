@@ -3,6 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/DLL/jbnv/JBNVSDK.h" charset="GBK" />
     <file url="file://$PROJECT_DIR$/DLL/jbnv/include/JBNVSDK.h" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/pingtest.py" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/tmp/pingtest.py" charset="GBK" />
   </component>
 </project>

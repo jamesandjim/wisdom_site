@@ -22,7 +22,6 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
 
     @pyqtSlot('QTreeWidgetItem*', 'int')
     def on_tree_menu_itemClicked(self):
-        # print(self.tree_menu.currentItem().text(0))
         selected = self.tree_menu.currentItem().text(0)
 
         if selected == '人员信息采集':
@@ -84,7 +83,6 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     form = MyMainWindow()
-    form.show()
-
+    form.showMaximized()
     sys.exit(app.exec_())
 

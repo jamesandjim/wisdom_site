@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1179</width>
-    <height>706</height>
+    <height>800</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,6 +18,12 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1024</width>
+    <height>800</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>智慧工地系统</string>

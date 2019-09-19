@@ -21,6 +21,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         super(InfoCollectionCls, self).__init__(parent)
         self.setupUi(self)
         self.pb_cj.setVisible(False)
+        self.pb_refresh_photo.setVisible(False)
         # self.cr = zkCardReader.CardReader()
         self.db = Dboperator()
         self.load()
@@ -34,7 +35,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
     @pyqtSlot()
     def on_pb_refresh_photo_clicked(self):
         """刷新考勤设备照片 处理函数"""
-        img = QPixmap('./face_photos/{}.jpg'.format(self.le_idNum.text()))
+        img = QPixmap('./photos_face/{}.jpg'.format(self.le_idNum.text()))
         self.lb_photo3.setPixmap(img)
 
     @pyqtSlot()
@@ -44,7 +45,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
             cam_Dev = CameraDev()
             cam_Dev.filename = self.le_idNum.text()
             cam_Dev.take_photo()
-            img = QPixmap('./photos/{}.jpg'.format(cam_Dev.filename))
+            img = QPixmap('./photos_cam/{}.jpg'.format(cam_Dev.filename))
             self.lb_photo3.setPixmap(img)
         except Exception as e:
             QMessageBox.information(self, '提示', '未检测到摄像头！', QMessageBox.Yes)
@@ -58,9 +59,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         if face.createPerson(person):
 
             if face.takeImg(person["id"]):
-
-                map = QPixmap("./face_photos/{}".format(self.le_idNum.text()))
-
+                map = QPixmap("./photos_face/{}".format(self.le_idNum.text()))
                 self.lb_photo3.setPixmap(map)
             else:
                 QMessageBox.information(self, '提示', '不能拍照', QMessageBox.Yes)
@@ -155,7 +154,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
                     self.le_effectedDate.setText(cr.info['effectedDate'])
                     self.le_expiredDate.setText(cr.info['expiredDate'])
 
-                    image = QPixmap("./kl_photos/{}.jpg".format(cr.info['cardNo']))
+                    image = QPixmap("./photos_kl/{}.jpg".format(cr.info['cardNo']))
                     self.lb_photo.setPixmap(image)
                 else:
                     QMessageBox.information(self, '提示', '请确认身份证是否放到阅读器上！', QMessageBox.Yes)

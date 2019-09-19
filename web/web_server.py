@@ -10,7 +10,7 @@ def getFace():
     print(r)
     ftp = myFtp('192.168.0.105')
     ftp.Login('', '')
-    ftp.DownLoadFile('./face_photos/{}.jpg'.format(j['personId']), './faceRegister/{}_{}.jpg'.format(j['personId'], j['faceId']))
+    ftp.DownLoadFile('./photos_face/{}.jpg'.format(j['personId']), './faceRegister/{}_{}.jpg'.format(j['personId'], j['faceId']))
     ftp.close()
 
     print(j)

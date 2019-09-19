@@ -2,7 +2,7 @@ import sys
 
 from PyQt5 import QtWidgets, QtCore
 
-from ht import EmationThread
+from tmp.ht import EmationThread
 
 
 class MyForm(object):
