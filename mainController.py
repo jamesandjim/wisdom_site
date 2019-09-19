@@ -4,9 +4,9 @@ from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtCore import pyqtSlot
 
 from views import mainUi
-from controllers import infoCollectionController
-from controllers import sysSetController
-from controllers import departmentController
+import infoCollectionController
+import sysSetController
+import departmentController
 
 
 class MyMainWindow(QWidget, mainUi.Ui_mainForm):

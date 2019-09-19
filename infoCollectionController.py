@@ -1,4 +1,5 @@
 import base64
+import requests
 
 from PyQt5.QtWidgets import QWidget, QMessageBox, QFileDialog
 from PyQt5 import QtSql
@@ -12,6 +13,8 @@ from models.dbtools import Dboperator
 from devices.face01 import Face_device
 from devices.camera import CameraDev
 
+from commTools import st_des, toBASE64
+
 
 class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
     def __init__(self, parent=None):
@@ -20,14 +23,23 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         self.pb_cj.setVisible(False)
         # self.cr = zkCardReader.CardReader()
         self.db = Dboperator()
+        self.load()
+
+    def load(self):
+        qs = "select name from wis_department"
+        data = self.db.querySQL(qs)
+        self.cb_department.setModel(data)
+
 
     @pyqtSlot()
     def on_pb_refresh_photo_clicked(self):
+        """刷新考勤设备照片 处理函数"""
         img = QPixmap('./face_photos/{}.jpg'.format(self.le_idNum.text()))
         self.lb_photo3.setPixmap(img)
 
     @pyqtSlot()
     def on_pb_camera_clicked(self):
+        """从摄像头拍照 处理函数"""
         try:
             cam_Dev = CameraDev()
             cam_Dev.filename = self.le_idNum.text()
@@ -39,6 +51,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
 
     @pyqtSlot()
     def on_pb_cj_photo_clicked(self):
+        """从考勤设备拍摄照片 处理函数"""
         face = Face_device('192.168.0.105')
         person = {"id": str(self.le_idNum.text()), "name": str(self.le_name.text())}
 
@@ -56,6 +69,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
 
     @pyqtSlot()
     def on_pb_readall_clicked(self):
+        """人员信息列表 处理函数"""
         queryModel = self.db.querySQL('select * from wis_person')
         self.tableView.setModel(queryModel)
         queryModel.setHeaderData(0, Qt.Horizontal, '身份证号')
@@ -79,6 +93,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
 
     @pyqtSlot()
     def on_pb_save_upload_clicked(self):
+        """保存数据到本地 处理函数"""
         idperiod = str('{}-{}'.format(self.le_effectedDate.text(), self.le_expiredDate.text()))
         idNo = str(self.le_idNum.text())
         name = str(self.le_name.text())
@@ -110,19 +125,16 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
 
     @pyqtSlot()
     def on_pb_uploadPhoto_clicked(self):
+        """使用电脑中的照片 处理函数"""
         path, imptype = QFileDialog.getOpenFileName(self, '选择用于识别的人像', '/', 'jpg(*.jpg);;bmp(*.bmp)')
         img = QPixmap(path)
         self.lb_photo2.setPixmap(img)
         self.lb_photo2.setScaledContents(True)
-        print(path)
-
-    @pyqtSlot()
-    def on_pushButton_clicked(self):
-        self.querydb()
-        print('xxx')
 
     @pyqtSlot()
     def on_pb_cj1_clicked(self):
+        """读身份证信息 处理函数"""
+        self.pb_cj1.setText('信息读取中....')
         try:
             cr = klCardReader.CardReader()
         except Exception as e:
@@ -131,7 +143,6 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
 
         if r == 0:
             try:
-                self.pb_cj1.setText('信息读取中....')
                 r = cr.readCard()
                 if r == 0:
                     self.le_name.setText(cr.info['name'])
@@ -145,20 +156,20 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
                     self.le_expiredDate.setText(cr.info['expiredDate'])
 
                     image = QPixmap("./kl_photos/{}.jpg".format(cr.info['cardNo']))
-
                     self.lb_photo.setPixmap(image)
-                    self.pb_cj1.setText('读身份证信息')
                 else:
                     QMessageBox.information(self, '提示', '请确认身份证是否放到阅读器上！', QMessageBox.Yes)
             except Exception as e:
                 QMessageBox.information(self, '提示', '读卡失败，{}'.format(e), QMessageBox.Yes)
             finally:
                 cr.closeDevice()
+                self.pb_cj1.setText('读身份证信息')
         else:
             QMessageBox.information(self, '提示', '身份证阅读器打开失败！', QMessageBox.Yes)
 
     @pyqtSlot()
     def on_pb_cj_clicked(self):
+        """读身份证信息（中控） 处理函数"""
         try:
             cr = zkCardReader.CardReader()
         except Exception as e:
@@ -185,28 +196,16 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
                 self.lb_photo.setPixmap(image)
                 cr.closeDevice()
 
-
-
             else:
                 QMessageBox.information(self, '提示', '请重新放置身份证！', QMessageBox.Yes)
 
         else:
             QMessageBox.information(self, '提示', '身份证阅读器打开失败！', QMessageBox.Yes)
 
+    @pyqtSlot()
+    def on_pb_uploadPerson_clicked(self):
+        pass
 
-    def opendb(self):
-        db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
-
-        db.setDatabaseName('./db/wisdom.db')
-        db.open()
-
-    def querydb(self):
-        self.opendb()
-        # query = QtSql.QSqlQuery()
-        query = QtSql.QSqlQueryModel()
-        query.setQuery('select bookname as 书名, bookid as 书号, auth as 作者, category as 书类, publisher as 出版社 from book')
-        # query.setQuery('select * from book')
-        self.tableView.setModel(query)
 
 
 

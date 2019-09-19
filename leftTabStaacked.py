@@ -7,7 +7,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QListWidget, QStackedWidget, QHBoxLayout,\
     QListWidgetItem, QLabel
 
-from controllers.infoCollectionController import *
+from infoCollectionController import *
 
 class LeftTabWidget(QWidget):
 
