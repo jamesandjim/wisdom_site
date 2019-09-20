@@ -120,15 +120,19 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         else:
             personStatus = 0
 
-        q_sql = "select * from wis_person where idNo = '%s'" % idNo
-        self.db.excuteSQl(q_sql)
-        if self.db.query.next():
-            QMessageBox.information(self, '提示', '人员信息重复！', QMessageBox.Yes)
+        if idNo != '':
+
+            q_sql = "select * from wis_person where idNo = '%s'" % idNo
+            self.db.excuteSQl(q_sql)
+            if self.db.query.next():
+                QMessageBox.information(self, '提示', '人员信息重复！', QMessageBox.Yes)
+            else:
+
+                sql = "INSERT INTO wis_person VALUES('%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s',%d,'%s',%d,'%s','%s',%d,%d,%d,%d)" % (idNo, name, gender, nation, birthday, address, idissue, idperiod, idphoto, photo, inf_photo, userType, dev_mac, RegType, user_id, work_sn, department, status, uploadYN, personStatus)
+
+                self.db.excuteSQl(sql)
         else:
-
-            sql = "INSERT INTO wis_person VALUES('%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s',%d,'%s',%d,'%s','%s',%d,%d)" % (idNo, name, gender, nation, birthday, address, idissue, idperiod, idphoto, photo, inf_photo, userType, dev_mac, RegType, user_id, work_sn, department, status)
-
-            self.db.excuteSQl(sql)
+            QMessageBox.information(self, '提示', '人员信息为空！', QMessageBox.Yes)
 
     @pyqtSlot()
     def on_pb_uploadPhoto_clicked(self):
