@@ -101,16 +101,24 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         birthday = str(self.le_birthdate.text())
         address = str(self.le_address.text())
         idissue = str(self.le_issue.text())
-        idphoto = "akdkdk"
-        photo = "iejeii"
-        inf_photo = "erqer"
+        idphoto = "./photos_kl/{}.jpg".format(self.le_idNum.text())
+        photo = './photos_cam/{}.jpg'.format(self.le_idNum.text())
+        inf_photo = ""
         userType = 1
         dev_mac = "cj_kdk"
         RegType = 3
         user_id = ""
         work_sn = ""
-        department = 1
+        department = str(self.cb_department.currentText())
         status = 0
+        if self.checkbox_uploadYN.isChecked():
+            uploadYN = 1
+        else:
+            uploadYN = 0
+        if self.rb_personStatus1.isChecked():
+            personStatus = 1
+        else:
+            personStatus = 0
 
         q_sql = "select * from wis_person where idNo = '%s'" % idNo
         self.db.excuteSQl(q_sql)
