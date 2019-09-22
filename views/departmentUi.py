@@ -20,6 +20,7 @@ class Ui_Form(object):
 "    border-radius:5px;\n"
 "}")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setStyleSheet("QWidget #widget{\n"

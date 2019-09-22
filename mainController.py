@@ -7,6 +7,7 @@ from views import mainUi
 import infoCollectionController
 import sysSetController
 import departmentController
+import faceDeviceController
 
 
 class MyMainWindow(QWidget, mainUi.Ui_mainForm):
@@ -50,7 +51,9 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
             pass
 
         elif selected == '考勤设备':
-            pass
+            widget = faceDeviceController.FaceDeviceWindow()
+            self.removeC()
+            self.verticalLayout_3.addWidget(widget)
 
         elif selected == '显示屏设备':
             pass
