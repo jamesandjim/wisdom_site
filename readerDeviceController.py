@@ -3,11 +3,11 @@ from PyQt5.QtCore import pyqtSlot, QModelIndex
 
 from models.dbtools import Dboperator
 
-from views import zjptUi
+from views import readerDeviceUi
 
 
-class ZjptDeviceWindow(QWidget, zjptUi.Ui_Form):
+class ReaderDeviceWindow(QWidget, readerDeviceUi.Ui_Form):
     def __init__(self, parent=None):
-        super(ZjptDeviceWindow, self).__init__(parent)
+        super(ReaderDeviceWindow, self).__init__(parent)
         self.setupUi(self)
         self.db = Dboperator()

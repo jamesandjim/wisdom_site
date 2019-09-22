@@ -8,6 +8,8 @@ import infoCollectionController
 import sysSetController
 import departmentController
 import faceDeviceController
+import readerDeviceController
+import zjptController
 
 
 class MyMainWindow(QWidget, mainUi.Ui_mainForm):
@@ -36,7 +38,9 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
             self.verticalLayout_3.addWidget(widget)
 
         elif selected == '住建平台信息设置':
-            pass
+            widget = zjptController.ZjptDeviceWindow()
+            self.removeC()
+            self.verticalLayout_3.addWidget(widget)
 
         elif selected == '人员信息查询':
             pass
@@ -48,7 +52,9 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
             pass
 
         elif selected == '采集设备':
-            pass
+            widget = readerDeviceController.ReaderDeviceWindow()
+            self.removeC()
+            self.verticalLayout_3.addWidget(widget)
 
         elif selected == '考勤设备':
             widget = faceDeviceController.FaceDeviceWindow()

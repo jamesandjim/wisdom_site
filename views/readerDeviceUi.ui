@@ -44,27 +44,15 @@
 }</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
-      <property name="spacing">
-       <number>10</number>
-      </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
-        <property name="leftMargin">
-         <number>10</number>
-        </property>
-        <property name="topMargin">
-         <number>20</number>
-        </property>
-        <property name="rightMargin">
-         <number>10</number>
-        </property>
-        <property name="bottomMargin">
-         <number>10</number>
-        </property>
         <item>
          <layout class="QFormLayout" name="formLayout">
           <property name="formAlignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
           </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label">
@@ -106,148 +94,15 @@
            <widget class="QComboBox" name="cb_deviceType">
             <item>
              <property name="text">
-              <string>可见光人脸设备</string>
+              <string>KL803</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>红外光人脸设备</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>刷卡设备</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>其他设备</string>
+              <string>ZK100</string>
              </property>
             </item>
            </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_6">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="text">
-             <string>安装位置</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QComboBox" name="cb_location">
-            <item>
-             <property name="text">
-              <string>入口设备</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>出口设备</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>出入口设备</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>其他设备</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_7">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="text">
-             <string>是否启用</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QRadioButton" name="radioButton_nomal">
-            <property name="text">
-             <string>正常使用</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QRadioButton" name="radioButton_stop">
-            <property name="text">
-             <string>停止使用</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>15</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <layout class="QFormLayout" name="formLayout_2">
-          <property name="formAlignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_8">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="text">
-             <string>设备IP</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="le_deviceIP"/>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_9">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="text">
-             <string>子网掩码</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="le_deivceMask"/>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_10">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="text">
-             <string>设备网关</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="le_deviceGateWay"/>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_11">
@@ -288,7 +143,50 @@
           <item row="5" column="1">
            <widget class="QLineEdit" name="le_Memo"/>
           </item>
+          <item row="7" column="1">
+           <widget class="QRadioButton" name="radioButton_stop">
+            <property name="text">
+             <string>停止使用</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QRadioButton" name="radioButton_nomal">
+            <property name="text">
+             <string>正常使用</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>是否启用</string>
+            </property>
+           </widget>
+          </item>
          </layout>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>15</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <spacer name="horizontalSpacer">
@@ -355,7 +253,7 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>15</width>
+            <width>50</width>
             <height>20</height>
            </size>
           </property>
