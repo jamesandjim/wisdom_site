@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="img">
     <file>resource/img/header1.jpg</file>
+    <file>resource/img/main.jpg</file>
   </qresource>
   <qresource prefix="ico">
     <file>resource/ico/main.jpg</file>

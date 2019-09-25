@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget
 from views import sysSetUi
 
 
-class SysSetWindow(QWidget, sysSetUi.Ui_sysSetForm):
+class SysSetWindow(QWidget, sysSetUi.Ui_Form):
     def __init__(self, parent=None):
         super(SysSetWindow, self).__init__(parent)
         self.setupUi(self)

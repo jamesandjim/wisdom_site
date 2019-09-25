@@ -10,6 +10,8 @@ import departmentController
 import faceDeviceController
 import readerDeviceController
 import zjptController
+import personManageController
+import attendanceManagementController
 
 
 class MyMainWindow(QWidget, mainUi.Ui_mainForm):
@@ -27,7 +29,7 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
     def on_tree_menu_itemClicked(self):
         selected = self.tree_menu.currentItem().text(0)
 
-        if selected == '人员信息采集':
+        if selected == '劳务人员信息采集':
             widget = infoCollectionController.InfoCollectionCls()
             self.removeC()
             self.verticalLayout_3.addWidget(widget)
@@ -42,14 +44,15 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
             self.removeC()
             self.verticalLayout_3.addWidget(widget)
 
-        elif selected == '人员信息查询':
-            pass
+        elif selected == '劳务人员信息管理':
+            widget = personManageController.PersonManageWindow()
+            self.removeC()
+            self.verticalLayout_3.addWidget(widget)
 
         elif selected == '人员考勤数据管理':
-            pass
-
-        elif selected == '系统参数设置':
-            pass
+            widget = attendanceManagementController.AttendanceManagementWindow()
+            self.removeC()
+            self.verticalLayout_3.addWidget(widget)
 
         elif selected == '采集设备':
             widget = readerDeviceController.ReaderDeviceWindow()

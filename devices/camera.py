@@ -40,7 +40,7 @@ class CameraDev(object):
             # 按空格获取图像
             if key == ord(" "):
                 # 以当前时间存储
-                filename = "./photos/" + self.filename + ".jpg"
+                filename = "./photos_cam/" + self.filename + ".jpg"
                 print(filename)
 
                 # 保存位置
