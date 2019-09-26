@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1039</width>
-    <height>818</height>
+    <width>1171</width>
+    <height>797</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,7 +61,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="le_deviceId"/>
+             <widget class="QLineEdit" name="le_idNo"/>
             </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label_2">
@@ -74,7 +74,7 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="le_deviceName"/>
+             <widget class="QLineEdit" name="le_name"/>
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="label_5">
@@ -87,7 +87,7 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLineEdit" name="lineEdit_5"/>
+             <widget class="QLineEdit" name="le_gender"/>
             </item>
             <item row="3" column="0">
              <widget class="QLabel" name="label_6">
@@ -100,7 +100,7 @@
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QLineEdit" name="lineEdit_6"/>
+             <widget class="QLineEdit" name="le_nation"/>
             </item>
             <item row="4" column="0">
              <widget class="QLabel" name="label_8">
@@ -113,7 +113,7 @@
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QLineEdit" name="le_deviceIP"/>
+             <widget class="QLineEdit" name="le_address"/>
             </item>
             <item row="5" column="0">
              <widget class="QLabel" name="label_7">
@@ -126,7 +126,7 @@
              </widget>
             </item>
             <item row="5" column="1">
-             <widget class="QLineEdit" name="lineEdit_2"/>
+             <widget class="QLineEdit" name="le_birthday"/>
             </item>
             <item row="6" column="0">
              <widget class="QLabel" name="label_10">
@@ -139,7 +139,7 @@
              </widget>
             </item>
             <item row="6" column="1">
-             <widget class="QLineEdit" name="le_deivceMask"/>
+             <widget class="QLineEdit" name="le_idperiod"/>
             </item>
             <item row="7" column="0">
              <widget class="QLabel" name="label_9">
@@ -152,35 +152,28 @@
              </widget>
             </item>
             <item row="7" column="1">
-             <widget class="QLineEdit" name="le_deviceGateWay"/>
-            </item>
-            <item row="8" column="0">
-             <widget class="QLabel" name="label_18">
-              <property name="text">
-               <string>身份证图</string>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="1">
-             <widget class="QLabel" name="label_19">
-              <property name="minimumSize">
-               <size>
-                <width>200</width>
-                <height>200</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>200</width>
-                <height>200</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="le_idissue"/>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_idphoto">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="horizontalSpacer_2">
@@ -202,13 +195,16 @@
            <layout class="QFormLayout" name="formLayout_2">
             <item row="0" column="0">
              <widget class="QLabel" name="label_14">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>部门工组</string>
               </property>
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="lineEdit_3"/>
+             <widget class="QLineEdit" name="le_department"/>
             </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label_11">
@@ -221,7 +217,7 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="le_deviceSN"/>
+             <widget class="QLineEdit" name="le_userType"/>
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="label_12">
@@ -234,7 +230,7 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLineEdit" name="le_key"/>
+             <widget class="QLineEdit" name="le_RegType"/>
             </item>
             <item row="3" column="0">
              <widget class="QLabel" name="label_3">
@@ -247,17 +243,20 @@
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QLineEdit" name="le_Memo"/>
+             <widget class="QLineEdit" name="le_user_id"/>
             </item>
             <item row="4" column="0">
              <widget class="QLabel" name="label_15">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>是否上传</string>
               </property>
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QCheckBox" name="checkBox">
+             <widget class="QCheckBox" name="checkBox_uploadYN">
               <property name="text">
                <string>人员信息是否上传到住建平台</string>
               </property>
@@ -265,72 +264,84 @@
             </item>
             <item row="5" column="0">
              <widget class="QLabel" name="label_13">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>住建工作号</string>
               </property>
              </widget>
             </item>
             <item row="5" column="1">
-             <widget class="QLineEdit" name="lineEdit"/>
+             <widget class="QLineEdit" name="le_work_sn"/>
             </item>
             <item row="6" column="0">
              <widget class="QLabel" name="label_17">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
-               <string>数据状态</string>
+               <string>考勤设备同步</string>
               </property>
              </widget>
             </item>
             <item row="6" column="1">
-             <widget class="QLineEdit" name="lineEdit_4"/>
+             <widget class="QLineEdit" name="le_deviceStatus"/>
             </item>
-            <item row="7" column="0">
+            <item row="8" column="0">
              <widget class="QLabel" name="label_16">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>人员状态</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="1">
-             <widget class="QRadioButton" name="radioButton">
+            <item row="8" column="1">
+             <widget class="QRadioButton" name="radioButton_personStatus_nomal">
               <property name="text">
                <string>正常状态</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="1">
-             <widget class="QRadioButton" name="radioButton_2">
+            <item row="9" column="1">
+             <widget class="QRadioButton" name="radioButton_personStatus_stop">
               <property name="text">
                <string>停用状态</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="0">
-             <widget class="QLabel" name="label_20">
+            <item row="7" column="0">
+             <widget class="QLabel" name="label_18">
               <property name="text">
-               <string>人脸识别图</string>
+               <string>住建平台同步</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="1">
-             <widget class="QLabel" name="label_21">
-              <property name="minimumSize">
-               <size>
-                <width>200</width>
-                <height>184</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>200</width>
-                <height>184</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
+            <item row="7" column="1">
+             <widget class="QLineEdit" name="le_zjptStatus"/>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_photo">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="horizontalSpacer">
@@ -375,13 +386,6 @@
              <widget class="QPushButton" name="pb_save">
               <property name="text">
                <string>保存</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton">
-              <property name="text">
-               <string>手动上传权限到设备</string>
               </property>
              </widget>
             </item>
@@ -477,16 +481,30 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="pb_uploadToDevice">
             <property name="text">
-             <string>从住建平台刷新新增人员</string>
+             <string>手动上传权限到设备</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="pb_uploadPerson">
             <property name="text">
-             <string>从住建平台刷新删除人员</string>
+             <string>手动上传人员到住建平台</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_downloadPerson">
+            <property name="text">
+             <string>从住建平台同步新增人员</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_downloadDeletePerson">
+            <property name="text">
+             <string>从住建平台同步删除人员</string>
             </property>
            </widget>
           </item>
@@ -506,7 +524,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QTableView" name="tv_device">
+         <widget class="QTableView" name="tv_person">
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>

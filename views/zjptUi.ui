@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>907</width>
-    <height>658</height>
+    <width>921</width>
+    <height>705</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
     border-radius:5px;
 }</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -32,7 +32,7 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item row="0" column="0">
+   <item>
     <widget class="QToolBox" name="toolBox">
      <property name="styleSheet">
       <string notr="true">QToolBox #toolBox{
@@ -48,8 +48,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>907</width>
-        <height>606</height>
+        <width>921</width>
+        <height>653</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -60,12 +60,9 @@ background-color: rgb(255, 255, 255);
       <attribute name="label">
        <string>成都住建平台信息</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <property name="sizeConstraint">
-          <enum>QLayout::SetFixedSize</enum>
-         </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
          <property name="leftMargin">
           <number>9</number>
          </property>
@@ -80,11 +77,17 @@ background-color: rgb(255, 255, 255);
          </property>
          <item>
           <layout class="QFormLayout" name="formLayout">
-           <property name="formAlignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+           <property name="leftMargin">
+            <number>9</number>
            </property>
-           <property name="verticalSpacing">
-            <number>10</number>
+           <property name="topMargin">
+            <number>9</number>
+           </property>
+           <property name="rightMargin">
+            <number>9</number>
+           </property>
+           <property name="bottomMargin">
+            <number>9</number>
            </property>
            <item row="0" column="0">
             <widget class="QLabel" name="label">
@@ -94,72 +97,125 @@ background-color: rgb(255, 255, 255);
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="le_uploadPersonURL"/>
+            <widget class="QLineEdit" name="le_uploadPersonURL">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>人员信息下载地址</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="le_downloadPersonURL">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
             <widget class="QLabel" name="label_2">
              <property name="text">
               <string>人员信息删除地址</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="le_deleteURL"/>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="le_deletePersonURL">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
-           <item row="2" column="0">
+           <item row="3" column="0">
             <widget class="QLabel" name="label_3">
              <property name="text">
               <string>考勤信息上传地址</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QLineEdit" name="le_uploadAttURL"/>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="le_uploadAttURL">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
-           <item row="3" column="0">
+           <item row="6" column="0">
             <widget class="QLabel" name="label_4">
              <property name="text">
               <string>操作结果反馈地址</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
-            <widget class="QLineEdit" name="le_feedbackURL"/>
-           </item>
-           <item row="5" column="1">
-            <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0">
-             <property name="sizeConstraint">
-              <enum>QLayout::SetFixedSize</enum>
+           <item row="6" column="1">
+            <widget class="QLineEdit" name="le_feedbackURL">
+             <property name="enabled">
+              <bool>false</bool>
              </property>
-             <item>
-              <widget class="QPushButton" name="pb_update">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>修改</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pb_save">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>保存</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QPushButton" name="pb_update">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>修改</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QPushButton" name="pb_save">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>保存</string>
+             </property>
+            </widget>
            </item>
           </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout"/>
          </item>
         </layout>
        </item>
@@ -170,8 +226,8 @@ background-color: rgb(255, 255, 255);
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>907</width>
-        <height>606</height>
+        <width>98</width>
+        <height>28</height>
        </rect>
       </property>
       <property name="styleSheet">

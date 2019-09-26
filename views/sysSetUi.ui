@@ -73,7 +73,10 @@ background-color: rgb(255, 255, 255);
         <string>是否联接住建平台</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="checkBox">
+      <widget class="QCheckBox" name="checkBox_zjptYN">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>130</x>
@@ -102,7 +105,10 @@ background-color: rgb(255, 255, 255);
         <string>住建平台选择</string>
        </property>
       </widget>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="comboBox_zjptName">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>128</x>
@@ -125,7 +131,10 @@ background-color: rgb(255, 255, 255);
         <string>数据备份目录</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="le_backupUrl">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>130</x>
@@ -135,11 +144,14 @@ background-color: rgb(255, 255, 255);
         </rect>
        </property>
       </widget>
-      <widget class="QCheckBox" name="checkBox_4">
+      <widget class="QCheckBox" name="checkBox_htzdclYN">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>128</x>
-         <y>95</y>
+         <y>90</y>
          <width>227</width>
          <height>16</height>
         </rect>
@@ -161,7 +173,10 @@ background-color: rgb(255, 255, 255);
         <string>本地服务器地址</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="le_localServer">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>130</x>
@@ -175,7 +190,7 @@ background-color: rgb(255, 255, 255);
        <property name="geometry">
         <rect>
          <x>28</x>
-         <y>133</y>
+         <y>120</y>
          <width>96</width>
          <height>16</height>
         </rect>
@@ -184,11 +199,14 @@ background-color: rgb(255, 255, 255);
         <string>后台处理时间间隔</string>
        </property>
       </widget>
-      <widget class="QSpinBox" name="spinBox">
+      <widget class="QSpinBox" name="spinBox_htzkclTime">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>130</x>
-         <y>133</y>
+         <y>120</y>
          <width>38</width>
          <height>18</height>
         </rect>
@@ -200,11 +218,11 @@ background-color: rgb(255, 255, 255);
         </sizepolicy>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>130</x>
-         <y>250</y>
+         <y>430</y>
          <width>176</width>
          <height>43</height>
         </rect>
@@ -223,14 +241,17 @@ background-color: rgb(255, 255, 255);
          <number>10</number>
         </property>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="pb_update">
           <property name="text">
            <string>修改</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="pb_save">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>保存</string>
           </property>
@@ -238,7 +259,10 @@ background-color: rgb(255, 255, 255);
         </item>
        </layout>
       </widget>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pb_selectPath">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>130</x>
@@ -249,6 +273,90 @@ background-color: rgb(255, 255, 255);
        </property>
        <property name="text">
         <string>选择目录</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_aqmYN">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>290</y>
+         <width>191</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>未带安全帽不允许进场</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_photoBdYN">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>260</y>
+         <width>231</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>人脸照片上传后立即与身份证对比</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>330</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>采集设备SN</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>370</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>采集设备KEY</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="le_cjSN">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>330</y>
+         <width>181</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="le_cjKEY">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>370</y>
+         <width>181</width>
+         <height>20</height>
+        </rect>
        </property>
       </widget>
      </widget>
@@ -297,6 +405,14 @@ background-color: rgb(255, 255, 255);
       </widget>
      </widget>
      <widget class="QWidget" name="page_qtcs">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>907</width>
+        <height>580</height>
+       </rect>
+      </property>
       <attribute name="label">
        <string>其他参数</string>
       </attribute>

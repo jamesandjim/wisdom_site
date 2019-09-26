@@ -156,12 +156,25 @@
             </property>
             <property name="maximumSize">
              <size>
-              <width>80</width>
+              <width>100</width>
               <height>80</height>
              </size>
             </property>
             <property name="text">
-             <string>PushButton</string>
+             <string>增加人员</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../resource.qrc">
+              <normaloff>:/ico/resource/ico/2.jpg</normaloff>:/ico/resource/ico/2.jpg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -181,12 +194,25 @@
             </property>
             <property name="maximumSize">
              <size>
-              <width>80</width>
+              <width>100</width>
               <height>80</height>
              </size>
             </property>
             <property name="text">
-             <string>PushButton</string>
+             <string>人员管理</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../resource.qrc">
+              <normaloff>:/ico/resource/ico/3.jpg</normaloff>:/ico/resource/ico/3.jpg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -204,7 +230,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="pb_exitSystem">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -219,12 +245,12 @@
             </property>
             <property name="maximumSize">
              <size>
-              <width>80</width>
+              <width>100</width>
               <height>80</height>
              </size>
             </property>
             <property name="text">
-             <string>退出</string>
+             <string>退出系统</string>
             </property>
             <property name="icon">
              <iconset resource="../resource.qrc">
@@ -236,7 +262,26 @@
               <height>40</height>
              </size>
             </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>3</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -376,11 +421,6 @@ border-radius:5px;</string>
              <property name="text">
               <string>设备管理</string>
              </property>
-             <item>
-              <property name="text">
-               <string>采集设备</string>
-              </property>
-             </item>
              <item>
               <property name="text">
                <string>考勤设备</string>

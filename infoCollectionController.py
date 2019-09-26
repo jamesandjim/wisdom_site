@@ -105,12 +105,13 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         photo = './photos_cam/{}.jpg'.format(self.le_idNum.text())
         inf_photo = ""
         userType = 1
-        dev_mac = "cj_kdk"
-        RegType = 3
+
+        RegType = 3 if self.cb_RegType.currentText() == '人脸采集' else 1
         user_id = ""
         work_sn = ""
         department = str(self.cb_department.currentText())
-        status = 0
+        deviceStatus = 0
+        zjptStatus = 0
         if self.checkbox_uploadYN.isChecked():
             uploadYN = 1
         else:
@@ -128,7 +129,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
                 QMessageBox.information(self, '提示', '人员信息重复！', QMessageBox.Yes)
             else:
 
-                sql = "INSERT INTO wis_person VALUES('%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s',%d,'%s',%d,'%s','%s','%s',%d,%d,%d)" % (idNo, name, gender, nation, birthday, address, idissue, idperiod, idphoto, photo, inf_photo, userType, dev_mac, RegType, user_id, work_sn, department, status, uploadYN, personStatus)
+                sql = "INSERT INTO wis_person VALUES('%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,'%s','%s','%s',%d,%d,%d,%d)" % (idNo, name, gender, nation, birthday, address, idissue, idperiod, idphoto, photo, inf_photo, userType, RegType, user_id, work_sn, department, deviceStatus, zjptStatus, uploadYN, personStatus)
 
                 self.db.excuteSQl(sql)
                 QMessageBox.information(self, '提示', '人员信息采集成功！', QMessageBox.Yes)

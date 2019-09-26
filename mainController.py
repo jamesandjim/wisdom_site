@@ -54,10 +54,10 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
             self.removeC()
             self.verticalLayout_3.addWidget(widget)
 
-        elif selected == '采集设备':
-            widget = readerDeviceController.ReaderDeviceWindow()
-            self.removeC()
-            self.verticalLayout_3.addWidget(widget)
+        # elif selected == '采集设备':
+        #     widget = readerDeviceController.ReaderDeviceWindow()
+        #     self.removeC()
+        #     self.verticalLayout_3.addWidget(widget)
 
         elif selected == '考勤设备':
             widget = faceDeviceController.FaceDeviceWindow()
@@ -88,8 +88,8 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
             pass
 
     @pyqtSlot()
-    def on_pushButton_clicked(self):
-        pass
+    def on_pb_exitSystem_clicked(self):
+        sys.exit()
 
 
 if __name__ == '__main__':
