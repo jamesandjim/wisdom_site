@@ -44,6 +44,9 @@
 }</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
+      <property name="topMargin">
+       <number>30</number>
+      </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
@@ -61,7 +64,11 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="le_idNo"/>
+             <widget class="QLineEdit" name="le_idNo">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label_2">
@@ -74,7 +81,11 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="le_name"/>
+             <widget class="QLineEdit" name="le_name">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="label_5">
@@ -87,7 +98,11 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLineEdit" name="le_gender"/>
+             <widget class="QLineEdit" name="le_gender">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
             <item row="3" column="0">
              <widget class="QLabel" name="label_6">
@@ -100,7 +115,11 @@
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QLineEdit" name="le_nation"/>
+             <widget class="QLineEdit" name="le_nation">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
             <item row="4" column="0">
              <widget class="QLabel" name="label_8">
@@ -113,7 +132,11 @@
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QLineEdit" name="le_address"/>
+             <widget class="QLineEdit" name="le_address">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
             <item row="5" column="0">
              <widget class="QLabel" name="label_7">
@@ -126,7 +149,11 @@
              </widget>
             </item>
             <item row="5" column="1">
-             <widget class="QLineEdit" name="le_birthday"/>
+             <widget class="QLineEdit" name="le_birthday">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
             <item row="6" column="0">
              <widget class="QLabel" name="label_10">
@@ -139,7 +166,11 @@
              </widget>
             </item>
             <item row="6" column="1">
-             <widget class="QLineEdit" name="le_idperiod"/>
+             <widget class="QLineEdit" name="le_idperiod">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
             <item row="7" column="0">
              <widget class="QLabel" name="label_9">
@@ -152,7 +183,11 @@
              </widget>
             </item>
             <item row="7" column="1">
-             <widget class="QLineEdit" name="le_idissue"/>
+             <widget class="QLineEdit" name="le_idissue">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -160,14 +195,14 @@
            <widget class="QLabel" name="label_idphoto">
             <property name="minimumSize">
              <size>
-              <width>150</width>
-              <height>150</height>
+              <width>120</width>
+              <height>120</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>150</width>
-              <height>150</height>
+              <width>120</width>
+              <height>120</height>
              </size>
             </property>
             <property name="text">
@@ -203,9 +238,6 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="le_department"/>
-            </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label_11">
               <property name="styleSheet">
@@ -216,9 +248,6 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="le_userType"/>
-            </item>
             <item row="2" column="0">
              <widget class="QLabel" name="label_12">
               <property name="styleSheet">
@@ -228,9 +257,6 @@
                <string>注册类型</string>
               </property>
              </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="le_RegType"/>
             </item>
             <item row="3" column="0">
              <widget class="QLabel" name="label_3">
@@ -243,7 +269,11 @@
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QLineEdit" name="le_user_id"/>
+             <widget class="QLineEdit" name="le_user_id">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
             <item row="4" column="0">
              <widget class="QLabel" name="label_15">
@@ -257,6 +287,9 @@
             </item>
             <item row="4" column="1">
              <widget class="QCheckBox" name="checkBox_uploadYN">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>人员信息是否上传到住建平台</string>
               </property>
@@ -273,7 +306,11 @@
              </widget>
             </item>
             <item row="5" column="1">
-             <widget class="QLineEdit" name="le_work_sn"/>
+             <widget class="QLineEdit" name="le_work_sn">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
             <item row="6" column="0">
              <widget class="QLabel" name="label_17">
@@ -286,7 +323,11 @@
              </widget>
             </item>
             <item row="6" column="1">
-             <widget class="QLineEdit" name="le_deviceStatus"/>
+             <widget class="QLineEdit" name="le_deviceStatus">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
             <item row="8" column="0">
              <widget class="QLabel" name="label_16">
@@ -300,6 +341,9 @@
             </item>
             <item row="8" column="1">
              <widget class="QRadioButton" name="radioButton_personStatus_nomal">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>正常状态</string>
               </property>
@@ -307,6 +351,9 @@
             </item>
             <item row="9" column="1">
              <widget class="QRadioButton" name="radioButton_personStatus_stop">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>停用状态</string>
               </property>
@@ -314,13 +361,44 @@
             </item>
             <item row="7" column="0">
              <widget class="QLabel" name="label_18">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>住建平台同步</string>
               </property>
              </widget>
             </item>
             <item row="7" column="1">
-             <widget class="QLineEdit" name="le_zjptStatus"/>
+             <widget class="QLineEdit" name="le_zjptStatus">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="comboBox_department">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="maxVisibleItems">
+               <number>15</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="comboBox_userType">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QComboBox" name="comboBox_RegType">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -362,7 +440,7 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout">
             <item>
-             <widget class="QPushButton" name="pb_updata">
+             <widget class="QPushButton" name="pb_update">
               <property name="text">
                <string>修改人员信息</string>
               </property>
@@ -525,6 +603,9 @@
         </item>
         <item>
          <widget class="QTableView" name="tv_person">
+          <property name="dragEnabled">
+           <bool>true</bool>
+          </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>
@@ -533,6 +614,9 @@
           </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
           </property>
           <property name="wordWrap">
            <bool>false</bool>

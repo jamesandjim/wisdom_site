@@ -1,5 +1,6 @@
 import base64
 import requests
+import shutil
 
 from PyQt5.QtWidgets import QWidget, QMessageBox, QFileDialog
 from PyQt5 import QtSql
@@ -45,7 +46,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
             cam_Dev = CameraDev()
             cam_Dev.filename = self.le_idNum.text()
             cam_Dev.take_photo()
-            img = QPixmap('./photos_cam/{}.jpg'.format(cam_Dev.filename))
+            img = QPixmap('./photos_face/{}.jpg'.format(cam_Dev.filename))
             self.lb_photo3.setPixmap(img)
         except Exception as e:
             QMessageBox.information(self, '提示', '未检测到摄像头！', QMessageBox.Yes)
@@ -102,7 +103,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         address = str(self.le_address.text())
         idissue = str(self.le_issue.text())
         idphoto = "./photos_kl/{}.jpg".format(self.le_idNum.text())
-        photo = './photos_cam/{}.jpg'.format(self.le_idNum.text())
+        photo = './photos_face/{}.jpg'.format(self.le_idNum.text())
         inf_photo = ""
         userType = 1
 
@@ -143,11 +144,16 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         img = QPixmap(path)
         self.lb_photo2.setPixmap(img)
         self.lb_photo2.setScaledContents(True)
+        newpath = './photos_face/{}.jpg'.format(self.le_idNum.text())
+        shutil.copyfile(path, newpath)
 
     @pyqtSlot()
     def on_pb_cj1_clicked(self):
         """读身份证信息 处理函数"""
         self.pb_cj1.setText('信息读取中....')
+        self.lb_photo.clear()
+        self.lb_photo2.clear()
+        self.lb_photo3.clear()
         try:
             cr = klCardReader.CardReader()
         except Exception as e:

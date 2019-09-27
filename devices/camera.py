@@ -40,8 +40,8 @@ class CameraDev(object):
             # 按空格获取图像
             if key == ord(" "):
                 # 以当前时间存储
-                filename = "./photos_cam/" + self.filename + ".jpg"
-                print(filename)
+                filename = "./photos_face/" + self.filename + ".jpg"
+
 
                 # 保存位置
                 cv2.imwrite(filename, new_photo)

@@ -120,7 +120,10 @@
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>SDTI 智慧工地实名制系统</string>
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="../resource.qrc">:/ico/resource/ico/sdti.png</pixmap>
             </property>
            </widget>
           </item>
@@ -150,8 +153,8 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>40</width>
-              <height>40</height>
+              <width>150</width>
+              <height>80</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -165,12 +168,12 @@
             </property>
             <property name="icon">
              <iconset resource="../resource.qrc">
-              <normaloff>:/ico/resource/ico/2.jpg</normaloff>:/ico/resource/ico/2.jpg</iconset>
+              <normaloff>:/ico/resource/ico/cj.png</normaloff>:/ico/resource/ico/cj.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>40</width>
-              <height>40</height>
+              <width>80</width>
+              <height>80</height>
              </size>
             </property>
             <property name="flat">
@@ -188,27 +191,27 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>40</width>
-              <height>40</height>
+              <width>150</width>
+              <height>80</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>100</width>
+              <width>150</width>
               <height>80</height>
              </size>
             </property>
             <property name="text">
-             <string>人员管理</string>
+             <string>平台操作</string>
             </property>
             <property name="icon">
              <iconset resource="../resource.qrc">
-              <normaloff>:/ico/resource/ico/3.jpg</normaloff>:/ico/resource/ico/3.jpg</iconset>
+              <normaloff>:/ico/resource/ico/zjpt.png</normaloff>:/ico/resource/ico/zjpt.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>40</width>
-              <height>40</height>
+              <width>80</width>
+              <height>80</height>
              </size>
             </property>
             <property name="flat">
@@ -239,13 +242,13 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>40</width>
-              <height>40</height>
+              <width>150</width>
+              <height>80</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>100</width>
+              <width>150</width>
               <height>80</height>
              </size>
             </property>
@@ -258,8 +261,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>40</width>
-              <height>40</height>
+              <width>80</width>
+              <height>80</height>
              </size>
             </property>
             <property name="flat">
@@ -394,7 +397,7 @@ border-radius:5px;</string>
               </font>
              </property>
              <property name="icon">
-              <iconset resource="../resource.qrc">
+              <iconset>
                <normaloff>:/ico/resource/ico/2.jpg</normaloff>
                <normalon>:/ico/resource/ico/1.jpg</normalon>:/ico/resource/ico/2.jpg</iconset>
              </property>
