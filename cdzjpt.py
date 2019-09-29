@@ -15,11 +15,13 @@ class Cdzj:
         self.person = {}
         self.attdata = {}
         self.delPersonID = ''
+
         self.msg = ''
         
     def uploadPerson(self):
-        r = requests.post(self.uploadPersonURL, self.person)
-        result = r.json
+        r = requests.post(self.uploadPersonURL, data=self.person)
+        result = r.json()
+
         if result['errcode'] == 0:
             self.msg = 'success'
         else:
@@ -28,7 +30,8 @@ class Cdzj:
     def downloadPerson(self, deviceSN, key):
         """用于从住建平台下载正式人员，需要提供考勤设备的sn,与对就的key"""
         headers = {'Content-Type': 'application/json;charset=gb2312'}
-        r = requests.get(self.downloadPersonURL, params=deviceSN)
+        payload = {'sn': deviceSN}
+        r = requests.get(self.downloadPersonURL, params=payload)
         xml = r.text
         el = ET.fromstring(xml)
         st = el.text
@@ -41,7 +44,8 @@ class Cdzj:
                 ccon = bcon.decode('utf-8')
                 self.person['user_id'] = content['user_id']
                 self.person['work_sn'] = content['work_sn']
-                self.person['id_card'] = content['id_card']
+                self.person['idNo'] = content['id_card']
+                self.msg = 'success'
  
             else:
                 self.msg = '未收到数据'
@@ -75,7 +79,7 @@ class Cdzj:
         if re == 0:
             content = js['Content']
             bcontent = des_descrypt(content, key)
-            print(bcontent)
+
             self.delPersonID = bcontent['user_id']
         else:
             self.msg = js['Msg']

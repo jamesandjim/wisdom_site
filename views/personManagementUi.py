@@ -299,6 +299,7 @@ class Ui_Form(object):
         self.pb_save.setText(_translate("Form", "保存"))
         self.pb_esc.setText(_translate("Form", "取消"))
         self.label_4.setText(_translate("Form", "请输入查询条件："))
+        self.le_queryPara.setPlaceholderText(_translate("Form", "请输入人员身份证号或姓名"))
         self.pb_query.setText(_translate("Form", "本地数据查询"))
         self.pb_allData.setText(_translate("Form", "本地全部数据"))
         self.pb_uploadToDevice.setText(_translate("Form", "手动上传权限到设备"))

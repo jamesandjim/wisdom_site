@@ -1,9 +1,14 @@
+import datetime
+
 from PyQt5.QtWidgets import QWidget, QMessageBox
 from PyQt5.QtCore import pyqtSlot, QModelIndex, Qt
 from PyQt5.Qt import QPixmap
 
+from commTools.toBASE64 import jpgtostr
 from models.dbtools import Dboperator
 from views import personManagementUi
+import cdzjpt
+
 
 
 class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
@@ -13,6 +18,9 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.data = None
         self.disableEdit()
         self.db = Dboperator()
+        self.cdzj = cdzjpt.Cdzj()
+        self.cjSN = ''
+        self.cjKEY = ''
         self.load()
 
     def load(self):
@@ -50,6 +58,20 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         allPerson.setHeaderData(18, Qt.Horizontal, '人员状态')
 
         self.tv_person.resizeColumnsToContents()
+
+        zjqs = "select * from wis_cdzjpt where id = '99'"
+        current = self.db.querySQL(zjqs).record(0)
+        self.cdzj.uploadPersonURL = current.field('uploadPersonURL').value()
+        print(self.cdzj.uploadPersonURL)
+        self.cdzj.downloadPersonURL = current.field('downloadPersonURL').value()
+        self.cdzj.downloadDelPersonURL = current.field('deletePersonURL').value()
+        self.cdzj.uploadAttendanceURL = current.field('uploadAttURL').value()
+        self.cdzj.feedbackURL = current.field('feedbackURL').value()
+
+        sysSetQs = "select * from wis_sysSet where id = 99"
+        currentSysSet = self.db.querySQL(sysSetQs).record(0)
+        self.cjSN = currentSysSet.field('cjSN').value()
+        self.cjKEY = currentSysSet.field('cjKEY').value()
 
     def enableEdit(self):
         self.comboBox_department.setEnabled(True)
@@ -212,5 +234,139 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.pb_update.setEnabled(True)
         self.pb_replaceIMG.setEnabled(True)
         self.pb_del.setEnabled(True)
+
+    @pyqtSlot()
+    def on_pb_query_clicked(self):
+        queryPara = self.le_queryPara.text()
+        if queryPara == '':
+            QMessageBox.information(self, '提示', '请输入查询条件！', QMessageBox.Yes)
+        else:
+            qs = '''
+                    select idNo, name, case gender when 1 then '男' when 0 then '女' end, nation, birthday, address, idissue, idperiod,
+                    idphoto, photo, case userType when 1 then '劳务人员' when 2 then '岗位人员' end,
+                    case RegType when 3 then '人脸采集' else '其他' end, user_id, work_sn, department,
+                    case deviceStatus when 0 then '未同步到设备' when 1 then '已同步到设备' end, 
+                    case zjptStatus when 0 then '未同步到住建平台' when 1 then '已同步到住建平台' end, 
+                    case uploadYN when 0 then '不上传平台' when 1 then '应上传平台' end,
+                    case personStatus when 0 then '已停用' when 1 then '正常' end
+                    from wis_person
+                    where idNo = '%s' or name = '%s'
+                    ''' % (queryPara, queryPara)
+            somePerson = self.db.querySQL(qs)
+            self.data = somePerson
+            self.tv_person.setModel(self.data)
+
+            somePerson.setHeaderData(0, Qt.Horizontal, '身份证号码')
+            somePerson.setHeaderData(1, Qt.Horizontal, '姓名')
+            somePerson.setHeaderData(2, Qt.Horizontal, '性别')
+            somePerson.setHeaderData(3, Qt.Horizontal, '民族')
+            somePerson.setHeaderData(4, Qt.Horizontal, '出生日期')
+            somePerson.setHeaderData(5, Qt.Horizontal, '住址')
+            somePerson.setHeaderData(6, Qt.Horizontal, '发证机关')
+            somePerson.setHeaderData(7, Qt.Horizontal, '有效期')
+            somePerson.setHeaderData(8, Qt.Horizontal, '身份证照片地址')
+            somePerson.setHeaderData(9, Qt.Horizontal, '人脸照片地址')
+            somePerson.setHeaderData(10, Qt.Horizontal, '用户类型')
+            somePerson.setHeaderData(11, Qt.Horizontal, '注册类型')
+            somePerson.setHeaderData(12, Qt.Horizontal, '住建平台统一号')
+            somePerson.setHeaderData(13, Qt.Horizontal, '住建平台工作号')
+            somePerson.setHeaderData(14, Qt.Horizontal, '部门班组')
+            somePerson.setHeaderData(15, Qt.Horizontal, '设备同步状态')
+            somePerson.setHeaderData(16, Qt.Horizontal, '平台同步状态')
+            somePerson.setHeaderData(17, Qt.Horizontal, '是否上传平台')
+            somePerson.setHeaderData(18, Qt.Horizontal, '人员状态')
+
+            self.tv_person.resizeColumnsToContents()
+
+    @pyqtSlot()
+    def on_pb_allData_clicked(self):
+        self.load()
+
+    @pyqtSlot()
+    def on_pb_uploadToDevice_clicked(self):
+        pass
+
+    @pyqtSlot()
+    def on_pb_uploadPerson_clicked(self):
+        qs = "select * from wis_person where zjptStatus = 0 and uploadYN = 1"
+        uploadPersons = self.db.querySQL(qs)
+        count = uploadPersons.rowCount()
+        if count > 0:
+            i = 0
+            while i < count:
+                person = uploadPersons.record(i)
+
+                idNo = person.field('idNo').value()
+                name = person.field('name').value()
+                gender = person.field('gender').value()
+                nation = person.field('nation').value()
+                tbirthday = person.field('birthday').value()
+                year = tbirthday[0:4]
+                month = tbirthday[4:6]
+                day = tbirthday[6:]
+                birthday = year+'-'+month+'-'+day
+                address = person.field('address').value()
+                idissue = person.field('idissue').value()
+                idperiod = person.field('idperiod').value()
+                idphotoPath = person.field('idphoto').value()
+                idphoto = jpgtostr(idphotoPath)
+
+                photoPath = person.field('photo').value()
+                photo = jpgtostr(photoPath)
+                inf_photo = ''
+                userType = person.field('userType').value()
+                dev_mac = self.cjSN
+                RegType = person.field('RegType').value()
+
+                self.cdzj.person['idNo'] = idNo
+                self.cdzj.person['name'] = name
+                self.cdzj.person['gender'] = gender
+                self.cdzj.person['nation'] = nation
+                self.cdzj.person['birthday'] = birthday
+                self.cdzj.person['address'] = address
+                self.cdzj.person['idissue'] = idissue
+                self.cdzj.person['idperiod'] = idperiod
+                self.cdzj.person['idphoto'] = idphoto
+                self.cdzj.person['photo'] = photo
+                self.cdzj.person['inf_photo'] = inf_photo
+                self.cdzj.person['userType'] = userType
+                self.cdzj.person['dev_mac'] = dev_mac
+                self.cdzj.person['RegType'] = RegType
+
+
+                self.cdzj.uploadPerson()
+                if self.cdzj.msg == 'success':
+                    qs = "update wis_person set zjptStatus = 1 where idNo = '%s'"% idNo
+                    self.db.excuteSQl(qs)
+                    okMsg = "人员:%s,身份证号:%s,%s成功上传到平台\n"%(name, idNo, datetime.datetime.now())
+                    with open('uploadLog.txt', 'a') as f:
+                        f.write(okMsg)
+
+                        f.close()
+
+                else:
+                    failMsg = "人员:%s,身份证号:%s,%s上传到平台失败，原因:%s\n"%(name, idNo, datetime.datetime.now(), self.cdzj.msg)
+                    with open('uploadLog.txt', 'a') as f:
+                        f.write(failMsg)
+                        f.close()
+                i = i + 1
+            QMessageBox.information(self, '提示', '上传结束！', QMessageBox.Yes)
+        else:
+            QMessageBox.information(self, '提示', '当前没有需要上传的人员！', QMessageBox.Yes)
+
+
+    @pyqtSlot()
+    def on_pb_downloadPerson_clicked(self):
+        self.cdzj.downloadPerson('smz-a03', 'kYaAeAp3')
+        if self.cdzj.msg == 'success':
+            print(self.cdzj.person)
+        else:
+            print(self.cdzj.msg)
+
+    @pyqtSlot()
+    def on_pb_downloadDeletePerson_clicked(self):
+        pass
+
+
 
 
