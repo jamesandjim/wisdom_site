@@ -163,6 +163,10 @@
               <height>80</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 14pt &quot;微软雅黑&quot;;
+color: rgb(255, 170, 0);</string>
+            </property>
             <property name="text">
              <string>增加人员</string>
             </property>
@@ -172,8 +176,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>60</width>
+              <height>60</height>
              </size>
             </property>
             <property name="flat">
@@ -201,6 +205,10 @@
               <height>80</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 14pt &quot;微软雅黑&quot;;
+color: rgb(255, 170, 0);</string>
+            </property>
             <property name="text">
              <string>平台操作</string>
             </property>
@@ -210,8 +218,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>60</width>
+              <height>60</height>
              </size>
             </property>
             <property name="flat">
@@ -252,6 +260,10 @@
               <height>80</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 14pt &quot;微软雅黑&quot;;
+color: rgb(255, 170, 0);</string>
+            </property>
             <property name="text">
              <string>退出系统</string>
             </property>
@@ -261,8 +273,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>60</width>
+              <height>60</height>
              </size>
             </property>
             <property name="flat">

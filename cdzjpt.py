@@ -42,11 +42,13 @@ class Cdzj:
             if content != '':
                 bcon = des_descrypt(content, key)
                 ccon = bcon.decode('utf-8')
-                self.person['user_id'] = content['user_id']
-                self.person['work_sn'] = content['work_sn']
-                self.person['idNo'] = content['id_card']
-                self.msg = 'success'
- 
+                dcon = json.loads(ccon)
+                for item in dcon:
+                    self.person['user_id'] = item['user_id']
+                    self.person['work_sn'] = item['work_sn']
+                    self.person['idNo'] = item['id_card']
+                    self.msg = 'success'
+
             else:
                 self.msg = '未收到数据'
         else:
@@ -57,9 +59,11 @@ class Cdzj:
         content = des_encrypt(self.attdata, key)
         payload = {'sn': deviceSN, 'content': content}
         r = requests.post(self.uploadAttendanceURL, data=payload)
-        txt = r.text
-        r1 = txt.replace(r'/', '')
-        r1 = r1.replace(r'<string>', '')
+        xml = r.text
+        el = ET.fromstring(xml)
+        r1 = el.text
+        # r1 = txt.replace(r'/', '')
+        # r1 = r1.replace(r'<string>', '')
         j = json.loads(r1)
         if j['Result'] == 0:
             self.msg = 'success'
@@ -79,15 +83,26 @@ class Cdzj:
         if re == 0:
             content = js['Content']
             bcontent = des_descrypt(content, key)
+            ccontent = bcontent.decode('utf-8')
+            dcontent = json.loads(ccontent)
+            for item in dcontent:
+                self.delPersonID = item['user_id']
+                self.msg = 'success'
+                print(self.delPersonID)
 
-            self.delPersonID = bcontent['user_id']
         else:
             self.msg = js['Msg']
 
     def feedback(self, deviceSN, otype, msg):
         p = {'type': otype, 'sn': deviceSN, 'msg': msg}
-        r = requests.get(self.feedbackURL, parms=p)
-        if r.json['Result'] == 0:
+        r = requests.get(self.feedbackURL, params=p)
+        rtxt = r.text
+        el = ET.fromstring(rtxt)
+        str1 = el.text
+        js = json.loads(str1)
+        if js['Result'] == 0:
             self.msg = 'success'
         else:
             self.msg = r.json['Msg']
+            print(self.msg)
+

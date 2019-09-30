@@ -359,13 +359,28 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
     def on_pb_downloadPerson_clicked(self):
         self.cdzj.downloadPerson('smz-a03', 'kYaAeAp3')
         if self.cdzj.msg == 'success':
-            print(self.cdzj.person)
+            qs = "update wis_person set user_id = '%s', work_sn = '%s' where idNo = '%s'" %(self.cdzj.person['user_id'], self.cdzj.person['work_sn'], self.cdzj.person['idNo'])
+            self.db.excuteSQl(qs)
+            selectQs = "select * from wis_person where idNo = '%s'" %self.cdzj.person['idNo']
+            data = self.db.querySQL(selectQs)
+            countP = data.rowCount()
+            self.cdzj.feedback('smz-a03', 2, '下发成功')
+            QMessageBox.information(self, '提示', '本次同步人员数：%d  '%countP, QMessageBox.Yes)
         else:
-            print(self.cdzj.msg)
+            self.cdzj.feedback('smz-a03', 3, '下发失败')
+            QMessageBox.information(self, '提示', '同步失败，原因：%s  '%self.cdzj.msg, QMessageBox.Yes)
 
     @pyqtSlot()
     def on_pb_downloadDeletePerson_clicked(self):
-        pass
+        self.cdzj.downloadDelPerson('smz-a03', 'kYaAeAp3')
+        if self.cdzj.msg == 'success':
+            qs = "update wis_person set personStatus = 0 where idNo = '%s'" % self.cdzj.delPersonID
+            self.db.excuteSQl(qs)
+            self.cdzj.feedback('smz-a03', 0, '人员删除成功')
+            QMessageBox.information(self, '提示', '已同步需删除人员，请手工同步到设备！', QMessageBox.Yes)
+        else:
+            self.cdzj.feedback('smz-a03', 1, '人员删除失败')
+            QMessageBox.information(self, '提示', '同步失败，原因：%s  ' % self.cdzj.msg, QMessageBox.Yes)
 
 
 
