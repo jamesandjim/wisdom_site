@@ -89,7 +89,6 @@ class Cdzj:
             for item in dcontent:
                 self.delPersonID = item['user_id']
                 self.msg = 'success'
-                print(self.delPersonID)
 
         else:
             self.msg = js['Msg']
@@ -105,5 +104,5 @@ class Cdzj:
             self.msg = 'success'
         else:
             self.msg = r.json['Msg']
-            print(self.msg)
+
 

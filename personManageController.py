@@ -119,7 +119,6 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.le_deviceStatus.clear()
         self.le_zjptStatus.clear()
 
-
     @pyqtSlot()
     def on_pb_replaceIMG_clicked(self):
         '''方法作用为更换人员的人脸图片'''
@@ -168,7 +167,6 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         allDepartment = self.db.querySQL(qs1)
         self.comboBox_department.clear()
         self.comboBox_department.setModel(allDepartment)
-
 
     @pyqtSlot(QModelIndex)
     def on_tv_person_clicked(self, QModelIndex):
@@ -224,7 +222,6 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.comboBox_RegType.addItems(list_RegType)
         self.comboBox_RegType.setCurrentText(RegType)
 
-
         if uploadYN == '应上传平台':
             self.checkBox_uploadYN.setChecked(True)
         else:
@@ -234,6 +231,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
             self.radioButton_personStatus_nomal.setChecked(True)
         else:
             self.radioButton_personStatus_stop.setChecked(False)
+
         idphoto_pixmap = QPixmap(idphoto)
         self.label_idphoto.setPixmap(idphoto_pixmap)
         self.label_idphoto.setScaledContents(True)
@@ -366,7 +364,6 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
             QMessageBox.information(self, '提示', '上传结束！', QMessageBox.Yes)
         else:
             QMessageBox.information(self, '提示', '当前没有需要上传的人员！', QMessageBox.Yes)
-
 
     @pyqtSlot()
     def on_pb_downloadPerson_clicked(self):
