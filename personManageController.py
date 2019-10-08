@@ -10,7 +10,6 @@ from views import personManagementUi
 import cdzjpt
 
 
-
 class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
     def __init__(self, parent=None):
         super(PersonManageWindow, self).__init__(parent)
@@ -24,6 +23,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.load()
 
     def load(self):
+        '''方法作用为初始化窗口数据'''
         qs = '''
         select idNo, name, case gender when 1 then '男' when 0 then '女' end, nation, birthday, address, idissue, idperiod,
         idphoto, photo, case userType when 1 then '劳务人员' when 2 then '岗位人员' end,
@@ -74,6 +74,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.cjKEY = currentSysSet.field('cjKEY').value()
 
     def enableEdit(self):
+        '''方法作用为使界面文本框可以输入'''
         self.comboBox_department.setEnabled(True)
         self.comboBox_userType.setEnabled(True)
         self.comboBox_RegType.setEnabled(True)
@@ -86,6 +87,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.pb_del.setEnabled(False)
 
     def disableEdit(self):
+        '''方法作用为使界面文本框无法输入'''
         self.comboBox_department.setEnabled(False)
         self.comboBox_userType.setEnabled(False)
         self.comboBox_RegType.setEnabled(False)
@@ -99,6 +101,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.pb_replaceIMG.setEnabled(False)
 
     def txtClear(self):
+        '''方法作用为清除文本框中的内容'''
         self.le_idNo.clear()
         self.le_name.clear()
         self.le_gender.clear()
@@ -119,10 +122,12 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
 
     @pyqtSlot()
     def on_pb_replaceIMG_clicked(self):
+        '''方法作用为更换人员的人脸图片'''
         pass
 
     @pyqtSlot()
     def on_pb_del_clicked(self):
+        '''方法作用删除人员'''
         qs = "delete  from wis_person where idNo = '%s'" % self.le_idNo.text()
         if QMessageBox.information(self, '提示', '你确认要删除选中人员？', QMessageBox.Yes|QMessageBox.No, QMessageBox.Yes) == QMessageBox.Yes:
             self.db.excuteSQl(qs)
@@ -131,10 +136,12 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
 
     @pyqtSlot()
     def on_pb_update_clicked(self):
+        '''方法作用为对人员信息进行修改'''
         self.enableEdit()
 
     @pyqtSlot()
     def on_pb_save_clicked(self):
+        '''方法作用为修改人员信息后，进行保存'''
         department = self.comboBox_department.currentText()
         idNo = self.le_idNo.text()
         userType = 1 if self.comboBox_userType.currentText() == '劳务人员' else 2
@@ -151,10 +158,12 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
 
     @pyqtSlot()
     def on_pb_esc_clicked(self):
+        '''方法作用为中止修改操作'''
         self.disableEdit()
 
     @pyqtSlot()
     def on_comboBox_department_activated(self):
+        '''方法作用为点部门单选框时，载入相应部门信息'''
         qs1 = 'select name from wis_department'
         allDepartment = self.db.querySQL(qs1)
         self.comboBox_department.clear()
@@ -163,6 +172,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
 
     @pyqtSlot(QModelIndex)
     def on_tv_person_clicked(self, QModelIndex):
+        '''方法作用为选中表中人员信息后，将人员信息在详情中进行填充'''
         rowID = self.tv_person.currentIndex().row()
 
         idNo = self.data.index(rowID, 0).data()
@@ -237,6 +247,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
 
     @pyqtSlot()
     def on_pb_query_clicked(self):
+        '''方法作用为根据输入条件，查询本地人员信息'''
         queryPara = self.le_queryPara.text()
         if queryPara == '':
             QMessageBox.information(self, '提示', '请输入查询条件！', QMessageBox.Yes)
@@ -280,14 +291,17 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
 
     @pyqtSlot()
     def on_pb_allData_clicked(self):
+        '''方法作用为查询全部人员信息'''
         self.load()
 
     @pyqtSlot()
     def on_pb_uploadToDevice_clicked(self):
+        '''方法作用为上传人员信息到人脸识别设备-授权'''
         pass
 
     @pyqtSlot()
     def on_pb_uploadPerson_clicked(self):
+        '''方法作用为上传本地人员信息到成都住建平台'''
         qs = "select * from wis_person where zjptStatus = 0 and uploadYN = 1"
         uploadPersons = self.db.querySQL(qs)
         count = uploadPersons.rowCount()
@@ -333,7 +347,6 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
                 self.cdzj.person['dev_mac'] = dev_mac
                 self.cdzj.person['RegType'] = RegType
 
-
                 self.cdzj.uploadPerson()
                 if self.cdzj.msg == 'success':
                     qs = "update wis_person set zjptStatus = 1 where idNo = '%s'"% idNo
@@ -357,30 +370,41 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
 
     @pyqtSlot()
     def on_pb_downloadPerson_clicked(self):
-        self.cdzj.downloadPerson('smz-a03', 'kYaAeAp3')
-        if self.cdzj.msg == 'success':
-            qs = "update wis_person set user_id = '%s', work_sn = '%s' where idNo = '%s'" %(self.cdzj.person['user_id'], self.cdzj.person['work_sn'], self.cdzj.person['idNo'])
-            self.db.excuteSQl(qs)
-            selectQs = "select * from wis_person where idNo = '%s'" %self.cdzj.person['idNo']
-            data = self.db.querySQL(selectQs)
-            countP = data.rowCount()
-            self.cdzj.feedback('smz-a03', 2, '下发成功')
-            QMessageBox.information(self, '提示', '本次同步人员数：%d  '%countP, QMessageBox.Yes)
-        else:
-            self.cdzj.feedback('smz-a03', 3, '下发失败')
-            QMessageBox.information(self, '提示', '同步失败，原因：%s  '%self.cdzj.msg, QMessageBox.Yes)
+        '''方法作用从住建平台上下载已生成了住建平台号的人员信息'''
+        runStatus = True
+        while runStatus:
+            self.cdzj.downloadPerson('smz-a03', 'kYaAeAp3')
+            if self.cdzj.msg == 'success':
+                qs = "update wis_person set user_id = '%s', work_sn = '%s' where idNo = '%s'" %(self.cdzj.person['user_id'], self.cdzj.person['work_sn'], self.cdzj.person['idNo'])
+                self.db.excuteSQl(qs)
+                selectQs = "select * from wis_person where idNo = '%s'" %self.cdzj.person['idNo']
+                data = self.db.querySQL(selectQs)
+                countP = data.rowCount()
+                self.cdzj.feedback('smz-a03', 2, '下发成功')
+                QMessageBox.information(self, '提示', '本次同步人员数：%d  '%countP, QMessageBox.Yes)
+            else:
+                runStatus = False
+                QMessageBox.information(self, '提示', '同步失败，原因：%s  ' % self.cdzj.msg, QMessageBox.Yes)
+                # self.cdzj.feedback('smz-a03', 3, '下发失败')
+
 
     @pyqtSlot()
     def on_pb_downloadDeletePerson_clicked(self):
-        self.cdzj.downloadDelPerson('smz-a03', 'kYaAeAp3')
-        if self.cdzj.msg == 'success':
-            qs = "update wis_person set personStatus = 0 where idNo = '%s'" % self.cdzj.delPersonID
-            self.db.excuteSQl(qs)
-            self.cdzj.feedback('smz-a03', 0, '人员删除成功')
-            QMessageBox.information(self, '提示', '已同步需删除人员，请手工同步到设备！', QMessageBox.Yes)
-        else:
-            self.cdzj.feedback('smz-a03', 1, '人员删除失败')
-            QMessageBox.information(self, '提示', '同步失败，原因：%s  ' % self.cdzj.msg, QMessageBox.Yes)
+        '''方法作用从住建平台上下载已删除的人员信息'''
+        runStatus = True
+        while runStatus:
+            self.cdzj.downloadDelPerson('smz-a03', 'kYaAeAp3')
+            if self.cdzj.msg == 'success':
+                qs = "update wis_person set personStatus = 0 where idNo = '%s'" % self.cdzj.delPersonID
+                self.db.excuteSQl(qs)
+                self.cdzj.feedback('smz-a03', 0, '人员删除成功')
+                QMessageBox.information(self, '提示', '已同步需删除人员，请手工同步到设备！', QMessageBox.Yes)
+            else:
+                QMessageBox.information(self, '提示', '同步失败，原因：%s  ' % self.cdzj.msg, QMessageBox.Yes)
+                runStatus = False
+                # self.cdzj.feedback('smz-a03', 1, '人员删除失败')
+
+
 
 
 

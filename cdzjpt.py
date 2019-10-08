@@ -37,6 +37,7 @@ class Cdzj:
         st = el.text
         js = json.loads(st)
         result = js['Result']
+        zresult  = js['Msg']
         if result == 0:
             content = js['Content']
             if content != '':
@@ -52,7 +53,7 @@ class Cdzj:
             else:
                 self.msg = '未收到数据'
         else:
-            self.msg = js['Msg']
+            self.msg = zresult
 
 
     def uploadAttendance(self, deviceSN, key):
