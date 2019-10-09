@@ -167,6 +167,8 @@ class Ui_Form(object):
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_2.addWidget(self.label_4)
         self.le_queryPara = QtWidgets.QLineEdit(self.widget)
+        self.le_queryPara.setInputMask("")
+        self.le_queryPara.setText("")
         self.le_queryPara.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.le_queryPara.setObjectName("le_queryPara")
         self.horizontalLayout_2.addWidget(self.le_queryPara)
@@ -186,6 +188,7 @@ class Ui_Form(object):
         self.tv_device.setWordWrap(False)
         self.tv_device.setObjectName("tv_device")
         self.tv_device.horizontalHeader().setDefaultSectionSize(200)
+        self.tv_device.horizontalHeader().setMinimumSectionSize(100)
         self.verticalLayout_3.addWidget(self.tv_device)
         self.verticalLayout_2.addWidget(self.widget)
 
@@ -222,5 +225,6 @@ class Ui_Form(object):
         self.pb_save.setText(_translate("Form", "保存"))
         self.pb_esc.setText(_translate("Form", "取消"))
         self.label_4.setText(_translate("Form", "请输入查询条件："))
+        self.le_queryPara.setPlaceholderText(_translate("Form", "请输入设备名称或IP"))
         self.pb_query.setText(_translate("Form", "查  询"))
         self.pb_allData.setText(_translate("Form", "全部数据"))

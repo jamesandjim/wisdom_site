@@ -408,8 +408,17 @@
         </item>
         <item>
          <widget class="QLineEdit" name="le_queryPara">
+          <property name="inputMask">
+           <string/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+          <property name="placeholderText">
+           <string>请输入设备名称或IP</string>
           </property>
          </widget>
         </item>
@@ -456,6 +465,9 @@
         <property name="wordWrap">
          <bool>false</bool>
         </property>
+        <attribute name="horizontalHeaderMinimumSectionSize">
+         <number>100</number>
+        </attribute>
         <attribute name="horizontalHeaderDefaultSectionSize">
          <number>200</number>
         </attribute>
