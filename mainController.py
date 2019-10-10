@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QApplication, QWidget, QDialog
 from PyQt5.QtCore import pyqtSlot
 
 from views import mainUi
@@ -12,6 +12,7 @@ import readerDeviceController
 import zjptController
 import personManageController
 import attendanceManagementController
+import loginController
 
 
 class MyMainWindow(QWidget, mainUi.Ui_mainForm):
@@ -88,13 +89,27 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
             pass
 
     @pyqtSlot()
+    def on_pb_addPerson_clicked(self):
+        widget = infoCollectionController.InfoCollectionCls()
+        self.removeC()
+        self.verticalLayout_3.addWidget(widget)
+
+    @pyqtSlot()
+    def on_pb_zjpt_clicked(self):
+        widget = personManageController.PersonManageWindow()
+        self.removeC()
+        self.verticalLayout_3.addWidget(widget)
+
+    @pyqtSlot()
     def on_pb_exitSystem_clicked(self):
         sys.exit()
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    form = MyMainWindow()
-    form.showMaximized()
-    sys.exit(app.exec_())
+    dialog = loginController.LoginWindow()
+    if dialog.exec_() == QDialog.Accepted:
+        form = MyMainWindow()
+        form.showMaximized()
+        sys.exit(app.exec_())
 

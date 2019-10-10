@@ -1,15 +1,16 @@
 <RCC>
   <qresource prefix="img">
+    <file>resource/img/login.png</file>
+    <file>resource/img/logoBack.jpg</file>
     <file>resource/img/header1.jpg</file>
     <file>resource/img/header.jpg</file>
     <file>resource/img/main.jpg</file>
   </qresource>
   <qresource prefix="ico">
-    <file>resource/ico/zjpt.png</file>
+    <file>resource/ico/sdti.png</file>
+    <file>resource/ico/main.jpg</file>
     <file>resource/ico/cj.png</file>
     <file>resource/ico/exit.png</file>
-    <file>resource/ico/sdti.png</file>
     <file>resource/ico/zjpt.png</file>
-    <file>resource/ico/main.jpg</file>
   </qresource>
 </RCC>

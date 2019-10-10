@@ -1,6 +1,6 @@
 import datetime
 
-from PyQt5.QtWidgets import QWidget, QMessageBox
+from PyQt5.QtWidgets import QWidget, QMessageBox, QProgressDialog, QProgressBar
 from PyQt5.QtCore import pyqtSlot, QModelIndex, Qt
 from PyQt5.Qt import QPixmap
 
@@ -20,6 +20,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.cdzj = cdzjpt.Cdzj()
         self.cjSN = ''
         self.cjKEY = ''
+        self.faceDevices = None
         self.load()
 
     def load(self):
@@ -62,7 +63,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         zjqs = "select * from wis_cdzjpt where id = '99'"
         current = self.db.querySQL(zjqs).record(0)
         self.cdzj.uploadPersonURL = current.field('uploadPersonURL').value()
-        print(self.cdzj.uploadPersonURL)
+        # print(self.cdzj.uploadPersonURL)
         self.cdzj.downloadPersonURL = current.field('downloadPersonURL').value()
         self.cdzj.downloadDelPersonURL = current.field('deletePersonURL').value()
         self.cdzj.uploadAttendanceURL = current.field('uploadAttURL').value()
@@ -72,6 +73,9 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         currentSysSet = self.db.querySQL(sysSetQs).record(0)
         self.cjSN = currentSysSet.field('cjSN').value()
         self.cjKEY = currentSysSet.field('cjKEY').value()
+
+        device_qs = "select sn, key from wis_faceDevice where status = 1"
+        self.faceDevices = self.db.querySQL(device_qs)
 
     def enableEdit(self):
         '''方法作用为使界面文本框可以输入'''
@@ -347,16 +351,16 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
 
                 self.cdzj.uploadPerson()
                 if self.cdzj.msg == 'success':
-                    qs = "update wis_person set zjptStatus = 1 where idNo = '%s'"% idNo
+                    qs = "update wis_person set zjptStatus = 1 where idNo = '%s'" % idNo
                     self.db.excuteSQl(qs)
-                    okMsg = "人员:%s,身份证号:%s,%s成功上传到平台\n"%(name, idNo, datetime.datetime.now())
+                    okMsg = "人员:%s,身份证号:%s,%s成功上传到平台\n" % (name, idNo, datetime.datetime.now())
                     with open('uploadLog.txt', 'a') as f:
                         f.write(okMsg)
 
                         f.close()
 
                 else:
-                    failMsg = "人员:%s,身份证号:%s,%s上传到平台失败，原因:%s\n"%(name, idNo, datetime.datetime.now(), self.cdzj.msg)
+                    failMsg = "人员:%s,身份证号:%s,%s上传到平台失败，原因:%s\n" % (name, idNo, datetime.datetime.now(), self.cdzj.msg)
                     with open('uploadLog.txt', 'a') as f:
                         f.write(failMsg)
                         f.close()
@@ -369,20 +373,55 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
     def on_pb_downloadPerson_clicked(self):
         '''方法作用从住建平台上下载已生成了住建平台号的人员信息'''
         runStatus = True
+        progress = QProgressDialog(self)
+        progress.setWindowTitle('请稍等')
+        progress.setLabelText('数据下载中...')
+        progress.setCancelButtonText('中止操作')
+        progress.setWindowModality(Qt.WindowModal)
+        progress.resize(800, 50)
         while runStatus:
-            self.cdzj.downloadPerson('smz-a03', 'kYaAeAp3')
-            if self.cdzj.msg == 'success':
-                qs = "update wis_person set user_id = '%s', work_sn = '%s' where idNo = '%s'" %(self.cdzj.person['user_id'], self.cdzj.person['work_sn'], self.cdzj.person['idNo'])
-                self.db.excuteSQl(qs)
-                selectQs = "select * from wis_person where idNo = '%s'" %self.cdzj.person['idNo']
-                data = self.db.querySQL(selectQs)
-                countP = data.rowCount()
-                self.cdzj.feedback('smz-a03', 2, '下发成功')
-                QMessageBox.information(self, '提示', '本次同步人员数：%d  '%countP, QMessageBox.Yes)
+            countD = self.faceDevices.rowCount()
+
+            progress.setRange(0, countD)
+
+            if countD > 0:
+                i = 0
+
+                while i < countD:
+
+                    faces = self.faceDevices.record(i)
+
+                    sn = str.strip(faces.field('sn').value())
+                    key = str.strip(faces.field('key').value())
+
+                    self.cdzj.downloadPerson(sn, key)
+                    if self.cdzj.msg == 'success':
+                        qs = "update wis_person set user_id = '%s', work_sn = '%s' where idNo = '%s'" % (self.cdzj.person['user_id'], self.cdzj.person['work_sn'], self.cdzj.person['idNo'])
+                        self.db.excuteSQl(qs)
+                        selectQs = "select * from wis_person where idNo = '%s'" % self.cdzj.person['idNo']
+                        data = self.db.querySQL(selectQs)
+                        countP = data.rowCount()
+                        self.cdzj.feedback(sn, 2, '下发成功')
+                        progress.setValue(i)
+                        if progress.wasCanceled():
+                            QMessageBox.warning(self, "提示", "操作失败")
+                            break
+                        # QMessageBox.information(self, '提示', '本次同步人员数：%d  ' % countP, QMessageBox.Yes)
+                    else:
+                        runStatus = False
+                        progress.close()
+                        QMessageBox.information(self, '提示', '同步失败，原因：%s  ' % self.cdzj.msg, QMessageBox.Yes)
+                        # self.cdzj.feedback('smz-a03', 3, '下发失败')
+                        break
+                    i += 1
+                else:
+                    progress.setValue(countD)
+                    QMessageBox.information(self, "提示", "操作成功")
+
             else:
-                runStatus = False
-                QMessageBox.information(self, '提示', '同步失败，原因：%s  ' % self.cdzj.msg, QMessageBox.Yes)
-                # self.cdzj.feedback('smz-a03', 3, '下发失败')
+                progress.deleteLater()
+                QMessageBox.information(self, '提示', '未找到考勤设备！', QMessageBox.Yes)
+                break
 
 
     @pyqtSlot()
@@ -390,16 +429,27 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         '''方法作用从住建平台上下载已删除的人员信息'''
         runStatus = True
         while runStatus:
-            self.cdzj.downloadDelPerson('smz-a03', 'kYaAeAp3')
-            if self.cdzj.msg == 'success':
-                qs = "update wis_person set personStatus = 0 where idNo = '%s'" % self.cdzj.delPersonID
-                self.db.excuteSQl(qs)
-                self.cdzj.feedback('smz-a03', 0, '人员删除成功')
-                QMessageBox.information(self, '提示', '已同步需删除人员，请手工同步到设备！', QMessageBox.Yes)
+            countd = self.faceDevices.rowCount()
+            if countd > 0:
+                i = 0
+                while i < countd:
+                    faces = self.faceDevices.record(i)
+                    sn = str.strip(faces.field('sn').value())
+                    key = str.strip(faces.field('key').value())
+                    self.cdzj.downloadDelPerson(sn, key)
+                    if self.cdzj.msg == 'success':
+                        qs = "update wis_person set personStatus = 0 where idNo = '%s'" % self.cdzj.delPersonID
+                        self.db.excuteSQl(qs)
+                        self.cdzj.feedback(sn, 0, '人员删除成功')
+                        QMessageBox.information(self, '提示', '已同步需删除人员，请手工同步到设备！', QMessageBox.Yes)
+                    else:
+                        QMessageBox.information(self, '提示', '同步失败，原因：%s  ' % self.cdzj.msg, QMessageBox.Yes)
+                        runStatus = False
+                        # self.cdzj.feedback('smz-a03', 1, '人员删除失败')
+                    i += 1
             else:
-                QMessageBox.information(self, '提示', '同步失败，原因：%s  ' % self.cdzj.msg, QMessageBox.Yes)
-                runStatus = False
-                # self.cdzj.feedback('smz-a03', 1, '人员删除失败')
+                QMessageBox.information(self, '提示', '未找到考勤设备！', QMessageBox.Yes)
+                break
 
 
 
