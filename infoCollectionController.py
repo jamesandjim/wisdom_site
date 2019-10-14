@@ -11,7 +11,7 @@ from views import infoCollectionUi
 from devices import zkCardReader
 from devices import klCardReader
 from models.dbtools import Dboperator
-from devices.face01 import Face_device
+from devices.face03 import Face_device
 from devices.camera import CameraDev
 
 from commTools import st_des, toBASE64
