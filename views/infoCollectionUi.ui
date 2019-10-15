@@ -502,6 +502,9 @@
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 170, 127);</string>
                  </property>
+                 <property name="frame">
+                  <bool>true</bool>
+                 </property>
                  <item>
                   <property name="text">
                    <string>请选择人员所属班组</string>

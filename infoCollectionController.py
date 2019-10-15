@@ -13,6 +13,7 @@ from devices import klCardReader
 from models.dbtools import Dboperator
 from devices.face03 import Face_device
 from devices.camera import CameraDev
+from devices.face01 import FaceDevice
 
 from commTools import st_des, toBASE64
 
@@ -21,10 +22,12 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
     def __init__(self, parent=None):
         super(InfoCollectionCls, self).__init__(parent)
         self.setupUi(self)
+        self.face = FaceDevice()
         self.pb_cj.setVisible(False)
         self.pb_refresh_photo.setVisible(False)
         # self.cr = zkCardReader.CardReader()
         self.db = Dboperator()
+
         self.load()
 
     def load(self):
@@ -46,8 +49,15 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
             cam_Dev = CameraDev()
             cam_Dev.filename = self.le_idNum.text()
             cam_Dev.take_photo()
-            img = QPixmap('./photos_face/{}.jpg'.format(cam_Dev.filename))
-            self.lb_photo3.setPixmap(img)
+            srcImg = './photos_face/{}.jpg'.format(cam_Dev.filename)
+            dstImg = './photos_face/{}_face.jpg'.format(cam_Dev.filename)
+            r = self.face.getFacePos(srcImg, dstImg)
+            if r:
+                img = QPixmap(dstImg)
+
+                self.lb_photo3.setPixmap(img)
+            else:
+                QMessageBox.information(self, '提示', '图片中未检测到头像，请重试！', QMessageBox.Yes)
         except Exception as e:
             QMessageBox.information(self, '提示', '未检测到摄像头！', QMessageBox.Yes)
 
@@ -97,7 +107,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         idperiod = str('{}-{}'.format(self.le_effectedDate.text(), self.le_expiredDate.text()))
         idNo = str(self.le_idNum.text())
         name = str(self.le_name.text())
-        gender = 1 if self.le_sex.text() == '男' else 0
+        gender = 1 if self.le_sex.text() == '男' else 2
         nation = str(self.le_nation.text())
         birthday = str(self.le_birthdate.text())
         address = str(self.le_address.text())
@@ -120,7 +130,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         if self.rb_personStatus1.isChecked():
             personStatus = 1
         else:
-            personStatus = 0
+            personStatus = 2
 
         if idNo != '':
 
@@ -146,6 +156,15 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         self.lb_photo2.setScaledContents(True)
         newpath = './photos_face/{}.jpg'.format(self.le_idNum.text())
         shutil.copyfile(path, newpath)
+        srcImg = './photos_face/{}.jpg'.format(self.le_idNum.text())
+        dstImg = './photos_face/{}_face.jpg'.format(self.le_idNum.text())
+        r = self.face.getFacePos(srcImg, dstImg)
+        if r:
+            img = QPixmap(dstImg)
+
+            self.lb_photo3.setPixmap(img)
+        else:
+            QMessageBox.information(self, '提示', '图片中未检测到头像，请重选图片！', QMessageBox.Yes)
 
     @pyqtSlot()
     def on_pb_cj1_clicked(self):

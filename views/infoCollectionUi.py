@@ -14,7 +14,7 @@ class Ui_infoCollectionForm(object):
     def setupUi(self, infoCollectionForm):
         infoCollectionForm.setObjectName("infoCollectionForm")
         infoCollectionForm.setWindowModality(QtCore.Qt.WindowModal)
-        infoCollectionForm.resize(998, 725)
+        infoCollectionForm.resize(998, 768)
         infoCollectionForm.setStyleSheet("")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(infoCollectionForm)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)

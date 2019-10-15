@@ -8,6 +8,7 @@ from commTools.toBASE64 import jpgtostr
 from models.dbtools import Dboperator
 from views import personManagementUi
 import cdzjpt
+from devices.face01 import FaceDevice
 
 
 class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
@@ -16,8 +17,10 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.setupUi(self)
         self.data = None
         self.disableEdit()
+        self.face = FaceDevice()
         self.db = Dboperator()
         self.cdzj = cdzjpt.Cdzj()
+
         self.cjSN = ''
         self.cjKEY = ''
         self.faceDevices = None
@@ -26,13 +29,13 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
     def load(self):
         '''方法作用为初始化窗口数据'''
         qs = '''
-        select idNo, name, case gender when 1 then '男' when 0 then '女' end, nation, birthday, address, idissue, idperiod,
+        select idNo, name, case gender when 1 then '男' when 2 then '女' end, nation, birthday, address, idissue, idperiod,
         idphoto, photo, case userType when 1 then '劳务人员' when 2 then '岗位人员' end,
         case RegType when 3 then '人脸采集' else '其他' end, user_id, work_sn, department,
         case deviceStatus when 0 then '未同步到设备' when 1 then '已同步到设备' end, 
         case zjptStatus when 0 then '未同步到住建平台' when 1 then '已同步到住建平台' end, 
         case uploadYN when 0 then '不上传平台' when 1 then '应上传平台' end,
-        case personStatus when 0 then '已停用' when 1 then '正常' end
+        case personStatus when 2 then '已停用' when 1 then '正常' end
         from wis_person
         '''
         allPerson = self.db.querySQL(qs)
@@ -150,7 +153,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         userType = 1 if self.comboBox_userType.currentText() == '劳务人员' else 2
         RegType = 3 if self.comboBox_RegType.currentText() == '人脸采集' else 0
         uploadYN = 1 if self.checkBox_uploadYN.isChecked() else 0
-        personStatus = 1 if self.radioButton_personStatus_nomal.isChecked() else 0
+        personStatus = 1 if self.radioButton_personStatus_nomal.isChecked() else 2
         qs = '''
              update wis_person set department = '%s', userType = %d, RegType = %d, uploadYN = %d, personStatus = %d
              where idNo = '%s'
@@ -255,13 +258,13 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
             QMessageBox.information(self, '提示', '请输入查询条件！', QMessageBox.Yes)
         else:
             qs = '''
-                    select idNo, name, case gender when 1 then '男' when 0 then '女' end, nation, birthday, address, idissue, idperiod,
+                    select idNo, name, case gender when 1 then '男' when 2 then '女' end, nation, birthday, address, idissue, idperiod,
                     idphoto, photo, case userType when 1 then '劳务人员' when 2 then '岗位人员' end,
                     case RegType when 3 then '人脸采集' else '其他' end, user_id, work_sn, department,
                     case deviceStatus when 0 then '未同步到设备' when 1 then '已同步到设备' end, 
                     case zjptStatus when 0 then '未同步到住建平台' when 1 then '已同步到住建平台' end, 
                     case uploadYN when 0 then '不上传平台' when 1 then '应上传平台' end,
-                    case personStatus when 0 then '已停用' when 1 then '正常' end
+                    case personStatus when 2 then '已停用' when 1 then '正常' end
                     from wis_person
                     where idNo = '%s' or name = '%s'
                     ''' % (queryPara, queryPara)
@@ -299,17 +302,62 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
     @pyqtSlot()
     def on_pb_uploadToDevice_clicked(self):
         '''方法作用为上传人员信息到人脸识别设备-授权'''
-        pass
+        qs = "select * from wis_faceDevice where status = 1"
+        self.faceDevices = self.db.querySQL(qs)
+        countD = self.faceDevices.rowCount()
+        if countD > 0:
+            j = 0
+            while j < countD:
+                faceDevice = self.faceDevices.record(j)
+
+                name = faceDevice.field('name').value()
+                ip = faceDevice.field('ip').value()
+
+                url = "http://{}/person/add".format(ip)
+
+                qs = "select * from wis_person where personStatus = 1"
+                persons = self.db.querySQL(qs)
+                countP = persons.rowCount()
+                if countP > 0:
+                    i = 0
+                    while i < countP:
+                        dic = {}
+                        person = persons.record(i)
+                        dic['faceId'] = person.field('idNo').value()
+                        dic['valid_time_type'] = 1
+                        dic['valid_start'] = 0
+                        dic['valid_end'] = 6
+                        dic['username'] = person.field('name').value()
+                        dic['idcard'] = person.field('idNo').value()
+                        dic['sex'] = person.field('gender').value()
+                        dic['nation'] = person.field('nation').value()
+                        dic['state'] = person.field('personStatus').value()
+                        dic['wgId'] = 1
+
+                        srcImg = person.field('photo').value()
+                        desImg = './photos_face/{}_face.jpg'.format(dic['faceId'])
+
+                        result = self.face.getFacePos(srcImg, desImg)
+                        if result:
+                            r = self.face.addPerson(url, dic, desImg, self.face.facePos_end)
+                        i += 1
+                j += 1
+
+            print('ok')
+
+
+
 
     @pyqtSlot()
     def on_pb_uploadPerson_clicked(self):
         '''方法作用为上传本地人员信息到成都住建平台'''
-        qs = "select * from wis_person where zjptStatus = 0 and uploadYN = 1"
+
+        qs = "select * from wis_person where zjptStatus = 0 and uploadYN = 1 and personStatus = 1"
         uploadPersons = self.db.querySQL(qs)
-        count = uploadPersons.rowCount()
-        if count > 0:
+        countP = uploadPersons.rowCount()
+        if countP > 0:
             i = 0
-            while i < count:
+            while i < countP:
                 person = uploadPersons.record(i)
 
                 idNo = person.field('idNo').value()

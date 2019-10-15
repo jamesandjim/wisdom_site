@@ -1,4 +1,8 @@
 from ctypes import *
+import requests
+from requests_toolbelt import MultipartEncoder
+from requests_toolbelt.utils import dump
+import json
 
 
 class FaceDevice:
@@ -35,17 +39,28 @@ class FaceDevice:
         result = self.dll.JBNV_GetFaceImage(srcImg.encode(), dstImg.encode(), byref(self.pInputImage), byref(self.SrcFacePos), byref(self.DstFacePos))
         if result:
             self.dll.JBNV_GetErrorMessage(result, byref(self.msg), 256, 0x00000804)
+            print(self.msg.value.decode('gbk'))
             return False
         else:
             self.facePos_end['x'] = self.DstFacePos.left
             self.facePos_end['y'] = self.DstFacePos.top
-            self.facePos_end['w'] = self.DstFacePos.right - self.facePos_end.left
-            self.facePos_end['h'] = self.DstFacePos.bottom - self.facePos_end.top
+            self.facePos_end['w'] = self.DstFacePos.right - self.DstFacePos.left
+            self.facePos_end['h'] = self.DstFacePos.bottom - self.DstFacePos.top
 
             return True
 
-    def addPerson(self):
-        pass
+    def addPerson(self, url, person, image, facepos):
+
+        m = MultipartEncoder(
+            fields={'person': json.dumps(person, ensure_ascii=False),
+                    'image': ('out.jpg', open(image, 'rb'), 'image/jpeg'), 'facepose': json.dumps(facepos)}
+        )
+
+        r = requests.post(url, data=m, headers={"Content-Type": m.content_type})
+        if r.json()['result'] == 1:
+            return True
+        else:
+            return r.json()['msg']
 
     def delPerson(self):
         pass
@@ -86,7 +101,24 @@ class FaceDevice:
     def serverUrlConfig(self):
         pass
 
-    
+
+class InputImage(Structure):
+    _fields_ = [
+        ('x', c_uint),
+        ('y', c_uint)
+    ]
+
+
+class FacePos(Structure):
+    _fields_ = [
+        ('left', c_uint),
+        ('top', c_uint),
+        ('right', c_uint),
+        ('bottom', c_uint),
+    ]
+
+
+
 
     # c = c_uint(1)
     #
@@ -110,21 +142,6 @@ class FaceDevice:
     #     print(DstFacePos.bottom)
     # print(msg.value.decode('gbk'))
 
-
-class InputImage(Structure):
-    _fields_ = [
-        ('x', c_uint),
-        ('y', c_uint)
-    ]
-
-
-class FacePos(Structure):
-    _fields_ = [
-        ('left', c_uint),
-        ('top', c_uint),
-        ('right', c_uint),
-        ('bottom', c_uint),
-    ]
 
 
 

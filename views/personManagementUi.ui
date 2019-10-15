@@ -382,7 +382,7 @@
                <bool>false</bool>
               </property>
               <property name="maxVisibleItems">
-               <number>15</number>
+               <number>10</number>
               </property>
              </widget>
             </item>

@@ -24,6 +24,7 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
         self.tree_menu.expandAll()
         # self.tree_menu.itemClicked['QTreeWidgetItem*', 'int'].connect(self.tree_menu_itemClicked)
 
+
     def removeC(self):
         for i in range(self.verticalLayout_3.count()):
             self.verticalLayout_3.itemAt(i).widget().deleteLater()
@@ -106,29 +107,29 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
     def on_pb_exitSystem_clicked(self):
         sys.exit()
 
-    def mousePressEvent(self, QMouseEvent):
-
-        if QMouseEvent.button() == Qt.LeftButton:
-            self.flag = True
-
-            self.m_Position = QMouseEvent.globalPos() - self.pos()
-
-            QMouseEvent.accept()
-
-            self.setCursor(QCursor(Qt.OpenHandCursor))
-
-    def mouseMoveEvent(self, QMouseEvent):
-
-        if Qt.LeftButton and self.flag:
-            self.move(QMouseEvent.globalPos() - self.m_Position)
-
-            QMouseEvent.accept()
-
-    def mouseReleaseEvent(self, QMouseEvent):
-
-        self.flag = False
-
-        self.setCursor(QCursor(Qt.ArrowCursor))
+    # def mousePressEvent(self, QMouseEvent):
+    #
+    #     if QMouseEvent.button() == Qt.LeftButton:
+    #         self.flag = True
+    #
+    #         self.m_Position = QMouseEvent.globalPos() - self.pos()
+    #
+    #         QMouseEvent.accept()
+    #
+    #         self.setCursor(QCursor(Qt.OpenHandCursor))
+    #
+    # def mouseMoveEvent(self, QMouseEvent):
+    #
+    #     if Qt.LeftButton and self.flag:
+    #         self.move(QMouseEvent.globalPos() - self.m_Position)
+    #
+    #         QMouseEvent.accept()
+    #
+    # def mouseReleaseEvent(self, QMouseEvent):
+    #
+    #     self.flag = False
+    #
+    #     self.setCursor(QCursor(Qt.ArrowCursor))
 
 
 if __name__ == '__main__':

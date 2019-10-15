@@ -178,7 +178,7 @@ class Ui_Form(object):
         self.formLayout_2.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.le_zjptStatus)
         self.comboBox_department = QtWidgets.QComboBox(self.widget)
         self.comboBox_department.setEnabled(False)
-        self.comboBox_department.setMaxVisibleItems(15)
+        self.comboBox_department.setMaxVisibleItems(10)
         self.comboBox_department.setObjectName("comboBox_department")
         self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.comboBox_department)
         self.comboBox_userType = QtWidgets.QComboBox(self.widget)
