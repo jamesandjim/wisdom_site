@@ -7,6 +7,8 @@
     <file>resource/img/main.jpg</file>
   </qresource>
   <qresource prefix="ico">
+    <file>resource/ico/ex.jpg</file>
+    <file>resource/ico/ex.png</file>
     <file>resource/ico/sdti.png</file>
     <file>resource/ico/main.jpg</file>
     <file>resource/ico/cj.png</file>
