@@ -309,6 +309,13 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
+           <widget class="QPushButton" name="pb_search">
+            <property name="text">
+             <string>搜索控制器</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="pb_add">
             <property name="text">
              <string>增加</string>

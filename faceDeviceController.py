@@ -96,6 +96,11 @@ class FaceDeviceWindow(QWidget, faceDeviceUi.Ui_Form):
         self.le_Memo.clear()
 
     @pyqtSlot()
+    def on_pb_search_clicked(self):
+        '''搜索控制器'''
+        pass
+
+    @pyqtSlot()
     def on_pb_add_clicked(self):
         '''增加按钮的处理方法'''
         self.enableTxt()

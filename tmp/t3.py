@@ -133,22 +133,22 @@ if __name__ == '__main__':
     print(mode)
 
     flags = FaceFlags(b'123456', b'jamesye', 0, 1, 0xFFFFFFFF, 0, 0, b'')
-    # with open('123.jpg', 'rb') as f:
-    #     file = f.read()
-    #
-    # print(type(file))
-    #
-    # size = sys.getsizeof(file)
-    #
-    # print(size)
-    #
-    # img = FaceImage(1, 0, file, size)
-    # r = face.addFace(flags, img)
-    #
-    # print(r)
+    with open('123.jpg', 'rb') as f:
+        file = f.read()
 
-    # r = face.trigger()
-    # print(r)
+    print(type(file))
+
+    size = sys.getsizeof(file)
+
+    print(size)
+
+    img = FaceImage(1, 0, file, size)
+    r = face.addFace(flags, img)
+
+    print(r)
+
+    r = face.trigger()
+    print(r)
 
     face.getdevice()
 
