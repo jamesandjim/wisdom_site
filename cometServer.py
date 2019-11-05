@@ -1,8 +1,10 @@
+# 建立本地服务器，基于HTTPCOMET
 import tornado.web
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 
+from cometResultHandle import ResultHandle, RecordHandle
 from uuid import uuid4
 import json
 
@@ -56,12 +58,12 @@ class RecordHandler(tornado.web.RequestHandler):
         bo2 = bo1.decode('utf-8')
         bo3 = json.loads(bo2)
 
-        print(bo3)
+        op = RecordHandle(bo3)
+        op.insertdb()
 
-
+# 增加人脸的请求处理
 class AddFace(tornado.web.RequestHandler):
     def post(self):
-
         dic = {}
         dic['version'] = self.get_body_argument('version')
         dic['cmd'] = self.get_body_argument('cmd')
@@ -78,16 +80,97 @@ class AddFace(tornado.web.RequestHandler):
         self.application.announce.changeSubject(dic)
 
 
+# 查询人脸的信息
+class QueryFace(tornado.web.RequestHandler):
+    def post(self):
+        dic = {}
+        dic['version'] = self.get_body_argument('version')
+        dic['cmd'] = self.get_body_argument('cmd')
+        dic['id'] = self.get_body_argument('id')
+        dic['per_id'] = self.get_body_argument('per_id')
+        dic['name'] = self.get_body_argument('name')
+        self.application.announce.changeSubject(dic)
+
+
+# 删除注册人员
+class DelFace(tornado.web.RequestHandler):
+    def post(self):
+        dic = {}
+        dic['version'] = self.get_body_argument('version')
+        dic['cmd'] = self.get_body_argument('cmd')
+        dic['type'] = self.get_body_argument('type')
+        dic['per_id'] = self.get_body_argument('per_id')
+        # dic['ipaddr'] = self.get_body_argument('ipaddr')
+        self.application.announce.changeSubject(dic)
+
+
+# 修改人脸信息
+class UpdateFace(tornado.web.RequestHandler):
+    def post(self):
+        pass
+
+
+# 设置时间
+class SetTime(tornado.web.RequestHandler):
+    def post(self):
+        pass
+
+
+# 设置是否开启活体检测
+class SetSpoofing(tornado.web.RequestHandler):
+    def post(self):
+        pass
+
+
+# 设置戴帽检测
+class setAttr(tornado.web.RequestHandler):
+    def post(self):
+        pass
+
+
+# 设置语音大小
+class setVoiceCFG(tornado.web.RequestHandler):
+    def post(self):
+        pass
+
+
+# 设置屏幕睡眠时间
+class setSleepTime(tornado.web.RequestHandler):
+    def post(self):
+        pass
+
+
+# 设置验证模式 /0：刷脸，1：刷卡，2：刷身份证，3：刷脸+刷卡 4：刷脸+刷身份证，5：刷脸或刷卡，6：刷脸或刷身份证，7：过人开闸
+class setRecoMode(tornado.web.RequestHandler):
+    def post(self):
+        pass
+
+
+# 设置是否启用未带安全帽禁止通行配置
+class setHatPass(tornado.web.RequestHandler):
+    def post(self):
+        pass
+
+
 # StatusHandler的处理是异步的
 class StatusHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def post(self):
+        self.application.announce.register(self.async_callback(self.on_message))
+        status = {}
         bo = self.request.body
         ip = self.get_body_argument('ipaddr')
-        print(bo.decode('utf-8'))
+        serialno = self.get_body_argument('serialno')
+        last_result = self.get_body_argument('last_result')
 
-        self.application.announce.register(self.async_callback(self.on_message))
-        print('%s 相机正在联接' % ip)
+        status['ip'] = ip
+        status['serialno'] = serialno
+        status['last_result'] = last_result
+        print(bo)
+
+        op = ResultHandle(status)
+        op.queryFaceHandle()
+
 
     def on_message(self, data):
         print('ok')
@@ -100,7 +183,6 @@ class StatusHandler(tornado.web.RequestHandler):
 class Application(tornado.web.Application):
     """
     """
-
     def __init__(self):
         """
         """
@@ -109,6 +191,8 @@ class Application(tornado.web.Application):
             (r'/', MainHandler),
             (r'/chat', ChatHandler),
             (r'/addFace', AddFace),
+            (r'/delFace', DelFace),
+            (r'/queryFace', QueryFace),
             (r'/heartbeat', StatusHandler),
             (r'/getRecordx', RecordHandler),
         ]
