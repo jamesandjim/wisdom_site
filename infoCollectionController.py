@@ -100,12 +100,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         payload['usr_type'] = 0
 
         requests.post('http://127.0.0.1:8080/addFace', data=payload)
-        time.sleep(3)
-        per_id = requests.post('http://127.0.0.1:8080/addFace', data=payload)
-        if
-
-
-
+        
     @pyqtSlot()
     def on_pb_readall_clicked(self):
         """人员信息列表 处理函数"""
