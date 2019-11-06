@@ -31,12 +31,12 @@ class AttendanceManagementWindow(QWidget, attendanceManagementUi.Ui_Form):
     @pyqtSlot()
     def on_pb_allData_clicked(self):
         qs = '''SELECT
-                wis_person.user_id,wis_records.faceId,wis_person.name,case wis_person.userType when 1 then '劳务人员' else '岗位人员' end
-                ,wis_person.department, wis_records.datetime, 
-                wis_faceDevice.name, wis_records.ip, wis_faceDevice.location, wis_faceDevice.deviceType, 
-                case wis_records.uploadYN when 1 then '已上传平台' else '未上传平台' end, wis_records.image
-                from wis_records, wis_person, wis_faceDevice
-                where wis_records.faceId = wis_person.idNo and wis_records.ip = wis_faceDevice.ip
+                wis_person.user_id,wis_recordsx.per_id,wis_person.name,case wis_person.userType when 1 then '劳务人员' else '岗位人员' end
+                ,wis_person.department, wis_recordsx.usec, 
+                wis_faceDevice.name, wis_recordsx.sn, wis_faceDevice.location, wis_faceDevice.deviceType, 
+                case wis_recordsx.uploadYN when 1 then '已上传平台' else '未上传平台' end, wis_recordsx.face_imgdata
+                from wis_recordsx, wis_person, wis_faceDevice
+                where wis_recordsx.per_id = wis_person.idNo and wis_recordsx.sn = wis_faceDevice.deviceSn
         '''
         allRecords = self.db.querySQL(qs)
         self.records = allRecords

@@ -1,6 +1,7 @@
 import base64
 import requests
 import shutil
+import time
 
 from PyQt5.QtWidgets import QWidget, QMessageBox, QFileDialog
 from PyQt5 import QtSql
@@ -14,6 +15,8 @@ from models.dbtools import Dboperator
 from devices.face03 import Face_device
 from devices.camera import CameraDev
 from devices.face01 import FaceDevice
+
+from infoAgent import Info
 
 from commTools import st_des, toBASE64
 
@@ -61,21 +64,47 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         except Exception as e:
             QMessageBox.information(self, '提示', '未检测到摄像头！', QMessageBox.Yes)
 
+    # @pyqtSlot()
+    # def on_pb_cj_photo_clicked(self):
+    #     """从考勤设备拍摄照片 处理函数"""
+        # face = Face_device('192.168.0.105')
+        # person = {"id": str(self.le_idNum.text()), "name": str(self.le_name.text())}
+        #
+        # if face.createPerson(person):
+        #
+        #     if face.takeImg(person["id"]):
+        #         map = QPixmap("./photos_face/{}".format(self.le_idNum.text()))
+        #         self.lb_photo3.setPixmap(map)
+        #     else:
+        #         QMessageBox.information(self, '提示', '不能拍照', QMessageBox.Yes)
+        # else:
+        #     QMessageBox.information(self, '提示', '不能创建人员', QMessageBox.Yes)
     @pyqtSlot()
-    def on_pb_cj_photo_clicked(self):
-        """从考勤设备拍摄照片 处理函数"""
-        face = Face_device('192.168.0.105')
-        person = {"id": str(self.le_idNum.text()), "name": str(self.le_name.text())}
-
-        if face.createPerson(person):
-
-            if face.takeImg(person["id"]):
-                map = QPixmap("./photos_face/{}".format(self.le_idNum.text()))
-                self.lb_photo3.setPixmap(map)
-            else:
-                QMessageBox.information(self, '提示', '不能拍照', QMessageBox.Yes)
+    def on_pb_uploadtoDev_clicked(self):
+        '''上传人员信息至考勤设备'''
+        with open('./photos_face/{}_face.jpg'.format(self.le_idNum.text()), 'rb') as f:
+            img_data = base64.b64encode(f.read())
+        payload = {'version': '0.2', 'cmd': 'create_face'}
+        payload['per_id'] = self.le_idNum.text()
+        payload['face_id'] = self.le_idNum.text()
+        payload['per_name'] = self.le_name.text()
+        payload['idcardNum'] = ''
+        payload['img_data'] = img_data
+        payload['idcardper'] = self.le_idNum.text()
+        payload['s_time'] = 0
+        payload['e_time'] = 10000
+        if self.rb_personStatus1.isChecked():
+            payload['per_type'] = 0
         else:
-            QMessageBox.information(self, '提示', '不能创建人员', QMessageBox.Yes)
+            payload['per_type'] = 2
+        payload['usr_type'] = 0
+
+        requests.post('http://127.0.0.1:8080/addFace', data=payload)
+        time.sleep(3)
+        per_id = requests.post('http://127.0.0.1:8080/addFace', data=payload)
+        if
+
+
 
     @pyqtSlot()
     def on_pb_readall_clicked(self):

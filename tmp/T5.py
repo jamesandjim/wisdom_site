@@ -23,6 +23,7 @@ dll.ZBX_SetNotifyConnected(1)
 @WINFUNCTYPE(None, POINTER(IpScan_t), c_int)
 def callback(ipscan, usr):
     print(ipscan.contents.mac)
+    print(ipscan.contents.ip)
 
 
 # 注册搜索回调函数

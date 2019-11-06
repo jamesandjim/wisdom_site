@@ -89,27 +89,28 @@ cam = dll.ZBX_ConnectEx(b'192.168.0.105', 8099, '', '', byref(errNo), 1, 1, True
 
 # 注册人脸回调
 
-@WINFUNCTYPE(None, POINTER(c_int), POINTER(QueryFaceInfo), c_int)
-def regFaceQueryCB(x, y, z):
-    print(y.contents.personName)
+# @WINFUNCTYPE(None, POINTER(c_int), POINTER(QueryFaceInfo), c_int)
+# def regFaceQueryCB(x, y, z):
+#     print(y.contents.personName)
+#
+#
+# dll.ZBX_RegFaceQueryCb(cam, regFaceQueryCB, 0)
+# flags = FaceFlags(b'12356', b'jamesye', 0, 1, 0xFFFFFFFF, 0, 0, b'')
+# with open('ymg.jpg', 'rb') as f:
+#     file = f.read()
+#
+# print(type(file))
+#
+# size = sys.getsizeof(file)
+#
+# print(size)
+#
+# img = FaceImage(1, 0, file, size)
+# dll.ZBX_AddJpgFaces(cam, flags, img, 1, 0)
 
 
-dll.ZBX_RegFaceQueryCb(cam, regFaceQueryCB, 0)
-flags = FaceFlags(b'12356', b'jamesye', 0, 1, 0xFFFFFFFF, 0, 0, b'')
-with open('ymg.jpg', 'rb') as f:
-    file = f.read()
-
-print(type(file))
-
-size = sys.getsizeof(file)
-
-print(size)
-
-img = FaceImage(1, 0, file, size)
-dll.ZBX_AddJpgFaces(cam, flags, img, 1, 0)
-
-while True:
-    pass
+r = dll.ZBX_DeleteFaceDataByPersonID(cam, b'511102199206023823')
+print(r)
 
 
 

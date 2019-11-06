@@ -3,6 +3,8 @@ import json
 import time
 from models.dbtools import Dboperator
 
+from infoAgent import Info
+
 
 class ResultHandle:
     def __init__(self, dic):
@@ -14,12 +16,19 @@ class ResultHandle:
         if last_result != '':
             lr = json.loads(last_result)
             cmd = lr['cmd']
+            code = lr['code']
+            reply = lr['reply']
 
             if cmd == 'create_face':
-                print('create_face')
+                if code == 0:
+                    print('%s 人员增加成功！' % self.dic['ipaddr'])
+                    '''todo  修改数据库中对应人员记录，将已上传改为1'''
+
+                else:
+                    print(reply)
             elif cmd == 'query_face':
                 print('query_face')
-                self.queryFaceHandle()
+                return lr['per_id']
             elif cmd == 'delete_face':
                 if lr['code'] == 0:
                     print('人员删除成功！')
@@ -48,8 +57,8 @@ class ResultHandle:
             else:
                 pass
 
-    def queryFaceHandle(self):
-        print('查询到数据')
+    def addFaceHandle(self):
+        print('处理人员增加成功后事宜')
 
 
 class RecordHandle:
@@ -61,6 +70,6 @@ class RecordHandle:
         jn = self.dic['body']
         dtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(jn['usec']))
         qs = '''
-                insert into wis_records values ('%s', %d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d, %d, %d, %d, %d, '%s', '%s', 0)
-                ''' % (jn['per_id'], 1, jn['matched'], dtime, jn['face_imgdata'], jn['sn'], 0, 1, 0, jn['hat'], 0, 0, 2, 0, jn['role'], jn['sn'], '')
+                insert into wis_recordsx values ('%s', '%s', %d, '%s','%s', %d, %d, %d, %d,'%s','%s', %d)
+                ''' % (jn['sn'], dtime, int(jn['matched']), jn['per_id'], jn['name'], int(jn['role']), int(jn['hat']), int(jn['face_imgsize']), int(jn['model_imgsize']), jn['face_imgdata'], jn['model_imgdata'], 0)
         self.db.excuteSQl(qs)

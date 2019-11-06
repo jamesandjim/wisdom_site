@@ -8,9 +8,11 @@ from cometResultHandle import ResultHandle, RecordHandle
 from uuid import uuid4
 import json
 
+from models.dbtools import Dboperator
+
 
 # 服务器端保存的字符串
-class Announce():
+class Announce:
     subject = {}
     callbacks = []
 
@@ -57,6 +59,7 @@ class RecordHandler(tornado.web.RequestHandler):
         # print(bo1.decode('utf-8'))
         bo2 = bo1.decode('utf-8')
         bo3 = json.loads(bo2)
+        print(bo3)
 
         op = RecordHandle(bo3)
         op.insertdb()
@@ -80,7 +83,7 @@ class AddFace(tornado.web.RequestHandler):
         self.application.announce.changeSubject(dic)
 
 
-# 查询人脸的信息
+# 查询人脸的信息(增加人脸是否成功可由些得到数据与本地数据对比)
 class QueryFace(tornado.web.RequestHandler):
     def post(self):
         dic = {}
@@ -166,10 +169,9 @@ class StatusHandler(tornado.web.RequestHandler):
         status['ip'] = ip
         status['serialno'] = serialno
         status['last_result'] = last_result
-        print(bo)
+        print(status)
 
         op = ResultHandle(status)
-        op.queryFaceHandle()
 
 
     def on_message(self, data):
@@ -187,6 +189,7 @@ class Application(tornado.web.Application):
         """
         """
         self.announce = Announce()
+        self.db = Dboperator()
         handlers = [
             (r'/', MainHandler),
             (r'/chat', ChatHandler),

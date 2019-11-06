@@ -20,7 +20,7 @@ class FaceDeviceWindow(QWidget, faceDeviceUi.Ui_Form):
         '''初始化界面中的表格数据'''
         qs = '''
              select id, name, deviceType, location, case status when 1 then '正常使用' else '停止使用' end,
-             ip, netmask, gateway, sn, key, memo
+             ip, netmask, gateway, sn, key, deviceSn
              from wis_faceDevice
              '''
         self.data = self.db.querySQL(qs)
@@ -34,9 +34,9 @@ class FaceDeviceWindow(QWidget, faceDeviceUi.Ui_Form):
         self.data.setHeaderData(5, Qt.Horizontal, '设备IP')
         self.data.setHeaderData(6, Qt.Horizontal, '子网掩码')
         self.data.setHeaderData(7, Qt.Horizontal, '设备网关')
-        self.data.setHeaderData(8, Qt.Horizontal, '设备SN')
-        self.data.setHeaderData(9, Qt.Horizontal, '设备KEY')
-        self.data.setHeaderData(10, Qt.Horizontal, '说明')
+        self.data.setHeaderData(8, Qt.Horizontal, '平台SN')
+        self.data.setHeaderData(9, Qt.Horizontal, '平台KEY')
+        self.data.setHeaderData(10, Qt.Horizontal, '硬件序列号')
         self.tv_device.resizeColumnsToContents()
 
 
@@ -118,7 +118,7 @@ class FaceDeviceWindow(QWidget, faceDeviceUi.Ui_Form):
     @pyqtSlot()
     def on_pb_del_clicked(self):
         '''删除按钮的处理方法'''
-        qs = "delete  from wis_faceDevice where id = '%s'" % self.le_deviceId
+        qs = "delete from wis_faceDevice where id = '%s'" % self.le_deviceId.text()
         if QMessageBox.information(self, '提示', '你确认要删除选中设备？', QMessageBox.Yes | QMessageBox.No,
                                    QMessageBox.Yes) == QMessageBox.Yes:
             self.db.excuteSQl(qs)
@@ -138,18 +138,18 @@ class FaceDeviceWindow(QWidget, faceDeviceUi.Ui_Form):
         gateway = self.le_deviceGateWay.text()
         sn = self.le_deviceSN.text()
         key = self.le_key.text()
-        memo = self.le_Memo.text()
+        deviceSn = self.le_Memo.text()
 
         if self.operator == 'add':
             qs = '''
             insert into wis_faceDevice values ('%s', '%s', '%s', '%s', %d, '%s','%s','%s','%s','%s','%s')
-            ''' % (deviceId, name, deviceType, location, status, ip, netmask, gateway, sn, key, memo)
+            ''' % (deviceId, name, deviceType, location, status, ip, netmask, gateway, sn, key, deviceSn)
         else:
             qs = '''
             update wis_faceDevice set name = '%s', deviceType = '%s', location = '%s', status = %d, ip = '%s',
-            netmask = '%s', gateway = '%s', sn = '%s', key = '%s', memo = '%s'
+            netmask = '%s', gateway = '%s', sn = '%s', key = '%s', deviceSn = '%s'
             where id = '%s'
-            ''' % (name, deviceType, location, status, ip, netmask, gateway, sn, key, memo, deviceId)
+            ''' % (name, deviceType, location, status, ip, netmask, gateway, sn, key, deviceSn, deviceId)
 
         self.db.excuteSQl(qs)
         self.load()
@@ -173,7 +173,7 @@ class FaceDeviceWindow(QWidget, faceDeviceUi.Ui_Form):
             QMessageBox.information(self, '提示', '请输入查询条件！', QMessageBox.Yes)
         else:
             qs = '''select id, name, deviceType, location, case status when 1 then '正常使用' else '停止使用' end,
-             ip, netmask, gateway, sn, key, memo
+             ip, netmask, gateway, sn, key, deviceSn
              from wis_faceDevice where name = '%s' or ip = '%s'
             ''' % (queryPara, queryPara)
 
@@ -188,9 +188,9 @@ class FaceDeviceWindow(QWidget, faceDeviceUi.Ui_Form):
             self.data.setHeaderData(5, Qt.Horizontal, '设备IP')
             self.data.setHeaderData(6, Qt.Horizontal, '子网掩码')
             self.data.setHeaderData(7, Qt.Horizontal, '设备网关')
-            self.data.setHeaderData(8, Qt.Horizontal, '设备SN')
-            self.data.setHeaderData(9, Qt.Horizontal, '设备KEY')
-            self.data.setHeaderData(10, Qt.Horizontal, '说明')
+            self.data.setHeaderData(8, Qt.Horizontal, '平台SN')
+            self.data.setHeaderData(9, Qt.Horizontal, '平台KEY')
+            self.data.setHeaderData(10, Qt.Horizontal, '设备序列号')
             self.tv_device.resizeColumnsToContents()
 
     @pyqtSlot()

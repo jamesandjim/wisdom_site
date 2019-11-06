@@ -379,13 +379,6 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pb_cj_photo">
-                 <property name="text">
-                  <string>从考勤设备拍摄照片</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <widget class="QPushButton" name="pb_uploadPhoto">
                  <property name="text">
                   <string>使用电脑中的照片</string>
@@ -403,9 +396,16 @@
                 </widget>
                </item>
                <item>
+                <widget class="QPushButton" name="pb_uploadtoDev">
+                 <property name="text">
+                  <string>上传至考勤设备</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QPushButton" name="pb_uploadPerson">
                  <property name="text">
-                  <string>上传人员信息至住建平台</string>
+                  <string>上传至住建平台</string>
                  </property>
                 </widget>
                </item>

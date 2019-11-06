@@ -1,9 +1,2 @@
 [net::fetchGroupIPAddress] <41> -find 192.168.0.100
 [net::MakeGroupSocket] <112> -set_option 192.168.0.100
-[Session::ResizeOrig] <1524> -EXIFInfo Error1983
-[Session::ResizeOrig] <1531> -cv::imdecode cvimg.cols = 448  cvimg.rows592
-[Session::SendCmd] <2503> -SendCmd  = {"cmd":"get_lately_seq","version":"0.2"}
-
-[Session::ParseJson] <2717> -Parse json stirng failed: * Line 1, Column 1
-  Syntax error: value, object or array expected.
-
