@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>998</width>
+    <width>1091</width>
     <height>768</height>
    </rect>
   </property>
@@ -144,6 +144,18 @@
                    </item>
                    <item row="0" column="1">
                     <widget class="QLineEdit" name="le_name">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
                      <property name="readOnly">
                       <bool>true</bool>
                      </property>
@@ -161,6 +173,18 @@
                    </item>
                    <item row="1" column="1">
                     <widget class="QLineEdit" name="le_birthdate">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
                      <property name="readOnly">
                       <bool>true</bool>
                      </property>
@@ -178,6 +202,18 @@
                    </item>
                    <item row="2" column="1">
                     <widget class="QLineEdit" name="le_idNum">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
                      <property name="readOnly">
                       <bool>true</bool>
                      </property>
@@ -195,6 +231,18 @@
                    </item>
                    <item row="3" column="1">
                     <widget class="QLineEdit" name="le_effectedDate">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
                      <property name="readOnly">
                       <bool>true</bool>
                      </property>
@@ -235,6 +283,18 @@
                    </item>
                    <item row="0" column="1">
                     <widget class="QLineEdit" name="le_sex">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
                      <property name="readOnly">
                       <bool>true</bool>
                      </property>
@@ -252,6 +312,18 @@
                    </item>
                    <item row="1" column="1">
                     <widget class="QLineEdit" name="le_nation">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
                      <property name="readOnly">
                       <bool>true</bool>
                      </property>
@@ -269,6 +341,18 @@
                    </item>
                    <item row="2" column="1">
                     <widget class="QLineEdit" name="le_issue">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
                      <property name="readOnly">
                       <bool>true</bool>
                      </property>
@@ -286,6 +370,18 @@
                    </item>
                    <item row="3" column="1">
                     <widget class="QLineEdit" name="le_expiredDate">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
                      <property name="readOnly">
                       <bool>true</bool>
                      </property>
@@ -324,6 +420,12 @@
                  </item>
                  <item row="0" column="1">
                   <widget class="QLineEdit" name="le_address">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
                    <property name="readOnly">
                     <bool>true</bool>
                    </property>
@@ -372,7 +474,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pb_camera">
+                <widget class="QPushButton" name="pb_camera1">
                  <property name="text">
                   <string>从摄像头拍照</string>
                  </property>
@@ -471,6 +573,18 @@
                </item>
                <item row="0" column="1">
                 <widget class="QLineEdit" name="le_userID">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -485,6 +599,18 @@
                </item>
                <item row="1" column="1">
                 <widget class="QLineEdit" name="le_workSN">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>
@@ -499,6 +625,18 @@
                </item>
                <item row="2" column="1">
                 <widget class="QComboBox" name="cb_department">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 170, 127);</string>
                  </property>
@@ -567,6 +705,18 @@
                </item>
                <item row="0" column="1">
                 <widget class="QComboBox" name="cb_RegType">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 170, 127);</string>
                  </property>
@@ -601,6 +751,18 @@
                </item>
                <item row="1" column="1">
                 <widget class="QComboBox" name="cb_userType">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 170, 127);</string>
                  </property>
@@ -660,6 +822,18 @@
                </item>
                <item row="4" column="1">
                 <widget class="QLineEdit" name="le_status">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="readOnly">
                   <bool>true</bool>
                  </property>

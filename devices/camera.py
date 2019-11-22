@@ -1,5 +1,4 @@
 import time
-
 import cv2
 
 
@@ -13,6 +12,9 @@ class CameraDev(object):
         if not self.cap.isOpened():
             self.cap.open()
 
+    def __del__(self):
+        self.releaseDevice()
+
     def take_photo(self):
         '''
        调用摄像头，捕捉图像
@@ -21,27 +23,15 @@ class CameraDev(object):
         while True:
             # 读取图像
             ret, photo = self.cap.read()
-            # cv2.imshow('photo', photo)
-            # wh = photo.shape
-            #
-            # print(wh)
-            # width = wh[1]
-            # height = wh[0]
-            # print(width)
-            # print(height)
-            # 将图像传送至窗口
             dim = (480, 640)
             new_photo = cv2.resize(photo, dim)
-
             cv2.imshow('photo', new_photo)
-
             # 设置等待时间，若数字为0则图像定格
             key = cv2.waitKey(2)
             # 按空格获取图像
             if key == ord(" "):
                 # 以当前时间存储
                 filename = "./photos_face/" + self.filename + ".jpg"
-
 
                 # 保存位置
                 cv2.imwrite(filename, new_photo)
@@ -51,7 +41,6 @@ class CameraDev(object):
                 self.cap.release()
                 cv2.destroyAllWindows()
                 break
-                pass
 
     def getFrame(self):
         ret, frame = self.cap.read()

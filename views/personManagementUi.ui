@@ -569,6 +569,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pb_refresh">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>刷新本地信息</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="pb_uploadPerson">
             <property name="text">
              <string>手动上传人员到住建平台</string>

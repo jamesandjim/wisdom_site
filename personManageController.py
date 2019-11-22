@@ -1,4 +1,7 @@
 import datetime
+import base64
+import requests
+import time
 
 from PyQt5.QtWidgets import QWidget, QMessageBox, QProgressDialog, QProgressBar
 from PyQt5.QtCore import pyqtSlot, QModelIndex, Qt
@@ -15,12 +18,12 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
     def __init__(self, parent=None):
         super(PersonManageWindow, self).__init__(parent)
         self.setupUi(self)
+        self.pb_refresh.setVisible(False)
         self.data = None
         self.disableEdit()
         self.face = FaceDevice()
         self.db = Dboperator()
         self.cdzj = cdzjpt.Cdzj()
-
         self.cjSN = ''
         self.cjKEY = ''
         self.faceDevices = None
@@ -237,7 +240,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         if personStatus == '正常':
             self.radioButton_personStatus_nomal.setChecked(True)
         else:
-            self.radioButton_personStatus_stop.setChecked(False)
+            self.radioButton_personStatus_stop.setChecked(True)
 
         idphoto_pixmap = QPixmap(idphoto)
         self.label_idphoto.setPixmap(idphoto_pixmap)
@@ -302,50 +305,67 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
     @pyqtSlot()
     def on_pb_uploadToDevice_clicked(self):
         '''方法作用为上传人员信息到人脸识别设备-授权'''
-        qs = "select * from wis_faceDevice where status = 1"
-        self.faceDevices = self.db.querySQL(qs)
-        countD = self.faceDevices.rowCount()
-        if countD > 0:
-            j = 0
-            while j < countD:
-                faceDevice = self.faceDevices.record(j)
 
-                name = faceDevice.field('name').value()
-                ip = faceDevice.field('ip').value()
+        qs = "select * from wis_person"
+        persons = self.db.querySQL(qs)
+        countP = persons.rowCount()
+        if countP > 0:
+            i = 0
+            while i < countP:
+                dic = {}
+                person = persons.record(i)
+                dic['version'] = '0.2'
+                dic['cmd'] = 'create_face'
+                dic['per_id'] = person.field('idNo').value()
+                dic['face_id'] = person.field('idNo').value()
+                dic['per_name'] = person.field('name').value()
+                dic['idcardNum'] = person.field('idNo').value()
+                dic['idcardper'] = person.field('idNo').value()
+                dic['s_time'] = 0
+                dic['e_time'] = 10000
+                personStatus = person.field('personStatus').value()
+                if personStatus == 1:
+                    dic['per_type'] = 0
+                else:
+                    dic['per_type'] = 2
 
-                url = "http://{}/person/add".format(ip)
+                dic['usr_type'] = 0
 
-                qs = "select * from wis_person where personStatus = 1"
-                persons = self.db.querySQL(qs)
-                countP = persons.rowCount()
-                if countP > 0:
-                    i = 0
-                    while i < countP:
-                        dic = {}
-                        person = persons.record(i)
-                        dic['faceId'] = person.field('idNo').value()
-                        dic['valid_time_type'] = 1
-                        dic['valid_start'] = 0
-                        dic['valid_end'] = 6
-                        dic['username'] = person.field('name').value()
-                        dic['idcard'] = person.field('idNo').value()
-                        dic['sex'] = person.field('gender').value()
-                        dic['nation'] = person.field('nation').value()
-                        dic['state'] = person.field('personStatus').value()
-                        dic['wgId'] = 1
+                desImg = './photos_face/{}_face.jpg'.format(dic['per_id'])
 
-                        srcImg = person.field('photo').value()
-                        desImg = './photos_face/{}_face.jpg'.format(dic['faceId'])
+                with open(desImg, 'rb') as f:
+                    bimg = base64.b64encode(f.read())
+                dic['img_data'] = bimg
 
-                        result = self.face.getFacePos(srcImg, desImg)
-                        if result:
-                            r = self.face.addPerson(url, dic, desImg, self.face.facePos_end)
-                        i += 1
-                j += 1
+                requests.post('http://127.0.0.1:8080/addFace', data=dic)
+                time.sleep(1)
+                i += 1
 
-            print('ok')
+        self.queryResult()
+        QMessageBox.information(self, '提示', '增加人脸到设备完成,在数据中查看上传结果！', QMessageBox.Yes)
 
+    @pyqtSlot()
+    def on_pb_refresh_clicked(self):
+        '''刷新本地数据'''
+        qs = "select * from wis_person where personStatus = 1 and deviceStatus = 0"
+        persons = self.db.querySQL(qs)
+        countP = persons.rowCount()
+        if countP > 0:
+            i = 0
+            while i < countP:
+                dic = {}
+                person = persons.record(i)
+                dic['version'] = '0.2'
+                dic['cmd'] = 'query_face'
+                dic['per_id'] = person.field('idNo').value()
 
+                dic['id'] = 20
+                dic['name'] = ''
+
+                requests.post('http://127.0.0.1:8080/queryFace', data=dic)
+                time.sleep(1)
+                i += 1
+        self.load()
 
 
     @pyqtSlot()
@@ -359,7 +379,6 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
             i = 0
             while i < countP:
                 person = uploadPersons.record(i)
-
                 idNo = person.field('idNo').value()
                 name = person.field('name').value()
                 gender = person.field('gender').value()
@@ -500,7 +519,27 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
                 break
 
 
+    def queryResult(self):
+        '''用来处理增加人员后，更新增加人员的情况，同刷新本地数据'''
+        qs = "select * from wis_person where personStatus = 1 and deviceStatus = 0"
+        persons = self.db.querySQL(qs)
+        countP = persons.rowCount()
+        if countP > 0:
+            i = 0
+            while i < countP:
+                dic = {}
+                person = persons.record(i)
+                dic['version'] = '0.2'
+                dic['cmd'] = 'query_face'
+                dic['per_id'] = person.field('idNo').value()
 
+                dic['id'] = 20
+                dic['name'] = ''
+
+                requests.post('http://127.0.0.1:8080/queryFace', data=dic)
+                time.sleep(1)
+                i += 1
+        self.load()
 
 
 

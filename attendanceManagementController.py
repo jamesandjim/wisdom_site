@@ -41,7 +41,7 @@ class AttendanceManagementWindow(QWidget, attendanceManagementUi.Ui_Form):
         allRecords = self.db.querySQL(qs)
         self.records = allRecords
         count = allRecords.rowCount()
-        print(count)
+
         self.tv_attendance.setModel(allRecords)
 
         allRecords.setHeaderData(0, Qt.Horizontal, '住建平台号')
@@ -59,8 +59,8 @@ class AttendanceManagementWindow(QWidget, attendanceManagementUi.Ui_Form):
 
         self.tv_attendance.resizeColumnsToContents()
         self.tv_attendance.horizontalHeader().setStretchLastSection(True)
-        self.tv_attendance.setColumnWidth(0, 200)
-        self.tv_attendance.setColumnWidth(1, 200)
+        self.tv_attendance.setColumnWidth(0, 150)
+        self.tv_attendance.setColumnWidth(1, 150)
         self.tv_attendance.setColumnWidth(11, 80)
         delegate = MyDelegate()
         self.tv_attendance.setItemDelegateForColumn(11, delegate)

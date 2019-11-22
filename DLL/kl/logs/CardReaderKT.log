@@ -14501,3 +14501,247 @@
 2019-11-06 16:42:05.310 DEBUG [4220]  BulkHidDevice::close end
 2019-11-06 16:42:05.312 DEBUG [4220] BulkHidDevice::~BulkHidDevice end
 2019-11-06 16:42:05.312 DEBUG [4220] IDCardReaderHID::~IDCardReaderHID end
+2019-11-07 11:23:52.553 DEBUG [13224]  cardreadekt dll version  5.1.6.0
+2019-11-07 11:23:52.554 DEBUG [13224] KT_Dev_Open start portType  5  param  {
+2019-11-07 11:23:52.554 WARN  [13224] parse  "{"  error  "unterminated object"
+2019-11-07 11:23:52.572 DEBUG [13224] CardReaderHID::SetParam  
+2019-11-07 11:23:52.572 DEBUG [13224] CardReaderHID::OpenPort start 
+2019-11-07 11:23:52.572 DEBUG [13224] BulkHidDevice::open start  {"VP":["VID_0483&PID_5750","VID_0483&PID_5751","VID_5000&PID_0500","VID_2015&PID_0008"],"addr":0,"bus":0,"pid":0,"vid":0}
+2019-11-07 11:23:52.723 DEBUG [13224] BulkHidDevice::open by VP  device count 10 
+2019-11-07 11:23:52.723 DEBUG [13224] libusb_open, number  1 , vid  20480 , pid  1280
+2019-11-07 11:23:52.788 DEBUG [13224] BulkHidDevice::open libusb_set_auto_detach_kernel_driver end -12
+2019-11-07 11:23:52.788 DEBUG [13224]  BulkHidDevice::open success  20480 1280
+2019-11-07 11:23:52.788 DEBUG [13224] 0x14306e60  BulkHidDevice::write left 20 string data  "aaaaaa9669000309010b"  timeout  300
+2019-11-07 11:23:52.825 DEBUG [13224] 0x14306e60  BulkHidDevice::read 20  "aaaaaa966900200901904b54383030332842295f"  timeout  300
+2019-11-07 11:23:52.825 DEBUG [13224] CardReaderHID::OpenPort open device  0
+2019-11-07 11:23:52.825 DEBUG [13224] CardReaderHID::GetSAMStatus start
+2019-11-07 11:23:52.826 DEBUG [13224] 0x14306e60  BulkHidDevice::write left 20 string data  "aaaaaa9669000309010b"  timeout  300
+2019-11-07 11:23:52.861 DEBUG [13224] 0x14306e60  BulkHidDevice::read 20  "aaaaaa966900200901904b54383030332842295f"  timeout  300
+2019-11-07 11:23:52.861 DEBUG [13224] CardReaderHID::GetSAMStatus device type  "KT8003(B)_V6.94_DC0D3038F1BF"
+2019-11-07 11:23:52.861 DEBUG [13224] KT8003(B)_V6.94_DC0D3038F1BF CardReaderHID::OpenPort set distribute reader
+2019-11-07 11:23:52.861 DEBUG [13224] CardReaderHID::OpenPort end 0
+2019-11-07 11:23:52.861 DEBUG [13224] KT_Dev_Open end  0
+2019-11-07 11:23:52.861 DEBUG [13224] KT8003(B)_V6.94_DC0D3038F1BF CardReaderHID::ReadIDCard start true
+2019-11-07 11:23:52.861 DEBUG [13224] SharedReader::readCard start "KT8003(B)_V6.94_DC0D3038F1BF"
+2019-11-07 11:23:52.865 DEBUG [13224] lws_log_Level[4]	Creating Vhost 'default' (serving disabled), 1 protocols, IPv6 off
+
+2019-11-07 11:23:53.909 DEBUG [13224] lws_log_Level[4]	created client ssl context for default
+
+2019-11-07 11:23:53.909 DEBUG [13224] "KT8003(B)_V6.94_DC0D3038F1BF" SharedReader::readCard process start  4
+2019-11-07 11:23:53.920 DEBUG [13224] SharedReader::connectByVHD lws_parse_uri result 0  prot  wss  address  idcard.kaercloud.top  port  443  path  /
+2019-11-07 11:23:53.920 DEBUG [13224] SharedReader::lwsCallback unknown reason 85
+
+2019-11-07 11:23:54.397 DEBUG [13224] SharedReader::handleRomoteCommand  "RESP_LOGIN" 0
+2019-11-07 11:23:54.397 DEBUG [13224] login success, user: "bishenle_test" , client token:  "5f624e0d-b5df-4b94-b160-289d476bce51"
+2019-11-07 11:23:54.471 DEBUG [13224] SharedReader::handleRomoteCommand  "RESP_GETSAMVSERVER" 0
+2019-11-07 11:23:54.472 DEBUG [13224] RESP_GETSAMVSERVER device token  "dd75ed18-09de-4dd3-acad-f9cbdfaf212f"  device mac  "00:e2:69:13:a8:f0"
+2019-11-07 11:23:54.561 DEBUG [13224] SharedReader::handleRomoteCommand  "SEND_MESSAGE" 0
+2019-11-07 11:23:54.561 WARN  [13224] BINDSAMV success  2877294375 "5f624e0d-b5df-4b94-b160-289d476bce51"
+2019-11-07 11:23:54.562 DEBUG [13224] 0x14306e60  BulkHidDevice::write left 20 char data  "aaaaaa5aa5000a1d000000000008010816"  timeout  2000
+2019-11-07 11:23:54.923 DEBUG [13224] processLocalSamData  2 "aaaaaa5aa5000308000b4b54383000001c0b0000"
+2019-11-07 11:23:54.923 DEBUG [13224] SharedReader::processLocalSamData select card resp  "0800"
+2019-11-07 11:23:54.923 DEBUG [13224] 0x14306e60  BulkHidDevice::write left 20 char data  "aaaaaa5aa5000800a40000026002cc"  timeout  2000
+2019-11-07 11:23:54.947 DEBUG [13224] processLocalSamData  3 "aaaaaa5aa500049000009454383000001c0b0000"
+2019-11-07 11:23:54.962 DEBUG [13224] processLocalSamData  4 "aaaaaa5aa50024000153430112011a0000000000"
+2019-11-07 11:23:54.962 WARN  [13224] SharedReader::processLocalSamData card dn "000153430112011A0000000000040153"
+2019-11-07 11:23:54.962 DEBUG [13224] SharedReader::processLocalSamData read base fp info "aaaaaa96690003301023"
+2019-11-07 11:23:55.061 DEBUG [13224] SharedReader::handleRomoteCommand  "SEND_MESSAGE" 0
+2019-11-07 11:23:55.061 DEBUG [13224] SharedReader::processRemoteSAMData remote samv_b 5
+2019-11-07 11:23:55.061 DEBUG [13224] 0x14306e60  BulkHidDevice::write left 20 char data  "aaaaaa5aa50010008800520af000edb65d6a96c3"  timeout  2000
+2019-11-07 11:23:55.096 DEBUG [13224] processLocalSamData  5 "aaaaaa5aa5000ce85d28045f821608900000c600"
+2019-11-07 11:23:55.118 DEBUG [13224] processLocalSamData  6 "aaaaaa5aa5000cdb7b4867e15d8f789000005800"
+2019-11-07 11:23:55.293 DEBUG [13224] SharedReader::handleRomoteCommand  "SEND_MESSAGE" 0
+2019-11-07 11:23:55.293 DEBUG [13224] SharedReader::processRemoteSAMData remote samv_b 7
+2019-11-07 11:23:55.294 DEBUG [13224] 0x14306e60  BulkHidDevice::write left 20 char data  "aaaaaa5aa50010008200520af001f82ed70d87df"  timeout  2000
+2019-11-07 11:23:55.331 DEBUG [13224] processLocalSamData  7 "aaaaaa5aa5000490000094e15d8f789000000000"
+2019-11-07 11:23:55.342 DEBUG [13224] processLocalSamData  8 "aaaaaa5aa5000490000094e15d8f789000000000"
+2019-11-07 11:23:55.370 DEBUG [13224] processLocalSamData  9 "aaaaaa5aa5005401000000000000003031303030"
+2019-11-07 11:23:55.396 DEBUG [13224] processLocalSamData  10 "aaaaaa5aa500545237dd21b2eb7308cfe471e232"
+2019-11-07 11:23:55.421 DEBUG [13224] processLocalSamData  11 "aaaaaa5aa5003af4fc9065a27d631e0594e78805"
+2019-11-07 11:23:55.434 DEBUG [13224] processLocalSamData  12 "aaaaaa5aa5000490000094a27d631e0594e70000"
+2019-11-07 11:23:55.460 DEBUG [13224] processLocalSamData  13 "aaaaaa5aa500542757f3145e0c9376f3b3bfe239"
+2019-11-07 11:23:55.488 DEBUG [13224] processLocalSamData  14 "aaaaaa5aa5005413a62d4928298976edb395e2e9"
+2019-11-07 11:23:55.515 DEBUG [13224] processLocalSamData  15 "aaaaaa5aa50054369d1c179d06342d9defabbc0e"
+2019-11-07 11:23:55.530 DEBUG [13224] processLocalSamData  16 "aaaaaa5aa500146cc10349d657e276c2b38ee208"
+2019-11-07 11:23:55.544 DEBUG [13224] processLocalSamData  17 "aaaaaa5aa5000490000094d657e276c2b38e0000"
+2019-11-07 11:23:55.570 DEBUG [13224] processLocalSamData  18 "aaaaaa5aa500541a8d42498957f176e34c2af578"
+2019-11-07 11:23:55.596 DEBUG [13224] processLocalSamData  19 "aaaaaa5aa50054b4913818528b9a27b9e98a694c"
+2019-11-07 11:23:55.623 DEBUG [13224] processLocalSamData  20 "aaaaaa5aa5005400ac8ee44eabed32e72104ae87"
+2019-11-07 11:23:55.651 DEBUG [13224] processLocalSamData  21 "aaaaaa5aa50054f290e7899d3b7d0fb10135fbfd"
+2019-11-07 11:23:55.678 DEBUG [13224] processLocalSamData  22 "aaaaaa5aa50054727b65debe01251288c7a57967"
+2019-11-07 11:23:55.705 DEBUG [13224] processLocalSamData  23 "aaaaaa5aa50054210f332e96e73fded447f0f0d5"
+2019-11-07 11:23:55.732 DEBUG [13224] processLocalSamData  24 "aaaaaa5aa50054afdd8da641b8e066218aadf0e3"
+2019-11-07 11:23:55.759 DEBUG [13224] processLocalSamData  25 "aaaaaa5aa500545efbf66fab1c752cb85c0277f3"
+2019-11-07 11:23:55.786 DEBUG [13224] processLocalSamData  26 "aaaaaa5aa500542d60c8db4f7a9c83a7cbe9bcc1"
+2019-11-07 11:23:55.812 DEBUG [13224] processLocalSamData  27 "aaaaaa5aa50054a1148e650086944ae9d5d7771f"
+2019-11-07 11:23:55.839 DEBUG [13224] processLocalSamData  28 "aaaaaa5aa500545c0812338e08af070969a158f2"
+2019-11-07 11:23:55.866 DEBUG [13224] processLocalSamData  29 "aaaaaa5aa500545799b2135aa2ec4ba1dac04ae0"
+2019-11-07 11:23:55.891 DEBUG [13224] processLocalSamData  30 "aaaaaa5aa5004461e4ce18803cba99cccff37ae4"
+2019-11-07 11:23:55.905 DEBUG [13224] processLocalSamData  31 "aaaaaa5aa5000490000094803cba99cccff30000"
+2019-11-07 11:23:55.932 DEBUG [13224] processLocalSamData  32 "aaaaaa5aa500547ec0985be65cee76d3b39fe219"
+2019-11-07 11:23:55.958 DEBUG [13224] processLocalSamData  33 "aaaaaa5aa500548216e59c3dd1442f014058a6c0"
+2019-11-07 11:23:55.986 DEBUG [13224] processLocalSamData  34 "aaaaaa5aa5005447c11e49f157bd76ddb3a9e223"
+2019-11-07 11:23:56.012 DEBUG [13224] processLocalSamData  35 "aaaaaa5aa500544cc12349f657c276e2b3aee228"
+2019-11-07 11:23:56.040 DEBUG [13224] processLocalSamData  36 "aaaaaa5aa5005451c12849fb57c776e7b3b3e22d"
+2019-11-07 11:23:56.067 DEBUG [13224] processLocalSamData  37 "aaaaaa5aa5005456c12d490058cc76ecb3b8e232"
+2019-11-07 11:23:56.094 DEBUG [13224] processLocalSamData  38 "aaaaaa5aa500545bc132490558d176f1b3bde237"
+2019-11-07 11:23:56.121 DEBUG [13224] processLocalSamData  39 "aaaaaa5aa500540896c9c48a882ae470a73edeb6"
+2019-11-07 11:23:56.147 DEBUG [13224] processLocalSamData  40 "aaaaaa5aa500545f8dc1f8331e26afbe453a840a"
+2019-11-07 11:23:56.175 DEBUG [13224] processLocalSamData  41 "aaaaaa5aa500546ac141491458e07600b4cce246"
+2019-11-07 11:23:56.201 DEBUG [13224] processLocalSamData  42 "aaaaaa5aa500546fc146491958e57605b4d1e24b"
+2019-11-07 11:23:56.228 DEBUG [13224] processLocalSamData  43 "aaaaaa5aa5005474c14b491e58ea760ab4d6e250"
+2019-11-07 11:23:56.253 DEBUG [13224] processLocalSamData  44 "aaaaaa5aa5004479c150492358ef760fb4dbe255"
+2019-11-07 11:23:56.254 WARN  [13224] SharedReader::processLocalSamData preread end 44 state 6 
+2019-11-07 11:23:57.427 DEBUG [13224] SharedReader::handleRomoteCommand  "SEND_MESSAGE" 0
+2019-11-07 11:23:57.427 DEBUG [13224] SharedReader::processRemoteSAMData readcard return 144 count 1
+2019-11-07 11:23:57.428 DEBUG [13224] SharedReader::setProcessCode 144
+2019-11-07 11:23:57.440 DEBUG [13224] SharedReader::makeSendResultData to send 0  process code 144
+2019-11-07 11:23:57.440 DEBUG [13224] SharedReader::lwsCallback unknown reason 80
+
+2019-11-07 11:23:57.440 DEBUG [13224] SharedReader::lwsCallback unknown reason 75
+
+2019-11-07 11:23:57.441 DEBUG [13224] lws context destroy end
+2019-11-07 11:23:57.442 DEBUG [13224] "KT8003(B)_V6.94_DC0D3038F1BF" SharedReader::readCard end 0 0
+2019-11-07 11:23:57.442 DEBUG [13224] KT8003(B)_V6.94_DC0D3038F1BF CardReaderHID::ReadIDCard end  0
+2019-11-07 11:23:57.442 DEBUG [13224] IDCardInfo::parseTextInfo total info  512
+2019-11-07 11:23:57.444 DEBUG [13224] IDCardInfo::~IDCardInfo
+2019-11-07 11:23:57.444 DEBUG [13224] KT_WltUnpack format  JPG  quality  -1
+2019-11-07 11:23:57.444 DEBUG [13224] IDCardInfo::parsePictureInfo method:  10  ; basePath: C:/Users/12348/PycharmProjects/wisdom_site/dll/kl
+2019-11-07 11:23:57.444 DEBUG [13224] resolveWltFromLibrary  C:/Users/12348/PycharmProjects/wisdom_site/dll/kl/wlt.dll
+2019-11-07 11:23:57.449 DEBUG [13224] IDCardInfo::parsePictureInfo wlt path  "C:/Users/12348/PycharmProjects/wisdom_site/dll/kl"
+2019-11-07 11:23:57.469 DEBUG [13224] IDCardInfo::parsePictureInfo success
+2019-11-07 11:23:57.469 DEBUG [13224] IDCardInfo::savePictureBuffer start JPG -1
+2019-11-07 11:23:57.471 DEBUG [13224] IDCardInfo::savePictureBuffer success 2513
+2019-11-07 11:23:57.471 DEBUG [13224] KT_WltUnpack success  2513 5000
+2019-11-07 11:23:57.471 DEBUG [13224] IDCardInfo::~IDCardInfo
+2019-11-07 11:23:57.477 DEBUG [13224] IDCardReaderHID::~IDCardReaderHID start 
+2019-11-07 11:23:57.477 DEBUG [13224] BulkHidDevice::close start
+2019-11-07 11:23:57.477 DEBUG [13224] BulkHidDevice::close libusb_close
+2019-11-07 11:23:57.477 DEBUG [13224]  BulkHidDevice::close end
+2019-11-07 11:23:57.477 DEBUG [13224] BulkHidDevice::~BulkHidDevice start
+2019-11-07 11:23:57.477 DEBUG [13224] BulkHidDevice::close start
+2019-11-07 11:23:57.478 DEBUG [13224]  BulkHidDevice::close end
+2019-11-07 11:23:57.479 DEBUG [13224] BulkHidDevice::~BulkHidDevice end
+2019-11-07 11:23:57.479 DEBUG [13224] IDCardReaderHID::~IDCardReaderHID end
+2019-11-07 12:21:23.630 DEBUG [14112]  cardreadekt dll version  5.1.6.0
+2019-11-07 12:21:23.631 DEBUG [14112] KT_Dev_Open start portType  5  param  {
+2019-11-07 12:21:23.631 WARN  [14112] parse  "{"  error  "unterminated object"
+2019-11-07 12:21:23.647 DEBUG [14112] CardReaderHID::SetParam  
+2019-11-07 12:21:23.647 DEBUG [14112] CardReaderHID::OpenPort start 
+2019-11-07 12:21:23.647 DEBUG [14112] BulkHidDevice::open start  {"VP":["VID_0483&PID_5750","VID_0483&PID_5751","VID_5000&PID_0500","VID_2015&PID_0008"],"addr":0,"bus":0,"pid":0,"vid":0}
+2019-11-07 12:21:23.795 DEBUG [14112] BulkHidDevice::open by VP  device count 10 
+2019-11-07 12:21:23.796 DEBUG [14112] libusb_open, number  1 , vid  20480 , pid  1280
+2019-11-07 12:21:23.858 DEBUG [14112] BulkHidDevice::open libusb_set_auto_detach_kernel_driver end -12
+2019-11-07 12:21:23.858 DEBUG [14112]  BulkHidDevice::open success  20480 1280
+2019-11-07 12:21:23.859 DEBUG [14112] 0xe8da970  BulkHidDevice::write left 20 string data  "aaaaaa9669000309010b"  timeout  300
+2019-11-07 12:21:23.897 DEBUG [14112] 0xe8da970  BulkHidDevice::read 20  "aaaaaa966900200901904b54383030332842295f"  timeout  300
+2019-11-07 12:21:23.897 DEBUG [14112] CardReaderHID::OpenPort open device  0
+2019-11-07 12:21:23.897 DEBUG [14112] CardReaderHID::GetSAMStatus start
+2019-11-07 12:21:23.897 DEBUG [14112] 0xe8da970  BulkHidDevice::write left 20 string data  "aaaaaa9669000309010b"  timeout  300
+2019-11-07 12:21:23.932 DEBUG [14112] 0xe8da970  BulkHidDevice::read 20  "aaaaaa966900200901904b54383030332842295f"  timeout  300
+2019-11-07 12:21:23.932 DEBUG [14112] CardReaderHID::GetSAMStatus device type  "KT8003(B)_V6.94_DC0D3038F1BF"
+2019-11-07 12:21:23.933 DEBUG [14112] KT8003(B)_V6.94_DC0D3038F1BF CardReaderHID::OpenPort set distribute reader
+2019-11-07 12:21:23.933 DEBUG [14112] CardReaderHID::OpenPort end 0
+2019-11-07 12:21:23.933 DEBUG [14112] KT_Dev_Open end  0
+2019-11-07 12:21:23.933 DEBUG [14112] KT8003(B)_V6.94_DC0D3038F1BF CardReaderHID::ReadIDCard start true
+2019-11-07 12:21:23.934 DEBUG [14112] SharedReader::readCard start "KT8003(B)_V6.94_DC0D3038F1BF"
+2019-11-07 12:21:23.940 DEBUG [14112] lws_log_Level[4]	Creating Vhost 'default' (serving disabled), 1 protocols, IPv6 off
+
+2019-11-07 12:21:24.994 DEBUG [14112] lws_log_Level[4]	created client ssl context for default
+
+2019-11-07 12:21:24.994 DEBUG [14112] "KT8003(B)_V6.94_DC0D3038F1BF" SharedReader::readCard process start  4
+2019-11-07 12:21:25.005 DEBUG [14112] SharedReader::connectByVHD lws_parse_uri result 0  prot  wss  address  idcard.kaercloud.top  port  443  path  /
+2019-11-07 12:21:25.005 DEBUG [14112] SharedReader::lwsCallback unknown reason 85
+
+2019-11-07 12:21:25.305 DEBUG [14112] SharedReader::handleRomoteCommand  "RESP_LOGIN" 0
+2019-11-07 12:21:25.305 DEBUG [14112] login success, user: "bishenle_test" , client token:  "30434022-3292-4ab4-808d-850e319cc3b5"
+2019-11-07 12:21:25.369 DEBUG [14112] SharedReader::handleRomoteCommand  "RESP_GETSAMVSERVER" 0
+2019-11-07 12:21:25.369 DEBUG [14112] RESP_GETSAMVSERVER device token  "7c6f4488-65b8-4431-a38f-118f72f6409f"  device mac  "00:e2:69:13:a8:d8"
+2019-11-07 12:21:25.455 DEBUG [14112] SharedReader::handleRomoteCommand  "SEND_MESSAGE" 0
+2019-11-07 12:21:25.455 WARN  [14112] BINDSAMV success  674971846 "30434022-3292-4ab4-808d-850e319cc3b5"
+2019-11-07 12:21:25.456 DEBUG [14112] 0xe8da970  BulkHidDevice::write left 20 char data  "aaaaaa5aa5000a1d000000000008010816"  timeout  2000
+2019-11-07 12:21:25.815 DEBUG [14112] processLocalSamData  2 "aaaaaa5aa5000308000b4b54383000001c0b0000"
+2019-11-07 12:21:25.816 DEBUG [14112] SharedReader::processLocalSamData select card resp  "0800"
+2019-11-07 12:21:25.816 DEBUG [14112] 0xe8da970  BulkHidDevice::write left 20 char data  "aaaaaa5aa5000800a40000026002cc"  timeout  2000
+2019-11-07 12:21:25.840 DEBUG [14112] processLocalSamData  3 "aaaaaa5aa500049000009454383000001c0b0000"
+2019-11-07 12:21:25.855 DEBUG [14112] processLocalSamData  4 "aaaaaa5aa50024000153430112011a0000000000"
+2019-11-07 12:21:25.855 WARN  [14112] SharedReader::processLocalSamData card dn "000153430112011A0000000000040153"
+2019-11-07 12:21:25.856 DEBUG [14112] SharedReader::processLocalSamData read base fp info "aaaaaa96690003301023"
+2019-11-07 12:21:25.956 DEBUG [14112] SharedReader::handleRomoteCommand  "SEND_MESSAGE" 0
+2019-11-07 12:21:25.956 DEBUG [14112] SharedReader::processRemoteSAMData remote samv_b 5
+2019-11-07 12:21:25.957 DEBUG [14112] 0xe8da970  BulkHidDevice::write left 20 char data  "aaaaaa5aa50010008800520af000b25943db2132"  timeout  2000
+2019-11-07 12:21:25.989 DEBUG [14112] processLocalSamData  5 "aaaaaa5aa5000c7d70e6e8dcd6d9539000001f00"
+2019-11-07 12:21:26.011 DEBUG [14112] processLocalSamData  6 "aaaaaa5aa5000c55589fa4f31a2e539000003e00"
+2019-11-07 12:21:26.163 DEBUG [14112] SharedReader::handleRomoteCommand  "SEND_MESSAGE" 0
+2019-11-07 12:21:26.163 DEBUG [14112] SharedReader::processRemoteSAMData remote samv_b 7
+2019-11-07 12:21:26.163 DEBUG [14112] 0xe8da970  BulkHidDevice::write left 20 char data  "aaaaaa5aa50010008200520af0018af23e797485"  timeout  2000
+2019-11-07 12:21:26.195 DEBUG [14112] processLocalSamData  7 "aaaaaa5aa5000490000094f31a2e539000000000"
+2019-11-07 12:21:26.207 DEBUG [14112] processLocalSamData  8 "aaaaaa5aa5000490000094f31a2e539000000000"
+2019-11-07 12:21:26.234 DEBUG [14112] processLocalSamData  9 "aaaaaa5aa5005401000000000000003031303030"
+2019-11-07 12:21:26.261 DEBUG [14112] processLocalSamData  10 "aaaaaa5aa500545237dd21b2eb7308cfe471e232"
+2019-11-07 12:21:26.284 DEBUG [14112] processLocalSamData  11 "aaaaaa5aa5003af4fc9065a27d631e0594e78805"
+2019-11-07 12:21:26.298 DEBUG [14112] processLocalSamData  12 "aaaaaa5aa5000490000094a27d631e0594e70000"
+2019-11-07 12:21:26.325 DEBUG [14112] processLocalSamData  13 "aaaaaa5aa500542757f3145e0c9376f3b3bfe239"
+2019-11-07 12:21:26.352 DEBUG [14112] processLocalSamData  14 "aaaaaa5aa5005413a62d4928298976edb395e2e9"
+2019-11-07 12:21:26.379 DEBUG [14112] processLocalSamData  15 "aaaaaa5aa50054369d1c179d06342d9defabbc0e"
+2019-11-07 12:21:26.393 DEBUG [14112] processLocalSamData  16 "aaaaaa5aa500146cc10349d657e276c2b38ee208"
+2019-11-07 12:21:26.406 DEBUG [14112] processLocalSamData  17 "aaaaaa5aa5000490000094d657e276c2b38e0000"
+2019-11-07 12:21:26.434 DEBUG [14112] processLocalSamData  18 "aaaaaa5aa500541a8d42498957f176e34c2af578"
+2019-11-07 12:21:26.461 DEBUG [14112] processLocalSamData  19 "aaaaaa5aa50054b4913818528b9a27b9e98a694c"
+2019-11-07 12:21:26.488 DEBUG [14112] processLocalSamData  20 "aaaaaa5aa5005400ac8ee44eabed32e72104ae87"
+2019-11-07 12:21:26.514 DEBUG [14112] processLocalSamData  21 "aaaaaa5aa50054f290e7899d3b7d0fb10135fbfd"
+2019-11-07 12:21:26.541 DEBUG [14112] processLocalSamData  22 "aaaaaa5aa50054727b65debe01251288c7a57967"
+2019-11-07 12:21:26.569 DEBUG [14112] processLocalSamData  23 "aaaaaa5aa50054210f332e96e73fded447f0f0d5"
+2019-11-07 12:21:26.596 DEBUG [14112] processLocalSamData  24 "aaaaaa5aa50054afdd8da641b8e066218aadf0e3"
+2019-11-07 12:21:26.622 DEBUG [14112] processLocalSamData  25 "aaaaaa5aa500545efbf66fab1c752cb85c0277f3"
+2019-11-07 12:21:26.649 DEBUG [14112] processLocalSamData  26 "aaaaaa5aa500542d60c8db4f7a9c83a7cbe9bcc1"
+2019-11-07 12:21:26.676 DEBUG [14112] processLocalSamData  27 "aaaaaa5aa50054a1148e650086944ae9d5d7771f"
+2019-11-07 12:21:26.704 DEBUG [14112] processLocalSamData  28 "aaaaaa5aa500545c0812338e08af070969a158f2"
+2019-11-07 12:21:26.730 DEBUG [14112] processLocalSamData  29 "aaaaaa5aa500545799b2135aa2ec4ba1dac04ae0"
+2019-11-07 12:21:26.756 DEBUG [14112] processLocalSamData  30 "aaaaaa5aa5004461e4ce18803cba99cccff37ae4"
+2019-11-07 12:21:26.769 DEBUG [14112] processLocalSamData  31 "aaaaaa5aa5000490000094803cba99cccff30000"
+2019-11-07 12:21:26.796 DEBUG [14112] processLocalSamData  32 "aaaaaa5aa500547ec0985be65cee76d3b39fe219"
+2019-11-07 12:21:26.823 DEBUG [14112] processLocalSamData  33 "aaaaaa5aa500548216e59c3dd1442f014058a6c0"
+2019-11-07 12:21:26.849 DEBUG [14112] processLocalSamData  34 "aaaaaa5aa5005447c11e49f157bd76ddb3a9e223"
+2019-11-07 12:21:26.876 DEBUG [14112] processLocalSamData  35 "aaaaaa5aa500544cc12349f657c276e2b3aee228"
+2019-11-07 12:21:26.904 DEBUG [14112] processLocalSamData  36 "aaaaaa5aa5005451c12849fb57c776e7b3b3e22d"
+2019-11-07 12:21:26.931 DEBUG [14112] processLocalSamData  37 "aaaaaa5aa5005456c12d490058cc76ecb3b8e232"
+2019-11-07 12:21:26.958 DEBUG [14112] processLocalSamData  38 "aaaaaa5aa500545bc132490558d176f1b3bde237"
+2019-11-07 12:21:26.985 DEBUG [14112] processLocalSamData  39 "aaaaaa5aa500540896c9c48a882ae470a73edeb6"
+2019-11-07 12:21:27.011 DEBUG [14112] processLocalSamData  40 "aaaaaa5aa500545f8dc1f8331e26afbe453a840a"
+2019-11-07 12:21:27.038 DEBUG [14112] processLocalSamData  41 "aaaaaa5aa500546ac141491458e07600b4cce246"
+2019-11-07 12:21:27.066 DEBUG [14112] processLocalSamData  42 "aaaaaa5aa500546fc146491958e57605b4d1e24b"
+2019-11-07 12:21:27.093 DEBUG [14112] processLocalSamData  43 "aaaaaa5aa5005474c14b491e58ea760ab4d6e250"
+2019-11-07 12:21:27.118 DEBUG [14112] processLocalSamData  44 "aaaaaa5aa5004479c150492358ef760fb4dbe255"
+2019-11-07 12:21:27.118 WARN  [14112] SharedReader::processLocalSamData preread end 44 state 6 
+2019-11-07 12:21:27.952 DEBUG [14112] SharedReader::handleRomoteCommand  "SEND_MESSAGE" 0
+2019-11-07 12:21:27.953 DEBUG [14112] SharedReader::processRemoteSAMData readcard return 144 count 1
+2019-11-07 12:21:27.953 DEBUG [14112] SharedReader::setProcessCode 144
+2019-11-07 12:21:27.964 DEBUG [14112] SharedReader::makeSendResultData to send 0  process code 144
+2019-11-07 12:21:27.964 DEBUG [14112] SharedReader::lwsCallback unknown reason 80
+
+2019-11-07 12:21:27.964 DEBUG [14112] SharedReader::lwsCallback unknown reason 75
+
+2019-11-07 12:21:27.967 DEBUG [14112] lws context destroy end
+2019-11-07 12:21:27.967 DEBUG [14112] "KT8003(B)_V6.94_DC0D3038F1BF" SharedReader::readCard end 0 0
+2019-11-07 12:21:27.967 DEBUG [14112] KT8003(B)_V6.94_DC0D3038F1BF CardReaderHID::ReadIDCard end  0
+2019-11-07 12:21:27.968 DEBUG [14112] IDCardInfo::parseTextInfo total info  512
+2019-11-07 12:21:27.970 DEBUG [14112] IDCardInfo::~IDCardInfo
+2019-11-07 12:21:27.971 DEBUG [14112] KT_WltUnpack format  JPG  quality  -1
+2019-11-07 12:21:27.971 DEBUG [14112] IDCardInfo::parsePictureInfo method:  10  ; basePath: C:/Users/12348/PycharmProjects/wisdom_site/dll/kl
+2019-11-07 12:21:27.971 DEBUG [14112] resolveWltFromLibrary  C:/Users/12348/PycharmProjects/wisdom_site/dll/kl/wlt.dll
+2019-11-07 12:21:27.977 DEBUG [14112] IDCardInfo::parsePictureInfo wlt path  "C:/Users/12348/PycharmProjects/wisdom_site/dll/kl"
+2019-11-07 12:21:27.999 DEBUG [14112] IDCardInfo::parsePictureInfo success
+2019-11-07 12:21:27.999 DEBUG [14112] IDCardInfo::savePictureBuffer start JPG -1
+2019-11-07 12:21:28.000 DEBUG [14112] IDCardInfo::savePictureBuffer success 2513
+2019-11-07 12:21:28.000 DEBUG [14112] KT_WltUnpack success  2513 5000
+2019-11-07 12:21:28.000 DEBUG [14112] IDCardInfo::~IDCardInfo
+2019-11-07 12:21:28.004 DEBUG [14112] IDCardReaderHID::~IDCardReaderHID start 
+2019-11-07 12:21:28.004 DEBUG [14112] BulkHidDevice::close start
+2019-11-07 12:21:28.004 DEBUG [14112] BulkHidDevice::close libusb_close
+2019-11-07 12:21:28.004 DEBUG [14112]  BulkHidDevice::close end
+2019-11-07 12:21:28.004 DEBUG [14112] BulkHidDevice::~BulkHidDevice start
+2019-11-07 12:21:28.004 DEBUG [14112] BulkHidDevice::close start
+2019-11-07 12:21:28.004 DEBUG [14112]  BulkHidDevice::close end
+2019-11-07 12:21:28.005 DEBUG [14112] BulkHidDevice::~BulkHidDevice end
+2019-11-07 12:21:28.005 DEBUG [14112] IDCardReaderHID::~IDCardReaderHID end

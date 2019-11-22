@@ -9,6 +9,7 @@ from infoAgent import Info
 class ResultHandle:
     def __init__(self, dic):
         self.dic = dic
+        self.db = Dboperator()
         self.prepare()
 
     def prepare(self):
@@ -21,14 +22,14 @@ class ResultHandle:
 
             if cmd == 'create_face':
                 if code == 0:
-                    print('%s 人员增加成功！' % self.dic['ipaddr'])
-                    '''todo  修改数据库中对应人员记录，将已上传改为1'''
+                    print('人员增加成功！')
 
                 else:
                     print(reply)
             elif cmd == 'query_face':
-                print('query_face')
-                return lr['per_id']
+                if code == 0:
+                    qs = "update wis_person set deviceStatus = 1 where idNo = '%s'" % lr['per_id']
+                    self.db.excuteSQl(qs)
             elif cmd == 'delete_face':
                 if lr['code'] == 0:
                     print('人员删除成功！')
@@ -68,7 +69,7 @@ class RecordHandle:
 
     def insertdb(self):
         jn = self.dic['body']
-        dtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(jn['usec']))
+        dtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(jn['usec'])-8*60*60))
         qs = '''
                 insert into wis_recordsx values ('%s', '%s', %d, '%s','%s', %d, %d, %d, %d,'%s','%s', %d)
                 ''' % (jn['sn'], dtime, int(jn['matched']), jn['per_id'], jn['name'], int(jn['role']), int(jn['hat']), int(jn['face_imgsize']), int(jn['model_imgsize']), jn['face_imgdata'], jn['model_imgdata'], 0)

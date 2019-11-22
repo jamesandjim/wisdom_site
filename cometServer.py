@@ -59,7 +59,10 @@ class RecordHandler(tornado.web.RequestHandler):
         # print(bo1.decode('utf-8'))
         bo2 = bo1.decode('utf-8')
         bo3 = json.loads(bo2)
-        print(bo3)
+        # print(bo3)
+
+        # with open('log.txt', 'a+') as f:
+        #     f.write(str(bo3))
 
         op = RecordHandle(bo3)
         op.insertdb()
