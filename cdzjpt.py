@@ -15,7 +15,11 @@ class Cdzj:
         self.person = {}
         self.attdata = {}
         self.delPersonID = ''
-        self.msg = ''
+        self.msg_uploadPerson = ''
+        self.msg_downloadPerson = ''
+        self.msg_uploadAttendance = ''
+        self.msg_downloadDelPerson = ''
+        self.msg_feedback = ''
         
     def uploadPerson(self):
         """ 用于上传人员信息到住建平台 """
@@ -23,9 +27,9 @@ class Cdzj:
         result = r.json()
 
         if result['errcode'] == 0:
-            self.msg = 'success'
+            self.msg_uploadPerson = 'success'
         else:
-            self.msg = result['errmsg']      
+            self.msg_uploadPerson = result['errmsg']
         
     def downloadPerson(self, deviceSN, key):
         """ 用于从住建平台下载正式人员，需要提供考勤设备的sn,与对就的key """
@@ -48,11 +52,11 @@ class Cdzj:
                     self.person['user_id'] = item['user_id']
                     self.person['work_sn'] = item['work_sn']
                     self.person['idNo'] = item['id_card']
-                    self.msg = 'success'
+                    self.msg_downloadPerson = 'success'
             else:
-                self.msg = '未收到数据'
+                self.msg_downloadPerson = '未收到数据'
         else:
-            self.msg = zresult
+            self.msg_downloadPerson = zresult
 
     def uploadAttendance(self, deviceSN, key):
         """ 用于上传人员考勤信息到住建平台 """
@@ -66,9 +70,9 @@ class Cdzj:
         # r1 = r1.replace(r'<string>', '')
         j = json.loads(r1)
         if j['Result'] == 0:
-            self.msg = 'success'
+            self.msg_uploadAttendance = 'success'
         else:
-            self.msg = j['Msg']
+            self.msg_uploadAttendance = j['Msg']
 
     def downloadDelPerson(self, deviceSN, key):
         """ 用于从住建平台下载需要删除的人员 """
@@ -87,9 +91,9 @@ class Cdzj:
             dcontent = json.loads(ccontent)
             for item in dcontent:
                 self.delPersonID = item['user_id']
-            self.msg = 'success'
+            self.msg_downloadDelPerson = 'success'
         else:
-            self.msg = js['Msg']
+            self.msg_downloadDelPerson = js['Msg']
 
     def feedback(self, deviceSN, otype, msg):
         """ 用于下载人员和下载需删除的人员成功后，给住建平台的反馈 """
@@ -100,6 +104,6 @@ class Cdzj:
         str1 = el.text
         js = json.loads(str1)
         if js['Result'] == 0:
-            self.msg = 'success'
+            self.msg_feedback = 'success'
         else:
-            self.msg = r.json['Msg']
+            self.msg_feedback = r.json['Msg']

@@ -367,7 +367,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
             self.cdzj.person['RegType'] = RegType
 
             self.cdzj.uploadPerson()
-            if self.cdzj.msg == 'success':
+            if self.cdzj.msg_uploadPerson == 'success':
                 qs = "update wis_person set zjptStatus = 1 where idNo = '%s'" % idNo
                 self.db.excuteSQl(qs)
                 okMsg = "人员:%s,身份证号:%s,%s成功上传到平台\n" % (name, idNo, datetime.datetime.now().strftime('%Y-%m-%d %X'))
@@ -376,6 +376,22 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
                 with open('uploadLog.txt', 'a') as f:
                     f.write(okMsg)
                     f.close()
+                qs = "select sn, key from wis_faceDevice where status = 1"
+                devices = self.db.querySQL(qs)
+                rows = devices.rowCount()
+                if rows > 0:
+                    i = 0
+                    while i < rows:
+                        device = devices.record(i)
+                        sn = str.strip(device.field('sn').value())
+                        key = str.strip(device.field('key').value())
+                        self.cdzj.downloadPerson(deviceSN=sn, key=key)
+                        if self.cdzj.msg_downloadPerson == 'sucess':
+                            self.cdzj.feedback(sn, 2, '下发成功')
+                        i += 1
+                        # todo  需要增加下发人员信息到设备的操作
+
+
             else:
                 failMsg = "人员:%s,身份证号:%s,%s上传到平台失败，原因:%s\n" % (name, idNo, datetime.datetime.now(), self.cdzj.msg)
                 QMessageBox.information(self, '提示', failMsg)
