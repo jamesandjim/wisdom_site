@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1091</width>
+    <width>1087</width>
     <height>768</height>
    </rect>
   </property>
@@ -498,16 +498,16 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pb_uploadtoDev">
+                <widget class="QPushButton" name="pb_uploadPerson">
                  <property name="text">
-                  <string>上传至考勤设备</string>
+                  <string>上传至住建平台</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pb_uploadPerson">
+                <widget class="QPushButton" name="pb_uploadtoDev">
                  <property name="text">
-                  <string>上传至住建平台</string>
+                  <string>上传至考勤设备</string>
                  </property>
                 </widget>
                </item>

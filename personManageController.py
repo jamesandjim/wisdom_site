@@ -128,6 +128,8 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.le_work_sn.clear()
         self.le_deviceStatus.clear()
         self.le_zjptStatus.clear()
+        self.label_photo.clear()
+        self.label_idphoto.clear()
 
     @pyqtSlot()
     def on_pb_replaceIMG_clicked(self):

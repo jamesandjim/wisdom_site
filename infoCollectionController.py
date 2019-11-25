@@ -35,6 +35,9 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         self.load()
 
     def load(self):
+        self.pb_uploadPerson.setEnabled(False)
+        self.pb_uploadtoDev.setEnabled(False)
+
         qs = "select name from wis_department"
         data = self.db.querySQL(qs)
         self.cb_department.setModel(data)
@@ -220,6 +223,9 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
                 sql = "INSERT INTO wis_person VALUES('%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,'%s','%s','%s',%d,%d,%d,%d)" % (idNo, name, gender, nation, birthday, address, idissue, idperiod, idphoto, photo, inf_photo, userType, RegType, user_id, work_sn, department, deviceStatus, zjptStatus, uploadYN, personStatus)
                 self.db.excuteSQl(sql)
                 QMessageBox.information(self, '提示', '人员信息采集成功！', QMessageBox.Yes)
+
+                self.pb_uploadPerson.setEnabled(True)
+                self.pb_uploadtoDev.setEnabled(True)
         else:
             QMessageBox.information(self, '提示', '人员信息为空！', QMessageBox.Yes)
 
@@ -318,7 +324,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
     @pyqtSlot()
     def on_pb_uploadPerson_clicked(self):
         idNo = self.le_idNum.text()
-        qs = "select * from wis_person where zjptStatus = 0 and uploadYN = 1 and personStatus = 1 and idNo = '%s'" % idNo
+        qs = "select * from wis_person where  uploadYN = 1 and personStatus = 1 and idNo = '%s'" % idNo
         persons = self.db.querySQL(qs)
         rows = persons.rowCount()
         if rows == 1:
@@ -364,12 +370,15 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
             if self.cdzj.msg == 'success':
                 qs = "update wis_person set zjptStatus = 1 where idNo = '%s'" % idNo
                 self.db.excuteSQl(qs)
-                okMsg = "人员:%s,身份证号:%s,%s成功上传到平台\n" % (name, idNo, datetime.datetime.now())
+                okMsg = "人员:%s,身份证号:%s,%s成功上传到平台\n" % (name, idNo, datetime.datetime.now().strftime('%Y-%m-%d %X'))
+                self.pb_save_upload.setEnabled(False)
+                QMessageBox.information(self, '提示', okMsg, QMessageBox.Yes)
                 with open('uploadLog.txt', 'a') as f:
                     f.write(okMsg)
                     f.close()
             else:
                 failMsg = "人员:%s,身份证号:%s,%s上传到平台失败，原因:%s\n" % (name, idNo, datetime.datetime.now(), self.cdzj.msg)
+                QMessageBox.information(self, '提示', failMsg)
                 with open('uploadLog.txt', 'a') as f:
                     f.write(failMsg)
                     f.close()
