@@ -323,6 +323,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
 
     @pyqtSlot()
     def on_pb_uploadPerson_clicked(self):
+        """同步人员平台信息"""
         idNo = self.le_idNum.text()
         qs = "select * from wis_person where  uploadYN = 1 and personStatus = 1 and idNo = '%s'" % idNo
         persons = self.db.querySQL(qs)

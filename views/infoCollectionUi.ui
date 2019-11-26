@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1087</width>
-    <height>768</height>
+    <height>797</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -501,6 +501,13 @@
                 <widget class="QPushButton" name="pb_uploadPerson">
                  <property name="text">
                   <string>上传至住建平台</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pb_downloadPerson">
+                 <property name="text">
+                  <string>从平台下载人员信息</string>
                  </property>
                 </widget>
                </item>
