@@ -464,7 +464,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
                     key = str.strip(faces.field('key').value())
 
                     self.cdzj.downloadPerson(sn, key)
-                    if self.cdzj.msg == 'success':
+                    if self.cdzj.msg_downloadPerson == 'success':
                         qs = "update wis_person set user_id = '%s', work_sn = '%s' where idNo = '%s'" % (self.cdzj.person['user_id'], self.cdzj.person['work_sn'], self.cdzj.person['idNo'])
                         self.db.excuteSQl(qs)
                         selectQs = "select * from wis_person where idNo = '%s'" % self.cdzj.person['idNo']

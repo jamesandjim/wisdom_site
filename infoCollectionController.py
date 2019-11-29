@@ -324,6 +324,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
     @pyqtSlot()
     def on_pb_uploadPerson_clicked(self):
         """同步人员平台信息"""
+        # 整理符合上传需求的人员信息
         idNo = self.le_idNum.text()
         qs = "select * from wis_person where  uploadYN = 1 and personStatus = 1 and idNo = '%s'" % idNo
         persons = self.db.querySQL(qs)
@@ -367,16 +368,19 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
             self.cdzj.person['dev_mac'] = dev_mac
             self.cdzj.person['RegType'] = RegType
 
+            # 上传人员信息到住建平台
             self.cdzj.uploadPerson()
             if self.cdzj.msg_uploadPerson == 'success':
+                # 上传上成功后将本地数据库对应记录打上成功标记
                 qs = "update wis_person set zjptStatus = 1 where idNo = '%s'" % idNo
                 self.db.excuteSQl(qs)
                 okMsg = "人员:%s,身份证号:%s,%s成功上传到平台\n" % (name, idNo, datetime.datetime.now().strftime('%Y-%m-%d %X'))
                 self.pb_save_upload.setEnabled(False)
-                QMessageBox.information(self, '提示', okMsg, QMessageBox.Yes)
+
                 with open('uploadLog.txt', 'a') as f:
                     f.write(okMsg)
                     f.close()
+                # 上传成功后，平台会产生人员的住建号，需要系统下载对应的人员信息并下发到有脸设备中，并返馈下发到设备的结果到平台
                 qs = "select sn, key from wis_faceDevice where status = 1"
                 devices = self.db.querySQL(qs)
                 rows = devices.rowCount()
@@ -387,11 +391,46 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
                         sn = str.strip(device.field('sn').value())
                         key = str.strip(device.field('key').value())
                         self.cdzj.downloadPerson(deviceSN=sn, key=key)
-                        if self.cdzj.msg_downloadPerson == 'sucess':
-                            self.cdzj.feedback(sn, 2, '下发成功')
-                        i += 1
-                        # todo  需要增加下发人员信息到设备的操作
+                        if self.cdzj.msg_downloadPerson == 'success':
+                            # 下载住建平台产生的的人员编号 ，并更新到本地数据库
+                            qs = "update wis_person set user_id = '%s', work_sn = '%s' where idNo = '%s'" % (
+                            self.cdzj.person['user_id'], self.cdzj.person['work_sn'], self.cdzj.person['idNo'])
+                            self.db.excuteSQl(qs)
 
+                            # 下发人员信息到人脸设备
+                            dic = {}
+                            person = self.cdzj.person.record(0)
+                            dic['version'] = '0.2'
+                            dic['cmd'] = 'create_face'
+                            dic['per_id'] = person.field('idNo').value()
+                            dic['face_id'] = person.field('idNo').value()
+                            dic['per_name'] = person.field('name').value()
+                            dic['idcardNum'] = person.field('idNo').value()
+                            dic['idcardper'] = person.field('idNo').value()
+                            dic['s_time'] = 0
+                            dic['e_time'] = 10000
+                            personStatus = person.field('personStatus').value()
+                            if personStatus == 1:
+                                dic['per_type'] = 0
+                            else:
+                                dic['per_type'] = 2
+
+                            dic['usr_type'] = 0
+
+                            desImg = './photos_face/{}_face.jpg'.format(dic['per_id'])
+
+                            with open(desImg, 'rb') as f:
+                                bimg = base64.b64encode(f.read())
+                            dic['img_data'] = bimg
+
+                            requests.post('http://127.0.0.1:8080/addFace', data=dic)
+                            time.sleep(1)
+
+                            self.cdzj.feedback(sn, 2, '下发成功')
+
+                            i += 1
+                        else:
+                            QMessageBox.information(self, '提示', self.cdzj.msg_downloadPerson, QMessageBox.Yes)
 
             else:
                 failMsg = "人员:%s,身份证号:%s,%s上传到平台失败，原因:%s\n" % (name, idNo, datetime.datetime.now(), self.cdzj.msg)
@@ -400,4 +439,4 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
                     f.write(failMsg)
                     f.close()
         else:
-            QMessageBox.information(self, '提示', '请先增加和保存需要上传的数据！', QMessageBox.Yes)
+            QMessageBox.information(self, '提示', '当前数据不需与住建平台进行同步！', QMessageBox.Yes)

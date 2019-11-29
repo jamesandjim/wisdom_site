@@ -107,3 +107,6 @@ class Cdzj:
             self.msg_feedback = 'success'
         else:
             self.msg_feedback = r.json['Msg']
+
+
+

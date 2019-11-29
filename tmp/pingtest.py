@@ -12,23 +12,16 @@ def DisableNetwork():
           print("disable network card successfully")
 def ping():
     ''' ping 主备网络 '''
-    with os.popen("ping 192.168.0.109") as p:
+    with os.popen("ping 192.168.0.202") as p:
         r = p.read()
+        print(r)
         if r.find('无法访问目标主机') != -1:
-             print('ok')
 
-        else:
              print('NO')
 
+        else:
+             print('yes')
 
-
-
-    # if result == 0:
-    #     print(result)
-    #     print("A网正常")
-    # else:
-    #     print("网络故障")
-    # return result
 if __name__ == '__main__':
     while True:
        PING_RESULT = ping()
