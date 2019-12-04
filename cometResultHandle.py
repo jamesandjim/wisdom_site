@@ -14,14 +14,16 @@ class ResultHandle:
 
     def prepare(self):
         last_result = self.dic['last_result']
-        if last_result != '':
+        if last_result != '1':
             lr = json.loads(last_result)
+            print(lr)
             cmd = lr['cmd']
             code = lr['code']
             reply = lr['reply']
 
             if cmd == 'create_face':
                 if code == 0:
+
                     print('人员增加成功！')
 
                 else:
@@ -55,6 +57,8 @@ class ResultHandle:
                 print('set_hat_pass')
             elif cmd == 'set_face_mode':
                 print('set_face_mode')
+            elif cmd == 'error':
+                print('命令错误')
             else:
                 pass
 
@@ -72,5 +76,5 @@ class RecordHandle:
         dtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(jn['usec'])-8*60*60))
         qs = '''
                 insert into wis_recordsx values ('%s', '%s', %d, '%s','%s', %d, %d, %d, %d,'%s','%s', %d)
-                ''' % (jn['sn'], dtime, int(jn['matched']), jn['per_id'], jn['name'], int(jn['role']), int(jn['hat']), int(jn['face_imgsize']), int(jn['model_imgsize']), jn['face_imgdata'], jn['model_imgdata'], 0)
+                ''' % (jn['sn'], dtime, int(jn['matched']), jn['per_id'], jn['name'], int(jn['role']), int(jn['hat']), int(jn['face_imgsize']), int(jn['model_imgsize']), jn['face_imgdata'], '', 0)
         self.db.excuteSQl(qs)

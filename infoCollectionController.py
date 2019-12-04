@@ -24,7 +24,10 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
         self.setupUi(self)
         self.face = FaceDevice()
         self.pb_cj.setVisible(False)
-        self.pb_refresh_photo.setVisible(False)
+        # self.pb_refresh_photo.setVisible(False)
+        self.pb_uploadtoDev.setVisible(False)
+        self.pb_uploadPerson.setVisible(False)
+        self.pb_downloadPerson.setVisible(False)
         # self.cr = zkCardReader.CardReader()
         self.db = Dboperator()
         self.cdzj = Cdzj()
@@ -223,6 +226,7 @@ class InfoCollectionCls(QWidget, infoCollectionUi.Ui_infoCollectionForm):
                 sql = "INSERT INTO wis_person VALUES('%s','%s',%d,'%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,'%s','%s','%s',%d,%d,%d,%d)" % (idNo, name, gender, nation, birthday, address, idissue, idperiod, idphoto, photo, inf_photo, userType, RegType, user_id, work_sn, department, deviceStatus, zjptStatus, uploadYN, personStatus)
                 self.db.excuteSQl(sql)
                 QMessageBox.information(self, '提示', '人员信息采集成功！', QMessageBox.Yes)
+
 
                 self.pb_uploadPerson.setEnabled(True)
                 self.pb_uploadtoDev.setEnabled(True)

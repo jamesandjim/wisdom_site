@@ -6,7 +6,6 @@ from views import collectImg
 from devices.camera import CameraDev
 import cv2
 import qimage2ndarray
-from commTools.findFile import getFiles
 
 
 class CollectImgWindow(QDialog, collectImg.Ui_Dialog):

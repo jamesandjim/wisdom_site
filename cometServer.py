@@ -59,13 +59,14 @@ class RecordHandler(tornado.web.RequestHandler):
         # print(bo1.decode('utf-8'))
         bo2 = bo1.decode('utf-8')
         bo3 = json.loads(bo2)
-        # print(bo3)
+        print(bo3)
 
         # with open('log.txt', 'a+') as f:
         #     f.write(str(bo3))
 
         op = RecordHandle(bo3)
         op.insertdb()
+
 
 # 增加人脸的请求处理
 class AddFace(tornado.web.RequestHandler):
@@ -76,7 +77,7 @@ class AddFace(tornado.web.RequestHandler):
         dic['per_id'] = self.get_body_argument('per_id')
         dic['face_id'] = self.get_body_argument('face_id')
         dic['per_name'] = self.get_body_argument('per_name')
-        dic['idcardNum'] = self.get_body_argument('idcardNum')
+        # dic['idcardNum'] = self.get_body_argument('idcardNum')
         dic['img_data'] = self.get_body_argument('img_data')
         dic['idcardper'] = self.get_body_argument('idcardper')
         dic['s_time'] = self.get_body_argument('s_time')
@@ -104,7 +105,7 @@ class DelFace(tornado.web.RequestHandler):
         dic = {}
         dic['version'] = self.get_body_argument('version')
         dic['cmd'] = self.get_body_argument('cmd')
-        dic['type'] = self.get_body_argument('type')
+        dic['type'] = int(self.get_body_argument('type'))
         dic['per_id'] = self.get_body_argument('per_id')
         # dic['ipaddr'] = self.get_body_argument('ipaddr')
         self.application.announce.changeSubject(dic)
@@ -159,12 +160,13 @@ class setHatPass(tornado.web.RequestHandler):
 
 
 # StatusHandler的处理是异步的
-class StatusHandler(tornado.web.RequestHandler):
+class HeartbeatHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def post(self):
         self.application.announce.register(self.async_callback(self.on_message))
         status = {}
         bo = self.request.body
+        print(bo)
         ip = self.get_body_argument('ipaddr')
         serialno = self.get_body_argument('serialno')
         last_result = self.get_body_argument('last_result')
@@ -199,7 +201,7 @@ class Application(tornado.web.Application):
             (r'/addFace', AddFace),
             (r'/delFace', DelFace),
             (r'/queryFace', QueryFace),
-            (r'/heartbeat', StatusHandler),
+            (r'/heartbeat', HeartbeatHandler),
             (r'/getRecordx', RecordHandler),
         ]
         settings = {

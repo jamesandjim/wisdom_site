@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1087</width>
-    <height>797</height>
+    <height>831</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -115,6 +115,9 @@
            <widget class="QGroupBox" name="gb_base">
             <property name="title">
              <string>人员基本信息</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_4">
              <item>
@@ -521,7 +524,7 @@
                <item>
                 <widget class="QPushButton" name="pb_refresh_photo">
                  <property name="text">
-                  <string>刷新考勤设备照片</string>
+                  <string>刷新人脸照片</string>
                  </property>
                 </widget>
                </item>
@@ -562,14 +565,17 @@
              </property>
              <item>
               <layout class="QFormLayout" name="formLayout_2">
+               <property name="labelAlignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
                <property name="formAlignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
                </property>
                <property name="horizontalSpacing">
                 <number>10</number>
                </property>
                <property name="verticalSpacing">
-                <number>12</number>
+                <number>6</number>
                </property>
                <item row="0" column="0">
                 <widget class="QLabel" name="label">
@@ -580,6 +586,12 @@
                </item>
                <item row="0" column="1">
                 <widget class="QLineEdit" name="le_userID">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
@@ -606,6 +618,12 @@
                </item>
                <item row="1" column="1">
                 <widget class="QLineEdit" name="le_workSN">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
@@ -632,6 +650,12 @@
                </item>
                <item row="2" column="1">
                 <widget class="QComboBox" name="cb_department">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
@@ -666,6 +690,12 @@
                </item>
                <item row="3" column="1">
                 <widget class="QCheckBox" name="checkbox_uploadYN">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 170, 127);</string>
                  </property>
@@ -697,8 +727,11 @@
              </item>
              <item>
               <layout class="QFormLayout" name="formLayout_3">
+               <property name="labelAlignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
                <property name="formAlignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
                </property>
                <property name="horizontalSpacing">
                 <number>10</number>
@@ -712,6 +745,12 @@
                </item>
                <item row="0" column="1">
                 <widget class="QComboBox" name="cb_RegType">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
@@ -758,6 +797,12 @@
                </item>
                <item row="1" column="1">
                 <widget class="QComboBox" name="cb_userType">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
@@ -799,6 +844,12 @@
                </item>
                <item row="2" column="1">
                 <widget class="QRadioButton" name="rb_personStatus1">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 170, 127);</string>
                  </property>
@@ -812,37 +863,17 @@
                </item>
                <item row="3" column="1">
                 <widget class="QRadioButton" name="rb_personStatus2">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 170, 127);</string>
                  </property>
                  <property name="text">
                   <string>冻结</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="label_15">
-                 <property name="text">
-                  <string>数据状态</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QLineEdit" name="le_status">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="readOnly">
-                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -982,46 +1013,6 @@
            </widget>
           </item>
          </layout>
-        </widget>
-        <widget class="QWidget" name="tab_2">
-         <property name="styleSheet">
-          <string notr="true">QWidget #tab_2{
-    background-color: rgb(255, 255, 255);
-    border-radius:5px;
-}</string>
-         </property>
-         <attribute name="title">
-          <string>人员信息列表</string>
-         </attribute>
-         <widget class="QTableView" name="tableView">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>10</y>
-            <width>811</width>
-            <height>381</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);</string>
-          </property>
-          <property name="gridStyle">
-           <enum>Qt::DotLine</enum>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="pb_readall">
-          <property name="geometry">
-           <rect>
-            <x>880</x>
-            <y>80</y>
-            <width>91</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>获取人员列表</string>
-          </property>
-         </widget>
         </widget>
        </widget>
       </item>

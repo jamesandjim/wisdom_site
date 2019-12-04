@@ -321,7 +321,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
                 dic['per_id'] = person.field('idNo').value()
                 dic['face_id'] = person.field('idNo').value()
                 dic['per_name'] = person.field('name').value()
-                dic['idcardNum'] = person.field('idNo').value()
+                # dic['idcardNum'] = person.field('idNo').value()
                 dic['idcardper'] = person.field('idNo').value()
                 dic['s_time'] = 0
                 dic['e_time'] = 10000
