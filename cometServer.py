@@ -178,7 +178,6 @@ class HeartbeatHandler(tornado.web.RequestHandler):
 
         op = ResultHandle(status)
 
-
     def on_message(self, data):
         print('ok')
         self.write(data)

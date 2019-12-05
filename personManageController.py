@@ -419,7 +419,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
                 self.cdzj.person['RegType'] = RegType
 
                 self.cdzj.uploadPerson()
-                if self.cdzj.msg == 'success':
+                if self.cdzj.msg_uploadPerson == 'success':
                     qs = "update wis_person set zjptStatus = 1 where idNo = '%s'" % idNo
                     self.db.excuteSQl(qs)
                     okMsg = "人员:%s,身份证号:%s,%s成功上传到平台\n" % (name, idNo, datetime.datetime.now())
@@ -429,7 +429,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
                         f.close()
 
                 else:
-                    failMsg = "人员:%s,身份证号:%s,%s上传到平台失败，原因:%s\n" % (name, idNo, datetime.datetime.now(), self.cdzj.msg)
+                    failMsg = "人员:%s,身份证号:%s,%s上传到平台失败，原因:%s\n" % (name, idNo, datetime.datetime.now(), self.cdzj.msg_uploadPerson)
                     with open('uploadLog.txt', 'a') as f:
                         f.write(failMsg)
                         f.close()
@@ -506,7 +506,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
                     sn = str.strip(faces.field('sn').value())
                     key = str.strip(faces.field('key').value())
                     self.cdzj.downloadDelPerson(sn, key)
-                    if self.cdzj.msg == 'success':
+                    if self.cdzj.msg_downloadDelPerson == 'success':
                         qs = "update wis_person set personStatus = 0 where idNo = '%s'" % self.cdzj.delPersonID
                         self.db.excuteSQl(qs)
                         self.cdzj.feedback(sn, 0, '人员删除成功')

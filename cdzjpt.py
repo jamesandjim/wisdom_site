@@ -6,6 +6,7 @@ import xml.etree.ElementTree as ET
 
 
 class Cdzj:
+    """实现与住建信息交换的基本功能，不含程序逻辑与多个人的处理"""
     def __init__(self):
         self.uploadPersonURL = ""
         self.downloadPersonURL = ""
@@ -22,7 +23,7 @@ class Cdzj:
         self.msg_feedback = ''
         
     def uploadPerson(self):
-        """ 用于上传人员信息到住建平台 """
+        """ 用于上传人员信息到住建平台 ,使用此方法需要给cdzj.person赋值"""
         r = requests.post(self.uploadPersonURL, data=self.person)
         result = r.json()
 
