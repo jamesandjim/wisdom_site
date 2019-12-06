@@ -267,7 +267,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
                     idphoto, photo, case userType when 1 then '劳务人员' when 2 then '岗位人员' end,
                     case RegType when 3 then '人脸采集' else '其他' end, user_id, work_sn, department,
                     case deviceStatus when 0 then '未同步到设备' when 1 then '已同步到设备' end, 
-                    case zjptStatus when 0 then '未同步到住建平台' when 1 then '已同步到住建平台' end, 
+                    case zjptStatus when 0 then '未同步到住建平台' when 1 then '已同步到住建平台' when 2 then '住建平台已删除' end, 
                     case uploadYN when 0 then '不上传平台' when 1 then '应上传平台' end,
                     case personStatus when 2 then '已停用' when 1 then '正常' end
                     from wis_person

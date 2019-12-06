@@ -13,6 +13,7 @@ class Cdzj:
         self.uploadAttendanceURL = ""
         self.downloadDelPersonURL = ""
         self.feedbackURL = ""
+        self.persons = []
         self.person = {}
         self.attdata = {}
         self.delPersonID = ''
@@ -34,6 +35,8 @@ class Cdzj:
         
     def downloadPerson(self, deviceSN, key):
         """ 用于从住建平台下载正式人员，需要提供考勤设备的sn,与对就的key """
+        self.person.clear()
+        self.persons.clear()
         headers = {'Content-Type': 'application/json;charset=gb2312'}
         payload = {'sn': deviceSN}
         r = requests.get(self.downloadPersonURL, params=payload)
@@ -51,8 +54,10 @@ class Cdzj:
                 dcon = json.loads(ccon)
                 for item in dcon:
                     self.person['user_id'] = item['user_id']
+                    self.person['name'] = item['name']
                     self.person['work_sn'] = item['work_sn']
                     self.person['idNo'] = item['id_card']
+                    self.persons.append(self.person)
                     self.msg_downloadPerson = 'success'
             else:
                 self.msg_downloadPerson = '未收到数据'
@@ -61,7 +66,7 @@ class Cdzj:
 
     def uploadAttendance(self, deviceSN, key):
         """ 用于上传人员考勤信息到住建平台 """
-        content = des_encrypt(self.attdata, key)
+        content = des_encrypt(json.dumps(self.attdata), key)
         payload = {'sn': deviceSN, 'content': content}
         r = requests.post(self.uploadAttendanceURL, data=payload)
         xml = r.text

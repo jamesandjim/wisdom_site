@@ -9,17 +9,21 @@ from models.dbtools import Dboperator
 from cdzjpt import Cdzj
 
 
+db = Dboperator()
+
+
 class DeviceExchangeInfo:
     '''用于处理与人脸设备交换数据的逻辑'''
     def __init__(self):
         '''各种属性及需要交换的数据'''
-        self.db = Dboperator()
+        # self.db = Dboperator()
+        global db
         self.devsIPlist = []
         self.prepare()
 
     def prepare(self):
         dev_qs = "select ip from wis_faceDevice where status = 1"
-        devices = self.db.querySQL(dev_qs)
+        devices = db.querySQL(dev_qs)
         dev_count = devices.rowCount()
         if dev_count > 0:
             i = 0
@@ -32,7 +36,7 @@ class DeviceExchangeInfo:
     def queryResult(self):
         '''用来处理增加人员后，更新增加人员的情况，同刷新本地数据'''
         qs = "select * from wis_person where personStatus = 1 and deviceStatus = 0"
-        persons = self.db.querySQL(qs)
+        persons = db.querySQL(qs)
         countP = persons.rowCount()
         if countP > 0:
             i = 0
@@ -52,7 +56,7 @@ class DeviceExchangeInfo:
 
     def addFace(self):
         qs = "select * from wis_person where personStatus = 1 and deviceStatus = 0"
-        persons = self.db.querySQL(qs)
+        persons = db.querySQL(qs)
         countP = persons.rowCount()
         if countP > 0:
             i = 0
@@ -85,11 +89,11 @@ class DeviceExchangeInfo:
                 requests.post('http://127.0.0.1:8080/addFace', data=dic)
                 time.sleep(1)
                 i += 1
-        self.queryResult()
+            self.queryResult()
 
     def deleteFace(self):
-        qs = "select * from wis_person where personStatus = 0 and deviceStatus = 1"
-        persons = self.db.querySQL(qs)
+        qs = "select * from wis_person where zjptStatus = 2"
+        persons = db.querySQL(qs)
         countP = persons.rowCount()
         if countP > 0:
             i = 0
@@ -115,7 +119,8 @@ class CdzjExchangeInfo:
     '''用于处理与住建交换数据的逻辑'''
     def __init__(self):
         '''各种属性及需要交换的数据'''
-        self.db = Dboperator() 
+        # self.db = Dboperator()
+        global db
         self.cdzj = Cdzj()
 
         self.cjSN = ''
@@ -125,7 +130,7 @@ class CdzjExchangeInfo:
     def prepare(self):
         """初始化一些常用的参数，包括成都住建的访问地址，采集设备的SN和KEY"""
         zjqs = "select * from wis_cdzjpt where id = '99'"
-        current = self.db.querySQL(zjqs).record(0)
+        current = db.querySQL(zjqs).record(0)
         self.cdzj.uploadPersonURL = current.field('uploadPersonURL').value()
         self.cdzj.downloadPersonURL = current.field('downloadPersonURL').value()
         self.cdzj.downloadDelPersonURL = current.field('deletePersonURL').value()
@@ -133,13 +138,13 @@ class CdzjExchangeInfo:
         self.cdzj.feedbackURL = current.field('feedbackURL').value()
 
         sysSetQs = "select * from wis_sysSet where id = 99"
-        currentSysSet = self.db.querySQL(sysSetQs).record(0)
+        currentSysSet = db.querySQL(sysSetQs).record(0)
         self.cjSN = currentSysSet.field('cjSN').value()
         self.cjKEY = currentSysSet.field('cjKEY').value()
 
     def uploadPersons(self):
         qs = "select * from wis_person where zjptStatus = 0 and uploadYN = 1 and personStatus = 1"
-        uploadPersons = self.db.querySQL(qs)
+        uploadPersons = db.querySQL(qs)
         countP = uploadPersons.rowCount()
         if countP > 0:
             i = 0
@@ -170,21 +175,21 @@ class CdzjExchangeInfo:
                 self.cdzj.uploadPerson()
                 if self.cdzj.msg_uploadPerson == 'success':
                     qs = "update wis_person set zjptStatus = 1 where idNo = '%s'" % idNo
-                    self.cdzj.db.excuteSQl(qs)
+                    db.excuteSQl(qs)
                     okMsg = "人员:%s,身份证号:%s,%s成功上传到平台\n" % (name, idNo, datetime.datetime.now())
-                    with open('uploadLog.txt', 'a') as f:
+                    with open('uploadPersonsLog.txt', 'a') as f:
                         f.write(okMsg)
                         # f.close()
                 else:
                     failMsg = "人员:%s,身份证号:%s,%s上传到平台失败，原因:%s\n" % (name, idNo, datetime.datetime.now(), self.cdzj.msg_uploadPerson)
-                    with open('uploadLog.txt', 'a') as f:
+                    with open('uploadPersonsLog.txt', 'a') as f:
                         f.write(failMsg)
                         # f.close()
                 i += 1
 
     def downloadPersons(self):
         dev_qs = "select * from wis_faceDevice where status = 1"
-        devices = self.db.querySQL(dev_qs)
+        devices = db.querySQL(dev_qs)
         countD = devices.rowCount()
 
         if countD > 0:
@@ -198,28 +203,32 @@ class CdzjExchangeInfo:
 
                 self.cdzj.downloadPerson(sn, key)
                 if self.cdzj.msg_downloadPerson == 'success':
-                    selectQs = "select * from wis_person where idNo = '%s'" % self.cdzj.person['idNo']
-                    data = self.db.querySQL(selectQs)
-                    countP = data.rowCount()
-                    if countP == 1:
+                    for p in self.cdzj.persons:
+                        selectQs = "select * from wis_person where idNo = '%s'" % p['idNo']
+                        data = db.querySQL(selectQs)
+                        countP = data.rowCount()
+                        if countP == 1:
 
-                        qs = "update wis_person set user_id = '%s', work_sn = '%s' where idNo = '%s'" % (
-                        self.cdzj.person['user_id'], self.cdzj.person['work_sn'], self.cdzj.person['idNo'])
-                        self.db.excuteSQl(qs)
+                            qs = "update wis_person set user_id = '%s', work_sn = '%s' where idNo = '%s'" % (
+                            p['user_id'], p['work_sn'], p['idNo'])
+                            db.excuteSQl(qs)
 
-                        self.cdzj.feedback(sn, 2, '下发成功')
-                        okMsg = "人员:%s,身份证号:%s,%s成功产生住建号：%s\n" % (data.record(0).field('name').value(), self.cdzj.person['idNo'], datetime.datetime.now(), self.cdzj.person['user_id'])
-                        with open('downloadLog.txt', 'a') as f:
-                            f.write(okMsg)
+                            self.cdzj.feedback(sn, 2, '下发成功')
+                            okMsg = "人员:%s,身份证号:%s,%s成功产生住建号：%s\n" % (data.record(0).field('name').value(), self.cdzj.person['idNo'], datetime.datetime.now(), self.cdzj.person['user_id'])
+                            with open('downloadPersonsLog.txt', 'a') as f:
+                                f.write(okMsg)
+                        else:
+                            with open('downloadPersonsLog.txt', 'a') as f:
+                                f.write('平台数据与本地数据不一致，姓名：%s，住建号：%s, 身份证号：%s\n' % (p['name'], p['user_id'], p['idNo']))
                 else:
-                    with open('downloadLog.txt', 'a') as f:
+                    with open('downloadPersonsLog.txt', 'a') as f:
                         f.write(self.cdzj.msg_downloadPerson)
 
                 i += 1
 
     def downloadDeletePersons(self):
         dev_qs = "select * from wis_faceDevice where status = 1"
-        devices = self.db.querySQL(dev_qs)
+        devices = db.querySQL(dev_qs)
         countD = devices.rowCount()
 
         if countD > 0:
@@ -232,32 +241,32 @@ class CdzjExchangeInfo:
                 key = str.strip(faces.field('key').value())
                 if self.cdzj.msg_downloadDelPerson == 'success':
                     selectQs = "select * from wis_person where user_id = '%s'" % self.cdzj.delPersonID
-                    data = self.db.querySQL(selectQs)
+                    data = db.querySQL(selectQs)
                     countP = data.rowCount()
                     if countP == 1:
-                        qs = "update wis_person set personStatus = 0 where user_id = '%s'" % self.cdzj.delPersonID
-                        self.db.excuteSQl(qs)
+                        qs = "update wis_person set zjptStatus = 2 where user_id = '%s'" % self.cdzj.delPersonID
+                        db.excuteSQl(qs)
 
                         okMsg = "人员:%s,身份证号:%s,%s成功删除\n" % (data.record(0).field('name').value(), data.record(0).field('idNo').value(), datetime.datetime.now())
                         with open('downloadDeletePersonsLog.txt', 'a') as f:
                             f.write(okMsg)
-                    self.cdzj.feedback(sn, 0, '人员删除成功')
+                        self.cdzj.feedback(sn, 0, '人员删除成功')
                 else:
                     with open('downloadDeletePersonsLog.txt', 'a') as f:
-                        f.write(self.cdzj.msg_downloadDelPerson)
+                        f.write(self.cdzj.msg_downloadDelPerson+'\n')
                 i += 1
-            else:
-                with open('downloadDeletePersonsLog.txt', 'a') as f:
-                    f.write('未找到考勤设备！')
+        else:
+            with open('downloadDeletePersonsLog.txt', 'a') as f:
+                f.write('未找到考勤设备！\n')
 
     def uploadAttendeces(self):
         rec_qs = '''
                  select wis_recordsx.per_id, wis_recordsx.usec as recog_time, wis_faceDevice.sn as sn, wis_faceDevice.key as devkey, wis_person.user_id as user_id
                  from wis_recordsx, wis_faceDevice, wis_person
                  where wis_recordsx.sn = wis_faceDevice.deviceSn and wis_recordsx.per_id = wis_person.idNo 
-                 and wis_recordsx.uploadYN = 0
+                 and wis_recordsx.uploadYN = 0 and wis_person.user_id != ''
                  '''
-        atts = self.db.querySQL(rec_qs)
+        atts = db.querySQL(rec_qs)
         att_count = atts.rowCount()
         if att_count > 0:
             i = 0
@@ -276,13 +285,13 @@ class CdzjExchangeInfo:
 
                 if self.cdzj.msg_uploadAttendance == 'success':
                     qs = "update wis_recordsx set uploadYN = 1 where sn = '%s' and usec = '%s', and per_id = '%s'" % (sn, recog_time, per_id)
-                    self.db.excuteSQl(qs)
-                    okMsg = "记录：%s, %s, %s 已上传成功" % (sn, recog_time, per_id)
+                    db.excuteSQl(qs)
+                    okMsg = "记录：%s, %s, %s 已上传成功\n" % (sn, recog_time, per_id)
                     with open('uploadAttendancesLog.txt', 'a') as f:
                         f.write(okMsg)
                 else:
                     with open('uploadAttendancesLog.txt', 'a') as f:
-                        f.write(self.cdzj.msg_uploadAttendance)
+                        f.write(self.cdzj.msg_uploadAttendance + '\n')
                 i += 1
 
     def personExchange(self):
@@ -302,16 +311,6 @@ if __name__ == '__main__':
     device_exchange = DeviceExchangeInfo()
 
     while True:
-        # 测试住建平台是否可用（暂时只能确保外网通畅）
-        if ping('61.139.2.69') == 'on':
-            # 如是住建网络通畅，则找到需要处理的人员信息，未上传到住建的，未从住建下载到本地的
-            print('处理住建。。。。')
-            cdzj_exchange.personExchange()
-            cdzj_exchange.uploadAttendeces()
-        else:
-            print('网络不通，等30秒再试')
-            time.sleep(30)
-
         # 以下为处理设备数据的操作
         if len(device_exchange.devsIPlist) > 0:
             for ip in device_exchange.devsIPlist:
@@ -325,4 +324,16 @@ if __name__ == '__main__':
         else:
             print('没有需要处理下发的人脸设备')
             pass
+
+        # 测试住建平台是否可用（暂时只能确保外网通畅）
+        if ping('61.139.2.69') == 'on':
+            # 如是住建网络通畅，则找到需要处理的人员信息，未上传到住建的，未从住建下载到本地的
+            print('处理住建。。。。')
+            cdzj_exchange.personExchange()
+            cdzj_exchange.uploadAttendeces()
+        else:
+            print('网络不通，等30秒再试')
+            time.sleep(30)
+
+
 

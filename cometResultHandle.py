@@ -32,8 +32,10 @@ class ResultHandle:
                 if code == 0:
                     qs = "update wis_person set deviceStatus = 1 where idNo = '%s'" % lr['per_id']
                     self.db.excuteSQl(qs)
+                    print('查询成功！')
             elif cmd == 'delete_face':
                 if lr['code'] == 0:
+
                     print('人员删除成功！')
                 else:
                     print(lr['reply'])
@@ -75,6 +77,6 @@ class RecordHandle:
         jn = self.dic['body']
         dtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(jn['usec'])-8*60*60))
         qs = '''
-                insert into wis_recordsx values ('%s', '%s', %d, '%s','%s', %d, %d, %d, %d,'%s','%s', %d)
-                ''' % (jn['sn'], dtime, int(jn['matched']), jn['per_id'], jn['name'], int(jn['role']), int(jn['hat']), int(jn['face_imgsize']), int(jn['model_imgsize']), jn['face_imgdata'], '', 0)
+                insert into wis_recordsx values ('%s', '%s', '%s', %d, '%s','%s', %d, %d, %d, %d,'%s','%s', %d)
+                ''' % (jn['sequence'], jn['sn'], dtime, int(jn['matched']), jn['per_id'], jn['name'], int(jn['role']), int(jn['hat']), int(jn['face_imgsize']), int(jn['model_imgsize']), jn['face_imgdata'], '', 0)
         self.db.excuteSQl(qs)

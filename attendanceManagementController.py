@@ -20,13 +20,32 @@ class AttendanceManagementWindow(QWidget, attendanceManagementUi.Ui_Form):
         self.db = Dboperator()
         self.cdzj = cdzjpt.Cdzj()
         self.records = None
+
+        # 以下参数为分页使用
+        self.totalPage = 0
+        self.currentPage = 0
+        self.totalRecord = 0
+        self.pageRecord = 20
+
         self.load()
+        self.setButtonStatus()
 
     def load(self):
 
         self.dateTimeEdit_begin.setDate(QDate.currentDate())
-        self.dateTimeEdit_begin.setTime(QTime(0,0,0))
+        self.dateTimeEdit_begin.setTime(QTime(0, 0, 0))
         self.dateTimeEdit_end.setDateTime(QDateTime.currentDateTime())
+
+    def setButtonStatus(self):
+        if (self.currentPage == self.totalPage):
+            self.pb_prev.setEnabled(True)
+            self.pb_next.setEnabled(False)
+        if (self.currentPage == 1):
+            self.pb_next.setEnabled(True)
+            self.pb_prev.setEnabled(False)
+        if (self.currentPage < self.totalPage and self.currentPage > 1):
+            self.pb_prev.setEnabled(True)
+            self.pb_next.setEnabled(True)
 
     @pyqtSlot()
     def on_pb_allData_clicked(self):
@@ -40,7 +59,7 @@ class AttendanceManagementWindow(QWidget, attendanceManagementUi.Ui_Form):
         '''
         allRecords = self.db.querySQL(qs)
         self.records = allRecords
-        count = allRecords.rowCount()
+        self.totalRecord = allRecords.rowCount()
 
         self.tv_attendance.setModel(allRecords)
 
