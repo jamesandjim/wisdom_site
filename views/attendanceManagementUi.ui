@@ -134,23 +134,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pb_cj_att">
-          <property name="text">
-           <string>手动采集设备考勤数据</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pb_uploadAtt">
-          <property name="text">
-           <string>手动上传考勤数据到住建平台</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QPushButton" name="pb_query">
           <property name="text">
-           <string>本地查询</string>
+           <string>查    询</string>
           </property>
          </widget>
         </item>
@@ -324,13 +310,13 @@
          <widget class="QLabel" name="label_totalPage">
           <property name="minimumSize">
            <size>
-            <width>30</width>
+            <width>80</width>
             <height>0</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>30</width>
+            <width>80</width>
             <height>16777215</height>
            </size>
           </property>

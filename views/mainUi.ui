@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1179</width>
+    <width>1484</width>
     <height>800</height>
    </rect>
   </property>
@@ -30,7 +30,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../resource.qrc">
-    <normaloff>:/ico/resource/ico/main.jpg</normaloff>:/ico/resource/ico/main.jpg</iconset>
+    <normaloff>:/ico/resource/ico/w.png</normaloff>:/ico/resource/ico/w.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -168,7 +168,7 @@
 color: rgb(255, 170, 0);</string>
             </property>
             <property name="text">
-             <string>增加人员</string>
+             <string>人员采集</string>
             </property>
             <property name="icon">
              <iconset resource="../resource.qrc">
@@ -210,11 +210,59 @@ color: rgb(255, 170, 0);</string>
 color: rgb(255, 170, 0);</string>
             </property>
             <property name="text">
-             <string>平台操作</string>
+             <string>人员管理</string>
             </property>
             <property name="icon">
              <iconset resource="../resource.qrc">
               <normaloff>:/ico/resource/ico/zjpt.png</normaloff>:/ico/resource/ico/zjpt.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>70</width>
+              <height>70</height>
+             </size>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_lcdMonitor">
+            <property name="styleSheet">
+             <string notr="true">font: 75 14pt &quot;微软雅黑&quot;;
+color: rgb(255, 170, 0);</string>
+            </property>
+            <property name="text">
+             <string>LCD监控</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../resource.qrc">
+              <normaloff>:/ico/resource/ico/lcd.png</normaloff>:/ico/resource/ico/lcd.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>70</width>
+              <height>70</height>
+             </size>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_tools">
+            <property name="styleSheet">
+             <string notr="true">font: 75 14pt &quot;微软雅黑&quot;;
+color: rgb(255, 170, 0);</string>
+            </property>
+            <property name="text">
+             <string>设置工具</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../resource.qrc">
+              <normaloff>:/ico/resource/ico/tools.png</normaloff>:/ico/resource/ico/tools.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -661,7 +709,7 @@ image: url(:/img/resource/img/main.jpg);
           </size>
          </property>
          <property name="text">
-          <string>成都丰盛时代科技有限公司 版权所有</string>
+          <string>版权所有</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -671,12 +719,28 @@ image: url(:/img/resource/img/main.jpg);
        <item>
         <widget class="QLabel" name="lable_ver">
          <property name="text">
-          <string>软件版本：V1.0.0</string>
+          <string>软件版本：V2.6.0</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>5</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </item>

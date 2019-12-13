@@ -1,6 +1,7 @@
 import sys
+import os
 
-from PyQt5.QtWidgets import QApplication, QWidget, QDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMessageBox
 from PyQt5.QtCore import pyqtSlot, Qt
 from PyQt5.QtGui import QCursor, QMouseEvent
 
@@ -14,6 +15,7 @@ import zjptController
 import personManageController
 import attendanceManagementController
 import loginController
+import operatorController
 
 
 class MyMainWindow(QWidget, mainUi.Ui_mainForm):
@@ -81,7 +83,9 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
             pass
 
         elif selected == '系统人员管理':
-            pass
+            widget = operatorController.OperatorWindow()
+            self.removeC()
+            self.verticalLayout_3.addWidget(widget)
 
         elif selected == '班组信息管理':
             widget = departmentController.DepartmentWindow()
@@ -102,6 +106,22 @@ class MyMainWindow(QWidget, mainUi.Ui_mainForm):
         widget = personManageController.PersonManageWindow()
         self.removeC()
         self.verticalLayout_3.addWidget(widget)
+
+    @pyqtSlot()
+    def on_pb_lcdMonitor_clicked(self):
+        monitor = 'lcdMonitorController.exe'
+        try:
+            r = os.popen(monitor)
+        except Exception as e:
+            QMessageBox.information(self, '提示', '打开软件出错，请确认文件是否存在！', QMessageBox.Yes)
+
+    @pyqtSlot()
+    def on_pb_tools_clicked(self):
+        tools = './tools/VzFaceSDKDemo.exe'
+        try:
+            r = os.popen(tools)
+        except Exception as e:
+            QMessageBox.information(self, '提示', '打开软件出错，请确认文件是否存在！', QMessageBox.Yes)
 
     @pyqtSlot()
     def on_pb_exitSystem_clicked(self):

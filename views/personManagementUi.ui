@@ -447,13 +447,6 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pb_replaceIMG">
-              <property name="text">
-               <string>更换人脸照片</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QPushButton" name="pb_del">
               <property name="text">
                <string>删除</string>
@@ -593,9 +586,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pb_downloadDeletePerson">
+           <widget class="QPushButton" name="pb_deletePerson">
             <property name="text">
-             <string>从住建平台同步删除人员</string>
+             <string>清除住建平台中已删除的人员</string>
             </property>
            </widget>
           </item>

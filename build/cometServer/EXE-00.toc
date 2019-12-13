@@ -1,5 +1,5 @@
 ('C:\\Users\\12348\\PycharmProjects\\wisdom_site\\build\\cometServer\\cometServer.exe',
- True,
+ False,
  False,
  True,
  None,
@@ -40,7 +40,7 @@
  [],
  False,
  False,
- 1573118258,
- [('run.exe',
-   'c:\\users\\12348\\envs\\wisdom\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-32bit\\run.exe',
+ 1576031052,
+ [('runw.exe',
+   'c:\\users\\12348\\envs\\wisdom\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-32bit\\runw.exe',
    'EXECUTABLE')])

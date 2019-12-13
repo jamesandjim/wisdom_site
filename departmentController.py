@@ -23,6 +23,8 @@ class DepartmentWindow(QWidget, departmentUi.Ui_Form):
         self.pb_save.setEnabled(True)
         self.le_departmentID.setFocus()
         self.pb_add.setEnabled(False)
+        self.checkBox_forLcd.setChecked(True)
+        self.lineEdit_num.setEnabled(True)
 
     def txtDisable(self):
         """将输入框设置为不可用"""
@@ -32,16 +34,23 @@ class DepartmentWindow(QWidget, departmentUi.Ui_Form):
         self.pb_save.setEnabled(False)
         self.pb_del.setEnabled(False)
         self.pb_update.setEnabled(False)
+        self.checkBox_forLcd.setEnabled(False)
+        self.lineEdit_num.setEnabled(False)
 
     def txtClear(self):
         """清除输入框内容"""
         self.le_departmentDemo.clear()
         self.le_departmentName.clear()
         self.le_departmentID.clear()
+        self.lineEdit_num.setText("0")
 
     def load(self):
         """表格装载全部的数据"""
-        qs = 'select id as 部门编号, name as 部门名称, memo as 部门详细说明 from wis_department'
+        qs = '''
+             select id as 部门编号, name as 部门名称, memo as 部门详细说明, 
+             case forLcd when 1 then '是' else '否' end  as 是否在LCD中显示, currentNum as 在场人员数
+             from wis_department
+             '''
         alldata = self.db.querySQL(qs)
         self.data = alldata
         self.tv_department.setModel(self.data)
@@ -56,6 +65,7 @@ class DepartmentWindow(QWidget, departmentUi.Ui_Form):
     def on_pb_update_clicked(self):
         """修改 按钮函数"""
         self.txtEnable()
+        self.checkBox_forLcd.setEnabled(True)
         self.le_departmentID.setEnabled(False)
 
     @pyqtSlot()
@@ -72,11 +82,13 @@ class DepartmentWindow(QWidget, departmentUi.Ui_Form):
         departmentID = self.le_departmentID.text()
         departmentName = self.le_departmentName.text()
         departmentDemo = self.le_departmentDemo.text()
+        forLcd = 1 if self.checkBox_forLcd.isChecked() else 0
+        currentNum = self.lineEdit_num.text()
         if departmentID != '' and departmentName != '':
             qs = "select * from wis_department where id = '%s' or name = '%s'" % (departmentID, departmentName)
             data = self.db.querySQL(qs)
             if data.rowCount() == 0:
-                qs = "INSERT INTO wis_department VALUES('%s','%s','%s')" % (departmentID, departmentName, departmentDemo)
+                qs = "INSERT INTO wis_department VALUES('%s','%s','%s', %d, %d)" % (departmentID, departmentName, departmentDemo, forLcd, int(currentNum))
                 self.db.excuteSQl(qs)
                 self.load()
                 self.txtClear()
@@ -108,6 +120,11 @@ class DepartmentWindow(QWidget, departmentUi.Ui_Form):
         self.le_departmentID.setText(data)
         self.le_departmentName.setText(self.data.index(rowID, 1).data())
         self.le_departmentDemo.setText(self.data.index(rowID, 2).data())
+        if self.data.index(rowID, 3).data() == '是':
+            self.checkBox_forLcd.setChecked(True)
+        else:
+            self.checkBox_forLcd.setChecked(False)
+        self.lineEdit_num.setText(str(self.data.index(rowID, 4).data()))
 
         self.txtDisable()
 
@@ -119,7 +136,13 @@ class DepartmentWindow(QWidget, departmentUi.Ui_Form):
     @pyqtSlot()
     def on_pb_query_clicked(self):
         """查询 按钮的函数"""
-        qs = "select id as 部门编号, name as 部门名称, memo as 部门详细说明 from wis_department where 部门名称 like '%{}%'".format(self.le_queryPara.text())
+        qs = '''
+                     select id as 部门编号, name as 部门名称, memo as 部门详细说明, 
+                     case forLcd when 1 then '是' else '否' end  as 是否在LCD中显示, currentNum as 在场人员数
+                     from wis_department
+                     where 部门名称 like '%{}%'
+                     '''.format(self.le_queryPara.text())
+        # qs = "select id as 部门编号, name as 部门名称, memo as 部门详细说明 from wis_department where 部门名称 like '%{}%'".format(self.le_queryPara.text())
         data = self.db.querySQL(qs)
         self.tv_department.setModel(data)
 

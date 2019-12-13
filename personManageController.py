@@ -11,7 +11,7 @@ from commTools.toBASE64 import jpgtostr
 from models.dbtools import Dboperator
 from views import personManagementUi
 import cdzjpt
-from devices.face01 import FaceDevice
+# from devices.face01 import FaceDevice
 
 
 class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
@@ -19,9 +19,14 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         super(PersonManageWindow, self).__init__(parent)
         self.setupUi(self)
         self.pb_refresh.setVisible(False)
+        self.pb_uploadPerson.setVisible(False)
+        self.pb_uploadToDevice.setVisible(False)
+        self.pb_refresh.setVisible(False)
+        self.pb_downloadPerson.setVisible(False)
+
         self.data = None
         self.disableEdit()
-        self.face = FaceDevice()
+        # self.face = FaceDevice()
         self.db = Dboperator()
         self.cdzj = cdzjpt.Cdzj()
         self.cjSN = ''
@@ -108,7 +113,6 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.pb_esc.setEnabled(False)
         self.pb_del.setEnabled(False)
         self.pb_update.setEnabled(False)
-        self.pb_replaceIMG.setEnabled(False)
 
     def txtClear(self):
         '''方法作用为清除文本框中的内容'''
@@ -130,11 +134,6 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.le_zjptStatus.clear()
         self.label_photo.clear()
         self.label_idphoto.clear()
-
-    @pyqtSlot()
-    def on_pb_replaceIMG_clicked(self):
-        '''方法作用为更换人员的人脸图片'''
-        pass
 
     @pyqtSlot()
     def on_pb_del_clicked(self):
@@ -252,7 +251,7 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
         self.label_photo.setScaledContents(True)
 
         self.pb_update.setEnabled(True)
-        self.pb_replaceIMG.setEnabled(True)
+        # self.pb_replaceIMG.setEnabled(True)
         self.pb_del.setEnabled(True)
 
     @pyqtSlot()
@@ -519,6 +518,16 @@ class PersonManageWindow(QWidget, personManagementUi.Ui_Form):
             else:
                 QMessageBox.information(self, '提示', '未找到考勤设备！', QMessageBox.Yes)
                 break
+
+    @pyqtSlot()
+    def on_pb_deletePerson_clicked(self):
+        '''方法作用删除已在平台上删除并在设备中删除的人员'''
+        qs = "delete  from wis_person where zjptStatus = 2"
+        if QMessageBox.information(self, '提示', '你确认要删除所有在住建平台中已删除的人员？', QMessageBox.Yes | QMessageBox.No,
+                                   QMessageBox.Yes) == QMessageBox.Yes:
+            self.db.excuteSQl(qs)
+            self.txtClear()
+            self.load()
 
 
     def queryResult(self):

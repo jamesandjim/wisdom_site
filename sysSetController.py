@@ -28,6 +28,7 @@ class SysSetWindow(QWidget, sysSetUi.Ui_Form):
         self.le_cjSN.setEnabled(True)
         self.le_cjKEY.setEnabled(True)
         self.pb_save.setEnabled(True)
+        self.lineEdit_lcdTitle.setEnabled(True)
 
     def disableAll(self):
         self.checkBox_photoBdYN.setEnabled(False)
@@ -42,6 +43,7 @@ class SysSetWindow(QWidget, sysSetUi.Ui_Form):
         self.le_cjSN.setEnabled(False)
         self.le_cjKEY.setEnabled(False)
         self.pb_save.setEnabled(False)
+        self.lineEdit_lcdTitle.setEnabled(False)
 
     def load(self):
         """装载系统参数"""
@@ -58,6 +60,7 @@ class SysSetWindow(QWidget, sysSetUi.Ui_Form):
         aqmYN = current.field('aqmYN').value()
         cjSN = current.field('cjSN').value()
         cjKEY = current.field('cjKEY').value()
+        lcdTitle = current.field('lcdTitle').value()
         if zjptYN == 1:
             self.checkBox_zjptYN.setChecked(True)
             item = current.field('zjptName').value()
@@ -91,6 +94,7 @@ class SysSetWindow(QWidget, sysSetUi.Ui_Form):
         self.le_localServer.setText(localServer)
         self.le_cjSN.setText(cjSN)
         self.le_cjKEY.setText(cjKEY)
+        self.lineEdit_lcdTitle.setText(lcdTitle)
 
     @pyqtSlot()
     def on_pb_update_clicked(self):
@@ -108,8 +112,9 @@ class SysSetWindow(QWidget, sysSetUi.Ui_Form):
         aqmYN = 1 if self.checkBox_aqmYN.isChecked() else 0
         cjSN = self.le_cjSN.text()
         cjKEY = self.le_cjKEY.text()
+        lcdTitle = self.lineEdit_lcdTitle.text()
 
-        qs = "update wis_sysSet set zjptYN = %d, zjptName = '%s', htzdclYN = %d, htzdclTime = %d, localServer = '%s', backupUrl = '%s', photoBdYN = %d, aqmYN = %d, cjSN = '%s', cjKEY = '%s' " %(zjptYN, zjptName, htzdclYN, htzdclTime, localServer, backupUrl, photoBdYN, aqmYN, cjSN, cjKEY)
+        qs = "update wis_sysSet set zjptYN = %d, zjptName = '%s', htzdclYN = %d, htzdclTime = %d, localServer = '%s', backupUrl = '%s', photoBdYN = %d, aqmYN = %d, cjSN = '%s', cjKEY = '%s', lcdTitle = '%s' " %(zjptYN, zjptName, htzdclYN, htzdclTime, localServer, backupUrl, photoBdYN, aqmYN, cjSN, cjKEY, lcdTitle)
         self.db.excuteSQl(qs)
         self.disableAll()
 

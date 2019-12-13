@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="img">
+    <file>resource/img/420124197802025936.jpg</file>
+    <file>resource/img/ymg.jpg</file>
     <file>resource/img/login.png</file>
     <file>resource/img/logoBack.jpg</file>
     <file>resource/img/header1.jpg</file>
@@ -7,8 +9,17 @@
     <file>resource/img/main.jpg</file>
   </qresource>
   <qresource prefix="ico">
+    <file>mima.jpg</file>
     <file>resource/ico/ex.jpg</file>
+    <file>resource/ico/sun.jpeg</file>
     <file>resource/ico/ex.png</file>
+    <file>resource/ico/max.png</file>
+    <file>resource/ico/阴转晴.png</file>
+    <file>resource/ico/menu.jpeg</file>
+    <file>resource/ico/w.png</file>
+    <file>resource/ico/lcd.png</file>
+    <file>resource/ico/tools.png</file>
+    <file>resource/ico/mima.jpg</file>
     <file>resource/ico/sdti.png</file>
     <file>resource/ico/main.jpg</file>
     <file>resource/ico/cj.png</file>

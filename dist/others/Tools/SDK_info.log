@@ -1,0 +1,42 @@
+[net::fetchGroupIPAddress] <41> -find 192.168.0.100
+[net::MakeGroupSocket] <112> -set_option 192.168.0.100
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"get_user_rights","version":"0.2"}
+
+[Session::SetRegFaceQueryCbEx] <665> -tmp00FAC9F0 tmp_data 03AA53F0
+[Session::QueryByRole] <1916> -QueryByRole m_nStartPos = 0m_nEndPos=5
+[Session::QueryByRole] <1920> -QueryByRole page_no = 1 page_size=5index = 0
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"query_face","id":0,"version":"0.2"}
+
+[Session::HandleFaceQuery] <3089> -m_nCurRecive = 1
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"query_face","id":1,"version":"0.2"}
+
+[Session::HandleFaceQuery] <3089> -m_nCurRecive = 2
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"query_face","id":2,"version":"0.2"}
+
+[Session::HandleFaceQuery] <3089> -m_nCurRecive = 3
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"query_face","id":3,"version":"0.2"}
+
+[Session::HandleFaceQuery] <3089> -m_nCurRecive = 4
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"query_face","id":4,"version":"0.2"}
+
+[Session::ParseJson] <2779> - in Json::Value::asCString(): requires stringValue
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"get_user_rights","version":"0.2"}
+
+[Session::SetRegFaceQueryCbEx] <665> -tmp00FAC9F0 tmp_data 03AAFA00
+[Session::QueryByRole] <1916> -QueryByRole m_nStartPos = 0m_nEndPos=5
+[Session::QueryByRole] <1920> -QueryByRole page_no = 1 page_size=5index = 0
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"query_face","id":0,"version":"0.2"}
+
+[Session::HandleFaceQuery] <3089> -m_nCurRecive = 1
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"query_face","id":1,"version":"0.2"}
+
+[Session::HandleFaceQuery] <3089> -m_nCurRecive = 2
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"query_face","id":2,"version":"0.2"}
+
+[Session::HandleFaceQuery] <3089> -m_nCurRecive = 3
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"query_face","id":3,"version":"0.2"}
+
+[Session::HandleFaceQuery] <3089> -m_nCurRecive = 4
+[Session::SendCmd] <2503> -SendCmd  = {"cmd":"query_face","id":4,"version":"0.2"}
+
+[Session::ParseJson] <2779> - in Json::Value::asCString(): requires stringValue

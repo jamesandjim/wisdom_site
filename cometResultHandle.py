@@ -76,7 +76,20 @@ class RecordHandle:
     def insertdb(self):
         jn = self.dic['body']
         dtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(jn['usec'])-8*60*60))
+        per_id = jn['per_id']
+        sn = jn['sn']
         qs = '''
-                insert into wis_recordsx values ('%s', '%s', '%s', %d, '%s','%s', %d, %d, %d, %d,'%s','%s', %d)
-                ''' % (jn['sequence'], jn['sn'], dtime, int(jn['matched']), jn['per_id'], jn['name'], int(jn['role']), int(jn['hat']), int(jn['face_imgsize']), int(jn['model_imgsize']), jn['face_imgdata'], '', 0)
+                insert into wis_recordsx values ('%s', '%s', %d,'%s', %d, '%s','%s', %d, %d, %d, %d,'%s','%s', %d)
+                ''' % (jn['sequence'], jn['sn'], jn['usec']-8*60*60, dtime, int(jn['matched']), jn['per_id'], jn['name'], int(jn['role']), int(jn['hat']), int(jn['face_imgsize']), int(jn['model_imgsize']), jn['face_imgdata'], '', 0)
         self.db.excuteSQl(qs)
+        qs = "select wis_faceDevice.location from wis_faceDevice where wis_faceDevice.deviceSn ='%s'" % sn
+        inOrout = self.db.querySQL(qs).record(0).field('location').value()
+
+        qs = "select wis_person.department from wis_person where wis_person.idNo = '%s'" % per_id
+        departs = self.db.querySQL(qs)
+        deName = departs.record(0).field('department').value()
+        if inOrout == '入口设备':
+            qs1 = "update wis_department set currentNum = currentNum + 1 where name = '%s'" % deName
+        if inOrout == '出口设备':
+            qs1 = "update wis_department set currentNum = currentNum - 1 where name = '%s'" % deName
+        self.db.excuteSQl(qs1)
