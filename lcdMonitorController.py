@@ -13,6 +13,7 @@ class LcdMonitorWindow(QtWidgets.QWidget, lcdMonitorUi.Ui_Form):
     def __init__(self, parent=None):
         super(LcdMonitorWindow, self).__init__(parent)
         self.setupUi(self)
+        self.sequence = ''
         self.listWidget_l.setHorizontalScrollBarPolicy(1)
         self.listWidget_l.setVerticalScrollBarPolicy(1)
         self.listWidget_r.setHorizontalScrollBarPolicy(1)
@@ -24,7 +25,7 @@ class LcdMonitorWindow(QtWidgets.QWidget, lcdMonitorUi.Ui_Form):
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.load)
-        self.timer.start(1)
+        self.timer.start(3)
 
     def firstWeather(self):
         qs = "select * from wis_lcdConfig where id = '99'"
@@ -109,44 +110,59 @@ class LcdMonitorWindow(QtWidgets.QWidget, lcdMonitorUi.Ui_Form):
     def refreshPhoto(self):
 
         qs = '''
-              select wis_recordsx.name, wis_recordsx.usec, wis_recordsx.per_id, wis_person.department, wis_person.idphoto
+              select wis_recordsx.name, wis_recordsx.usec, wis_recordsx.per_id, wis_person.department, wis_person.idphoto, wis_recordsx.timeSta
               from wis_recordsx, wis_person
               where wis_recordsx.per_id = wis_person.idNo 
-              order by sequence desc
-              limit 0, 1
+              order by wis_recordsx.timeSta desc
+              limit 0, 5
              '''
         dps = self.db.querySQL(qs)
         dps_count = dps.rowCount()
         if dps_count > 0:
+
             i = 0
             while i < dps_count:
-                # 处理需要显示的数据
-                name = dps.record(i).field('name').value()
-                usec = dps.record(i).field('usec').value()
-                per_id = dps.record(i).field('per_id').value()
-                department = dps.record(i).field('department').value()
-                idphoto = dps.record(i).field('idphoto').value()
+                if self.sequence != dps.record(i).field('timeSta').value():
+                    # 处理需要显示的数据
+                    name = dps.record(i).field('name').value()
+                    usec = dps.record(i).field('usec').value()
+                    per_id = dps.record(i).field('per_id').value()
+                    department = dps.record(i).field('department').value()
+                    idphoto = dps.record(i).field('idphoto').value()
 
-                info = "班组：%s\n 人员：%s\n 时间：%s" % (department, name, usec[11:])
-                # 建立 两个LABEL 左边显示图片，右边显示信息
-                idphoto_pixmap = QPixmap(idphoto).scaled(150, 200)
-                label_photo = QtWidgets.QLabel()
-                label_photo.setPixmap(idphoto_pixmap)
-                label_info = QtWidgets.QLabel(info)
+                    info = "\n班组：%s\n 人员：%s\n 时间：%s" % (department, name, usec[11:])
 
-                widget = QtWidgets.QWidget()
-                layout_main = QtWidgets.QVBoxLayout()
-                layout_center = QtWidgets.QHBoxLayout()
-                layout_center.addWidget(label_photo)
-                layout_center.addWidget(label_info)
-                layout_main.addLayout(layout_center)
-                widget.setLayout(layout_main)
+                    # 建立 两个LABEL 左边显示图片，右边显示信息
 
-                item = QtWidgets.QListWidgetItem()
-                item.setSizeHint((QtCore.QSize(150, 300)))
-                self.listWidget_l.addItem(item)
-                self.listWidget_l.setItemWidget(item, widget)
+                    idphoto_pixmap = QPixmap(idphoto).scaled(150, 200)
+                    label_photo = QtWidgets.QLabel()
+                    label_photo.clear()
+                    label_photo.setPixmap(idphoto_pixmap)
+                    label_info = QtWidgets.QLabel()
+                    label_info.clear()
+                    label_info.setText(info)
+                    label_info.setStyleSheet("font: 75 18pt \"微软雅黑\";\n"
+                                      "color: rgb(255, 255, 255);")
+                    label_info.setScaledContents(True)
+                    label_info.setAlignment(Qt.AlignVCenter)
 
+
+                    widget = QtWidgets.QWidget()
+                    layout_main = QtWidgets.QVBoxLayout()
+                    layout_center = QtWidgets.QFormLayout()
+                    layout_center.setSpacing(10)
+                    layout_center.addRow(label_photo, label_info)
+                    layout_main.addLayout(layout_center)
+                    widget.setLayout(layout_main)
+
+                    item = QtWidgets.QListWidgetItem()
+
+                    item.setSizeHint((QtCore.QSize(150, 400)))
+                    self.listWidget_l.addItem(item)
+
+                    self.listWidget_l.setItemWidget(item, widget)
+
+                    self.sequence = dps.record(i).field('timeSta').value()
 
                 i += 1
 

@@ -288,7 +288,7 @@ color: rgb(255, 255, 255);</string>
        <widget class="QGroupBox" name="groupBox_4">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>1</horstretch>
+          <horstretch>2</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
@@ -484,7 +484,7 @@ color: white;
                <enum>Qt::NoContextMenu</enum>
               </property>
               <property name="layoutDirection">
-               <enum>Qt::LeftToRight</enum>
+               <enum>Qt::RightToLeft</enum>
               </property>
               <property name="frameShape">
                <enum>QFrame::NoFrame</enum>
@@ -508,7 +508,7 @@ color: white;
                <enum>QLCDNumber::Outline</enum>
               </property>
               <property name="intValue" stdset="0">
-               <number>1</number>
+               <number>20</number>
               </property>
              </widget>
             </item>
@@ -607,7 +607,7 @@ border-radius:10px,10px;</string>
        <widget class="QGroupBox" name="groupBox_6">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>1</horstretch>
+          <horstretch>3</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
@@ -958,7 +958,7 @@ border-radius:10px,10px;</string>
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
-       <verstretch>1</verstretch>
+       <verstretch>2</verstretch>
       </sizepolicy>
      </property>
      <property name="styleSheet">
